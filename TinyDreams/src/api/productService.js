@@ -9,8 +9,4 @@ export function getAllProducts(index){
 export function getProduct(){
     return axios.get(`${baseUrl}/totalPages?limit=15`)
 }
-export function 
-
-
-
 

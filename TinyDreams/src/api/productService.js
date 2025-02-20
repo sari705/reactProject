@@ -1,4 +1,4 @@
-import { axios } from "axios";
+import axios  from "axios";
 
 let baseUrl = "https://nodeproject-gd82.onrender.com/api/product";
 
@@ -25,7 +25,3 @@ export function deleteProduct(productId) {
 export function updateProduct(product) {
     return axios.put(`${baseUrl}/${product._id}`, product)
 }
-
-
-
-

@@ -7,11 +7,11 @@ export function getAllUsers() {
 }
 
 export function getUser(id) {
-    return axios.get(`${baseUrl} /  ${id}`)
+    return axios.get(`${baseUrl}/${id}`)
 }
 
 export function logIn(body) {
-    return axios.post(`${baseUrl}  /logIn`, body)
+    return axios.post(`${baseUrl}/logIn`, body)
 }
 
 export function signUp(body) {
@@ -19,7 +19,7 @@ export function signUp(body) {
 }
 
 export function updateUser(id, body) {
-    return axios.put(`${baseUrl} / ${id}`, body)
+    return axios.put(`${baseUrl}/${id}`, body)
 }
 
 export function updatePassword(body) {

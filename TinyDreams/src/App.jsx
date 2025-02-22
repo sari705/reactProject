@@ -6,9 +6,11 @@ import ProductList from './pages/ProductList'
 
 function App() {
 
+  const [choiseProduct, setChoiseProduct] = useState();
+
   return (
     <>
-    <ProductList></ProductList>
+    <ProductList setChoiseProduct={setChoiseProduct}></ProductList>
       </>
   )
 }

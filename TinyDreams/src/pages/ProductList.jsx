@@ -1,17 +1,18 @@
-import {getAllProducts} from "../api/productService";
+import { getAllProducts } from "../api/productService";
 import { useEffect, useState } from "react";
+import OneProduct from "../components/OneProduct";
 
-export default function ProductList(){
+export default function ProductList({setChoiseProduct}) {
     const [products, setProducts] = useState([])
     async function getProducts() {
-        try{
+        try {
             let allProducts = await getAllProducts();
-            console.log("all product "+allProducts.data.products[0].name);
+            console.log("all product " + allProducts.data.products[0].name);
             setProducts(allProducts.data.products);
         }
-        catch(e){
+        catch (e) {
             console.log(e);
-        }      
+        }
 
     }
     useEffect(() => {
@@ -19,11 +20,18 @@ export default function ProductList(){
     }, [])
     return (
         <ul>
-            {
+            {products.map((product) => (
+                <li key={product._id}>
+                    <OneProduct product={product} />
+                </li>
+            ))}
+
+            {/* {
                 products.map((product) => {
                     let imgSrc = `/images/${product.images[0]}`;
-                    return <li key={product._id}><img src={imgSrc} alt={product.images[0]}></img>{product.name}</li>})
-            }
+                    return <li key={product._id}><img src={imgSrc} alt={product.images[0]}></img>{product.name}</li>
+                })
+            } */}
         </ul>
     )
 }

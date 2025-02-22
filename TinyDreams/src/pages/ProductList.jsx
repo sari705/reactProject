@@ -1,9 +1,13 @@
 import { getAllProducts } from "../api/productService";
 import { useEffect, useState } from "react";
 import OneProduct from "../components/OneProduct";
+import ViewProduct from "../components/ViewProduct";
 
 export default function ProductList({setChoiseProduct}) {
     const [products, setProducts] = useState([])
+
+    const [choiseProduct, setChoiseProduct] = useState();
+
     async function getProducts() {
         try {
             let allProducts = await getAllProducts();
@@ -18,11 +22,12 @@ export default function ProductList({setChoiseProduct}) {
     useEffect(() => {
         getProducts()
     }, [])
-    return (
+    return (<>
+     <div>
         <ul>
             {products.map((product) => (
                 <li key={product._id}>
-                    <OneProduct product={product} />
+                    <OneProduct product={product} setChoiseProduct={setChoiseProduct} /> 
                 </li>
             ))}
 
@@ -33,5 +38,13 @@ export default function ProductList({setChoiseProduct}) {
                 })
             } */}
         </ul>
+        </div>
+
+          <div>
+          <ViewProduct product={choiseProduct}/>
+          </div>
+
+        </>
     )
+
 }

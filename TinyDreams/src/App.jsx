@@ -5,17 +5,25 @@ import './App.css'
 import ProductList from './pages/ProductList'
 import Cart from './pages/Cart'
 import Login from './pages/Login'
+import NavBar from './components/NavBar'
+import { Routes, Route} from "react-router-dom"
+import Home from './pages/Home'
 
 
 function App() {
 
   return (
     <>
-    <Login></Login>
-    <ProductList></ProductList>
-    <Cart></Cart>
-    
-      </>
+      <NavBar/>
+      
+      <Routes>
+        <Route path="/" element={ <Home />} />
+        <Route path="/home" element={<Home /> } />
+        <Route path="/login" element={<Login/>} />
+        <Route path="/products" element={<ProductList />} />
+      </Routes>
+
+    </>
   )
 }
 

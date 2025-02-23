@@ -9,21 +9,23 @@ function ViewProduct({ product }) {
     console.log();
 
     console.log(store.getState().cart.products);
-    
+
     return (
         <>
             {
-                product && <div>
+                product.name ? <div>
+                    {images&&<img src={`/images/${images[0]}`} alt={product.images[0]} />}
                     <h2>{name}</h2>
                     <p>{description}</p>
                     <p>Price: ${price}</p>
                     <p>Stock: {stock > 0 ? `In Stock: ${stock}` : "Out of Stock"}</p>
                     <p>Category: {categories}</p>
+
                     {sizes && <p>Sizes: {sizes.join(", ")}</p>}
                     {colors && <p>Colors: {colors.join(", ")}</p>}
                     {tag && <p>Tags: {tag.join(", ")}</p>}
                     <button onClick={() => { disp(addToCart(product)) }}>הוסף לסל</button>
-                </div>
+                </div>:<h1>בחר מוצר להצגה מפורטת</h1>
             }
 
 

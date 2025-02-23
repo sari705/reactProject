@@ -1,22 +1,37 @@
 import { getAllProducts, getTotalPages } from "../api/productService";
+import { getCategories } from "../api/enumService";
 import { useEffect, useState } from "react";
 import OneProduct from "../components/OneProduct";
 import ViewProduct from "../components/ViewProduct";
 import "./css/productList.css"
+import axios from "axios";
 
 export default function ProductList() {
 
      const [products, setProducts] = useState([])
     const [choiseProduct, setChoiseProduct] = useState({});
-    const [totalPages, setTotalPages] = useState(1)
+    const [totalPages, setTotalPages] = useState(0)
     const [page, setPage] = useState(1)
+    const [categories, setCategories] = useState([])
 
     async function getProducts(pageNumber) {
         try {
-            console.log("fetching products...");            
+            console.log("fetching products...");
             let response = await getAllProducts(pageNumber);
             console.log("all product " + response.data.products[0].name);
             setProducts(response.data.products);
+            setChoiseProduct({})
+        }
+        catch (e) {
+            console.log(e);
+        }
+    }
+
+    async function getCategoriesEnum() {
+        try {
+            let response = await getCategories();
+            console.log("res;" + response.data.Categories);
+            setCategories(["בחר קטגוריה",...response.data.Categories]);
         }
         catch (e) {
             console.log(e);
@@ -37,6 +52,7 @@ export default function ProductList() {
 
     useEffect(() => {
         getPages()
+        getCategoriesEnum()
     }, [])
 
     useEffect(() => {
@@ -46,7 +62,13 @@ export default function ProductList() {
 
 
     return (<>
+        <select name="categoriesSelect" id="">
+            {categories && categories.map((category) => {
+                return <option key={category}>{category}</option>
+            })}
+        </select>
         <div className="product-page">
+
             <div className="product-details">
                 <ViewProduct product={choiseProduct} />
             </div>
@@ -71,12 +93,7 @@ export default function ProductList() {
                         </button>
                     ))}
                 </div>
-            </div>
-
-
-
-
-        </div>
+            </div>       </div>
 
     </>
     )

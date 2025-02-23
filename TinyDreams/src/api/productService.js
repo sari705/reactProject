@@ -26,3 +26,5 @@ export function deleteProduct(productId) {
 export function updateProduct(product) {
     return axios.put(`${baseUrl}/${product._id}`, product)
 }
+
+

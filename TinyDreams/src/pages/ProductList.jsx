@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import OneProduct from "../components/OneProduct";
 import ViewProduct from "../components/ViewProduct";
 
-export default function ProductList({setChoiseProduct}) {
+export default function ProductList({ setChoiseProduct }) {
     const [products, setProducts] = useState([])
 
     const [choiseProduct, setChoiseProduct] = useState();
@@ -23,27 +23,27 @@ export default function ProductList({setChoiseProduct}) {
         getProducts()
     }, [])
     return (<>
-     <div>
-        <ul>
-            {products.map((product) => (
-                <li key={product._id}>
-                    <OneProduct product={product} setChoiseProduct={setChoiseProduct} /> 
-                </li>
-            ))}
+        <div>
+            <ul>
+                {products.map((product) => (
+                    <li key={product._id}>
+                        <OneProduct product={product} setChoiseProduct={setChoiseProduct} />
+                    </li>
+                ))}
 
-            {/* {
+                {/* {
                 products.map((product) => {
                     let imgSrc = `/images/${product.images[0]}`;
                     return <li key={product._id}><img src={imgSrc} alt={product.images[0]}></img>{product.name}</li>
                 })
             } */}
-        </ul>
+            </ul>
         </div>
 
-          <div>
-          <ViewProduct product={choiseProduct}/>
-          </div>
-          
-        </>
+        <div>
+            <ViewProduct product={choiseProduct} />
+        </div>
+
+    </>
     )
 }

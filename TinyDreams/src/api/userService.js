@@ -1,4 +1,4 @@
-import { axios } from 'axios'
+import  axios  from 'axios'
 
 let baseUrl = "https://nodeproject-gd82.onrender.com/api/user";
 

@@ -1,0 +1,64 @@
+/* עיצוב עמוד המוצרים - מחלק את הדף לשני חלקים */
+.product-page {
+    display: flex;
+    height: 100vh; /* גובה מלא */
+    gap: 20px;
+    padding: 20px;
+}
+
+/* צד שמאל - פרטי מוצר */
+.product-details {
+    flex: 0.6; /* יותר קטן מבעבר כדי להרחיב את רשימת המוצרים */
+    background: #f9f9f9;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* צד ימין - רשימת מוצרים עם גלילה אנכית */
+.product-list-container {
+    flex: 0.8; /* צד ימין יהיה רחב יותר */
+    height: 100vh; /* גובה מלא */
+    overflow-y: auto; /* גלילה אנכית */
+    background: #fff;
+    border-radius: 8px;
+    padding: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* רשימת המוצרים */
+.product-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+/* כל מוצר */
+.product-list li {
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    padding: 10px;
+    text-align: center;
+    cursor: pointer;
+    transition: transform 0.2s ease-in-out;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* תמונות המוצרים - תיקון חיתוך */
+.product-list li img {
+    width: 100%;
+    height: auto;
+    max-height: 250px; /* תמונות גדולות יותר */
+    object-fit: contain;
+    border-radius: 8px;
+}
+
+
+.active{
+    background-color: black;
+    color: #fff;
+}

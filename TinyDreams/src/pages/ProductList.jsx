@@ -1,47 +1,81 @@
-import { getAllProducts } from "../api/productService";
+import { getAllProducts, getTotalPages } from "../api/productService";
 import { useEffect, useState } from "react";
 import OneProduct from "../components/OneProduct";
 import ViewProduct from "../components/ViewProduct";
+import "./css/productList.css"
 
-export default function ProductList({ setChoiseProduct }) {
-    const [products, setProducts] = useState([])
+export default function ProductList() {
 
-    const [choiseProduct, setChoiseProduct] = useState();
+     const [products, setProducts] = useState([])
+    const [choiseProduct, setChoiseProduct] = useState({});
+    const [totalPages, setTotalPages] = useState(1)
+    const [page, setPage] = useState(1)
 
-    async function getProducts() {
+    async function getProducts(pageNumber) {
         try {
-            let allProducts = await getAllProducts();
-            console.log("all product " + allProducts.data.products[0].name);
-            setProducts(allProducts.data.products);
+            console.log("fetching products...");            
+            let response = await getAllProducts(pageNumber);
+            console.log("all product " + response.data.products[0].name);
+            setProducts(response.data.products);
         }
         catch (e) {
             console.log(e);
         }
-
     }
+
+
+    async function getPages() {
+        try {
+            let totalPages = await getTotalPages();
+            setTotalPages(totalPages.data.totalPages);
+
+        }
+        catch (e) {
+            console.log(e)
+        }
+    }
+
     useEffect(() => {
-        getProducts()
+        getPages()
     }, [])
+
+    useEffect(() => {
+        getProducts(page)
+    }, [page])
+
+
+
     return (<>
-        <div>
-            <ul>
-                {products.map((product) => (
-                    <li key={product._id}>
-                        <OneProduct product={product} setChoiseProduct={setChoiseProduct} />
-                    </li>
-                ))}
+        <div className="product-page">
+            <div className="product-details">
+                <ViewProduct product={choiseProduct} />
+            </div>
 
-                {/* {
-                products.map((product) => {
-                    let imgSrc = `/images/${product.images[0]}`;
-                    return <li key={product._id}><img src={imgSrc} alt={product.images[0]}></img>{product.name}</li>
-                })
-            } */}
-            </ul>
-        </div>
+            <div className="product-list-container">
+                <ul className="product-list">
+                    {products.map((product) => (
+                        <li key={product._id}>
+                            <OneProduct product={product} setChoiseProduct={setChoiseProduct} />
+                        </li>
+                    ))}
 
-        <div>
-            <ViewProduct product={choiseProduct} />
+                </ul>
+                <div className="pagination">
+                    {[...Array(totalPages)].map((_, index) => (
+                        <button
+                            key={index + 1}
+                            onClick={() => setPage(index + 1)}
+                            className={page === index + 1 ? "active" : ""}
+                        >
+                            {index + 1}
+                        </button>
+                    ))}
+                </div>
+            </div>
+
+
+
+
         </div>
 
     </>

@@ -10,7 +10,7 @@ function Login() {
     const { register, formState: { errors }, handleSubmit } = useForm();
     const disp = useDispatch();
     const navigate = useNavigate();
-    console.log(useSelector((state) => state.user.currentUser));
+    console.log("user in redux: "+useSelector((state) => state.user.currentUser));
 
     async function submit(user) {
         console.log("in submit");
@@ -21,7 +21,7 @@ function Login() {
             console.log("res: ", response);
             disp(userIn(response.data.dataWithoutPassword.username));
             alert("loged in");            
-            // navigate("/ProductList")
+            navigate("/products")
         }
         catch (error) {
             console.log(error);            

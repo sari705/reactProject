@@ -43,8 +43,7 @@ export default function ProductList({setChoiseProduct}) {
           <div>
           <ViewProduct product={choiseProduct}/>
           </div>
-
+          
         </>
     )
-
 }

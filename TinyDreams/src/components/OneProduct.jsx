@@ -1,13 +1,12 @@
-import ViewProduct from "./ViewProduct";
 
-function OneProduct({product, setChoiseProduct}) {
+function OneProduct({ product, setChoiseProduct }) {
 
-    return ( <div>
-    <img src={`/images/${product.images[0]}`} alt={product.images[0]} onClick={() => setChoiseProduct(product)} /> 
-    <h2>{product.name}</h2>
-    <h3>{product.price}</h3>
+    return (<div>
+        <h2>{product.name}</h2>
+        <img src={`/images/${product.images[0]}`} alt={product.images[0]} onClick={() => setChoiseProduct(product)} />
+        <h3>{product.price}</h3>
 
-    </div> );
+    </div>);
 }
 
 export default OneProduct;

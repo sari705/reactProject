@@ -38,21 +38,13 @@ export default function ProductList() {
                             <OneProduct product={product} setChoiseProduct={setChoiseProduct} />
                         </li>
                     ))}
-
-                    {/* {
-                products.map((product) => {
-                    let imgSrc = `/images/${product.images[0]}`;
-                    return <li key={product._id}><img src={imgSrc} alt={product.images[0]}></img>{product.name}</li>
-                })
-            } */}
                 </ul>
             </div>
 
 
         </div>
-
+          
 
     </>
     )
-
 }

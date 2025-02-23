@@ -1,19 +1,32 @@
 import { useForm } from "react-hook-form";
+import { useDispatch } from 'react-redux';
+import { useNavigate } from "react-router-dom";
 
-import signUp from '../api/userService.js';
+import { signUp } from '../api/userService.js';
+import { userIn } from "../features/userSlice";
+
 
 function SignUp() {
 
 
-    let { register, handleSubmit, formState: { errors, isValid } } = useForm();
+    let { register, handleSubmit, formState: { errors } } = useForm();
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
 
-
-    function save(data) {
-        signUp(data);
+    async function save(data) {
+        try {
+            const user = await signUp(data);
+            dispatch(userIn({ username: user.username, email: user.email }));
+            navigate("/ProductList")
+            alert("You have successfully registered");
+        }
+        catch (e) {
+            alert(e.message);
+        }
     }
 
     return (<>
-    <h2>SignUp</h2>
+        <h2>SignUp</h2>
         <form onSubmit={handleSubmit(save)}>
 
 
@@ -30,6 +43,7 @@ function SignUp() {
                 }
             })
             }></input>
+            {errors.email&&<div className="error">{errors.email.message}</div>}
 
             <input type="password" placeholder="סיסמא"{...register("password", {
                 required: 'שדה סיסמא הוא שדה חובה',
@@ -38,8 +52,10 @@ function SignUp() {
                     message: " הסיסמה לא חזקה, נא להזין סיסמה עם אותיות ומספרים בין 7-15 תווים"
                 }
             })}></input>
+                        {errors.password&&<div className="error">{errors.password.message}</div>}
 
-           </form>
+
+        </form>
 
     </>);
 }

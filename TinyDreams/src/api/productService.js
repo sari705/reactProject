@@ -3,7 +3,7 @@ import axios  from "axios";
 let baseUrl = "https://nodeproject-gd82.onrender.com/api/product";
 
 export function getAllProducts(index) {
-    return axios.get(`${baseUrl}?limit=15&page=${index}`);
+    return axios.get(`${baseUrl}?&page=${index}`);
 }
 
 export function getProduct(productId) {
@@ -11,7 +11,7 @@ export function getProduct(productId) {
 }
 
 export function getTotalPages() {
-    return axios.get(`${baseUrl}/totalPages?limit=15`)
+    return axios.get(`${baseUrl}/pages`)
 }
 
 

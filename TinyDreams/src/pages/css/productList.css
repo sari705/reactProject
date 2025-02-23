@@ -56,3 +56,9 @@
     object-fit: contain;
     border-radius: 8px;
 }
+
+
+.active{
+    background-color: black;
+    color: #fff;
+}

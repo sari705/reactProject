@@ -35,7 +35,7 @@ function SignUp() {
             {errors.username && <div className="error">{errors.username.message} </div>}
 
 
-            <input type="email" {...register("email", {
+            <input type="email" placeholder="email" {...register("email", {
                 required: 'שדה אימייל הוא שדה חובה',
                 pattern: {
                     value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,

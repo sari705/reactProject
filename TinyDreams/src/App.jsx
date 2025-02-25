@@ -8,13 +8,13 @@ import Login from './pages/Login'
 import NavBar from './components/NavBar'
 import { Routes, Route} from "react-router-dom"
 import Home from './pages/Home'
+import SignUp from './pages/SignUp'
 
 
 function App() {
 
   return (
-    <>
-    
+    <>   
       <NavBar/>
 
       <Routes>
@@ -23,6 +23,7 @@ function App() {
         <Route path="/login" element={<Login/>} />
         <Route path="/products" element={<ProductList />} />
         <Route path="/cart" element={<Cart />} />
+        <Route path="/signup" element={<SignUp />} />
       </Routes>
 
     </>

@@ -1,4 +1,4 @@
-import { getAllProducts, getTotalPages } from "../api/productService";
+import { getAllProducts, getTotalPages, getProductsByCategory } from "../api/productService";
 import { getCategories } from "../api/enumService";
 import { useEffect, useState } from "react";
 import OneProduct from "../components/OneProduct";
@@ -8,11 +8,12 @@ import axios from "axios";
 
 export default function ProductList() {
 
-     const [products, setProducts] = useState([])
+    const [products, setProducts] = useState([])
     const [choiseProduct, setChoiseProduct] = useState({});
     const [totalPages, setTotalPages] = useState(0)
     const [page, setPage] = useState(1)
     const [categories, setCategories] = useState([])
+    const [choiseCategory, setChoiseCategory] = useState("בחר קטגוריה")
 
     async function getProducts(pageNumber) {
         try {
@@ -27,11 +28,31 @@ export default function ProductList() {
         }
     }
 
+    async function getProductsCategory(category) {
+        if (category === "בחר קטגוריה") {
+            getProducts(1);
+            return;
+        }
+        else {
+            try {
+                console.log("fetching products...");
+                let response = await getProductsByCategory(category);
+                // console.log("all product " + response.data.products[0].name);
+                setProducts(response.data.products);
+                setChoiseProduct({})
+            }
+            catch (e) {
+                console.log(e);
+            }
+        }
+
+    }
+
     async function getCategoriesEnum() {
         try {
             let response = await getCategories();
             console.log("res;" + response.data.Categories);
-            setCategories(["בחר קטגוריה",...response.data.Categories]);
+            setCategories(["בחר קטגוריה", ...response.data.Categories]);
         }
         catch (e) {
             console.log(e);
@@ -59,10 +80,13 @@ export default function ProductList() {
         getProducts(page)
     }, [page])
 
+    useEffect(() => {
+        getProductsCategory(choiseCategory)
+    }, [choiseCategory])
 
 
     return (<>
-        <select name="categoriesSelect" id="">
+        <select name="categoriesSelect" id="" onChange={(e) => { setChoiseCategory(e.target.value) }}>
             {categories && categories.map((category) => {
                 return <option key={category}>{category}</option>
             })}
@@ -82,7 +106,7 @@ export default function ProductList() {
                     ))}
 
                 </ul>
-                <div className="pagination">
+                {choiseCategory == "בחר קטגוריה"&&<div className="pagination">
                     {[...Array(totalPages)].map((_, index) => (
                         <button
                             key={index + 1}
@@ -92,8 +116,9 @@ export default function ProductList() {
                             {index + 1}
                         </button>
                     ))}
-                </div>
-            </div>       </div>
+                </div>}
+            </div>
+        </div>
 
     </>
     )

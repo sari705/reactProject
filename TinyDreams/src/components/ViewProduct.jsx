@@ -18,10 +18,10 @@ function ViewProduct({ product }) {
                     <h2>{name}</h2>
                     <p>{description}</p>
                     <p>Price: ${price}</p>
-                    <p>Stock: {stock > 0 ? `In Stock: ${stock}` : "Out of Stock"}</p>
+                    <p>{stock > 0 ? `In Stock: ${stock}` : "Out of Stock"}</p>
                     <p>Category: {categories}</p>
 
-                    {sizes && <p>Sizes: {sizes.join(", ")}</p>}
+                    {sizes.length>0 && <p>Sizes: {sizes.join(", ")}</p>}
                     {colors && <p>Colors: {colors.join(", ")}</p>}
                     {tag && <p>Tags: {tag.join(", ")}</p>}
                     <button onClick={() => { disp(addToCart(product)) }}>הוסף לסל</button>

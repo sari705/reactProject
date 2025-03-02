@@ -8,6 +8,7 @@ import Login from './pages/Login'
 import NavBar from './components/NavBar'
 import { Routes, Route} from "react-router-dom"
 import Home from './pages/Home'
+import SignUp from './pages/SignUp'
 
 
 function App() {
@@ -21,6 +22,7 @@ function App() {
         <Route path="/" element={ <Home />} />
         <Route path="/home" element={<Home /> } />
         <Route path="/login" element={<Login/>} />
+        <Route path="/signup" element={<SignUp/>} />
         <Route path="/products" element={<ProductList />} />
         <Route path="/cart" element={<Cart />} />
       </Routes>

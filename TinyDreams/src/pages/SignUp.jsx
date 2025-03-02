@@ -15,13 +15,14 @@ function SignUp() {
 
     async function save(data) {
         try {
+            console.log("data: ", data);
             const user = await signUp(data);
             dispatch(userIn({ username: user.username, email: user.email }));
             navigate("/ProductList")
-            alert("You have successfully registered");
         }
         catch (e) {
             alert(e.message);
+            console.log(e);
         }
     }
 
@@ -43,7 +44,7 @@ function SignUp() {
                 }
             })
             }></input>
-            {errors.email&&<div className="error">{errors.email.message}</div>}
+            {errors.email && <div className="error">{errors.email.message}</div>}
 
             <input type="password" placeholder="סיסמא"{...register("password", {
                 required: 'שדה סיסמא הוא שדה חובה',
@@ -52,9 +53,9 @@ function SignUp() {
                     message: " הסיסמה לא חזקה, נא להזין סיסמה עם אותיות ומספרים בין 7-15 תווים"
                 }
             })}></input>
-                        {errors.password&&<div className="error">{errors.password.message}</div>}
+            {errors.password && <div className="error">{errors.password.message}</div>}
 
-
+            <button type="submit">signUp</button>
         </form>
 
     </>);

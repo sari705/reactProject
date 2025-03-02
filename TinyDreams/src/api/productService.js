@@ -30,3 +30,11 @@ export function updateProduct(product) {
 export function getProductsByCategory(category) {
     return axios.post(`${baseUrl}/category`, { category })
 }
+
+export function searchProducts(query) {
+    const encodedQuery = encodeURIComponent(query);
+    console.log("Encoded query:", encodedQuery); // בדיקה
+
+
+    return axios.get(`https://nodeproject-gd82.onrender.com/api/product/search?query=${encodedQuery}`);
+}

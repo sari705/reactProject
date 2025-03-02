@@ -1,22 +1,26 @@
-import { getAllProducts, getTotalPages, getProductsByCategory } from "../api/productService";
+import { getAllProducts, getTotalPages, getProductsByCategory, searchProducts } from "../api/productService";
 import { getCategories } from "../api/enumService";
 import { useEffect, useState } from "react";
 import OneProduct from "../components/OneProduct";
 import ViewProduct from "../components/ViewProduct";
 import "./css/productList.css"
 import axios from "axios";
+import ReducedCart from "../components/ReducedCart";
 
 export default function ProductList() {
-
     const [products, setProducts] = useState([])
     const [choiseProduct, setChoiseProduct] = useState({});
     const [totalPages, setTotalPages] = useState(0)
     const [page, setPage] = useState(1)
     const [categories, setCategories] = useState([])
     const [choiseCategory, setChoiseCategory] = useState("בחר קטגוריה")
+    const [searchValue, setSearchValue] = useState("")
+    const [viewReducedCart, setViewReducedCart] = useState(false)
+
 
     async function getProducts(pageNumber) {
         try {
+            setViewReducedCart(true)
             console.log("fetching products...");
             let response = await getAllProducts(pageNumber);
             console.log("all product " + response.data.products[0].name);
@@ -45,7 +49,28 @@ export default function ProductList() {
                 console.log(e);
             }
         }
+    }
 
+    async function getSearchProduct() {
+        if (searchValue === "") {
+            if (choiseCategory === "בחר קטגוריה") {
+                getProducts(1);
+                return;
+            }
+            else {
+                getProductsCategory(choiseCategory)
+            }
+        }
+        else {
+            try {
+                let response = await searchProducts(searchValue);
+                console.log("res;" + response.data.products);
+                setProducts(response.data.products);
+            }
+            catch (e) {
+                console.log(e);
+            }
+        }
     }
 
     async function getCategoriesEnum() {
@@ -78,19 +103,26 @@ export default function ProductList() {
 
     useEffect(() => {
         getProducts(page)
+        setTimeout(() => {setViewReducedCart(false)}, 5000)
     }, [page])
 
     useEffect(() => {
         getProductsCategory(choiseCategory)
     }, [choiseCategory])
 
+    useEffect(() => {
+        getSearchProduct()
+    }, [searchValue])
+
 
     return (<>
+    
         <select name="categoriesSelect" id="" onChange={(e) => { setChoiseCategory(e.target.value) }}>
             {categories && categories.map((category) => {
                 return <option key={category}>{category}</option>
             })}
         </select>
+        <input type="search" placeholder="חפש מוצר לפי שם" name="" id="" onBlur={(e) => { setSearchValue(e.target.value) }} />
         <div className="product-page">
 
             <div className="product-details">
@@ -106,7 +138,7 @@ export default function ProductList() {
                     ))}
 
                 </ul>
-                {choiseCategory == "בחר קטגוריה"&&<div className="pagination">
+                {choiseCategory == "בחר קטגוריה" && searchValue == "" && <div className="pagination">
                     {[...Array(totalPages)].map((_, index) => (
                         <button
                             key={index + 1}
@@ -119,6 +151,7 @@ export default function ProductList() {
                 </div>}
             </div>
         </div>
+        {viewReducedCart && <ReducedCart></ReducedCart>}
 
     </>
     )

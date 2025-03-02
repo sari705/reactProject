@@ -21,6 +21,9 @@ function NavBar() {
                         <li className="nav-item">
                             <Link className="nav-link" to="/cart">סל הקניות</Link>
                         </li>
+                        <li className="nav-item">
+                            <Link className="nav-link" to="/add-product">הוסף מוצר</Link>
+                        </li>
                     </ul>
                 </div>
             </nav>

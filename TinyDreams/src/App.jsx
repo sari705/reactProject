@@ -9,6 +9,7 @@ import NavBar from './components/NavBar'
 import { Routes, Route} from "react-router-dom"
 import Home from './pages/Home'
 import SignUp from './pages/SignUp'
+import AddProduct from './pages/AddProduct'
 
 
 function App() {
@@ -24,6 +25,7 @@ function App() {
         <Route path="/products" element={<ProductList />} />
         <Route path="/cart" element={<Cart />} />
         <Route path="/signup" element={<SignUp />} />
+        <Route path="/add-product" element={<AddProduct />} />
       </Routes>
 
     </>

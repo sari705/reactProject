@@ -1,5 +1,11 @@
-import { useForm } from "react-hook-form";
 import {updateProduct}from "../api/productService";
+import { useState, useEffect } from "react";
+import { Controller, useForm } from "react-hook-form";
+import { MenuItem, Select } from "@mui/material";
+
+import { getCategories, getTags, getColors } from "../api/enumService";
+
+
 
 function UpdateProduct() {
 

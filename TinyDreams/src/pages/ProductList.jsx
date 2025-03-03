@@ -16,19 +16,23 @@ export default function ProductList() {
     const [choiseCategory, setChoiseCategory] = useState("בחר קטגוריה")
     const [searchValue, setSearchValue] = useState("")
     const [viewReducedCart, setViewReducedCart] = useState(false)
+    const [loading, setLoading] = useState(true);
 
 
     async function getProducts(pageNumber) {
         try {
+            setLoading(true);
             setViewReducedCart(true)
             console.log("fetching products...");
             let response = await getAllProducts(pageNumber);
-            console.log("all product " + response.data.products[0].name);
             setProducts(response.data.products);
             setChoiseProduct({})
         }
         catch (e) {
             console.log(e);
+        }
+        finally {
+            setLoading(false); // ✅ ביטול טעינה לאחר השלמת הבקשה
         }
     }
 
@@ -64,7 +68,6 @@ export default function ProductList() {
         else {
             try {
                 let response = await searchProducts(searchValue);
-                console.log("res;" + response.data.products);
                 setProducts(response.data.products);
             }
             catch (e) {
@@ -76,7 +79,6 @@ export default function ProductList() {
     async function getCategoriesEnum() {
         try {
             let response = await getCategories();
-            console.log("res;" + response.data.Categories);
             setCategories(["בחר קטגוריה", ...response.data.Categories]);
         }
         catch (e) {
@@ -103,7 +105,7 @@ export default function ProductList() {
 
     useEffect(() => {
         getProducts(page)
-        setTimeout(() => {setViewReducedCart(false)}, 5000)
+        setTimeout(() => { setViewReducedCart(false) }, 5000)
     }, [page])
 
     useEffect(() => {
@@ -116,7 +118,7 @@ export default function ProductList() {
 
 
     return (<>
-    
+
         <select name="categoriesSelect" id="" onChange={(e) => { setChoiseCategory(e.target.value) }}>
             {categories && categories.map((category) => {
                 return <option key={category}>{category}</option>
@@ -130,14 +132,17 @@ export default function ProductList() {
             </div>
 
             <div className="product-list-container">
-                <ul className="product-list">
-                    {products.map((product) => (
-                        <li key={product._id}>
-                            <OneProduct product={product} setChoiseProduct={setChoiseProduct} />
-                        </li>
-                    ))}
-
-                </ul>
+                {loading ? (
+                    <div className="loading-container">🔄 טוען מוצרים...</div>
+                ) : (
+                    <ul className="product-list">
+                        {products.map((product) => (
+                            <li key={product._id}>
+                                <OneProduct product={product} setChoiseProduct={setChoiseProduct} />
+                            </li>
+                        ))}
+                    </ul>
+                )}                
                 {choiseCategory == "בחר קטגוריה" && searchValue == "" && <div className="pagination">
                     {[...Array(totalPages)].map((_, index) => (
                         <button

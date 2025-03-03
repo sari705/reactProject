@@ -1,34 +1,47 @@
+body {
+    margin: 0;
+    padding: 0;
+    padding-top: 100px; /* ✅ מבטיח שהתוכן יתחיל אחרי ה-NavBar */
+}
+
 /* עיצוב עמוד המוצרים - מחלק את הדף לשני חלקים */
 .product-page {
     display: flex;
+    flex-wrap: wrap;
     gap: 20px;
     padding: 20px;
     align-items: flex-start;
-    min-height: 100vh; /* מוודא שהעמוד יהיה לפחות בגובה המסך */
+    min-height: 100vh;
+    margin-top: 20px; /* ✅ מרחיק עוד יותר מה-NavBar */
 }
 
 /* צד שמאל - פרטי מוצר נשאר קבוע */
 .product-details {
-    flex: 0.7;
+    flex: 0.5;
     background: #f9f9f9;
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     position: sticky;
-    top: 0;
-    max-height: 90vh; /* מונע חיתוך של תוכן גבוה מדי */
-    overflow-y: auto; /* מאפשר גלילה רק אם יש צורך */
+    top: 120px;
+    max-height: 80vh;
+    overflow-y: auto;
+    min-height: 500px; /* ✅ מונע קריסה של הגובה לפני טעינת המוצרים */
 }
 
 /* צד ימין - רשימת מוצרים */
 .product-list-container {
-    flex: 1; /* צד ימין יתפוס את שאר הרוחב */
-    min-height: 100vh; /* יוודא שהדף כולו יתגלגל */
+    margin-top: 4300px;
+    flex: 0.5;
+    min-height: 500px; /* ✅ גובה מינימלי כדי שהתוכן לא יקפוץ */
     background: #fff;
     border-radius: 8px;
-    padding: 10px;
+    padding: 20px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease-in-out;
 }
+
+
 
 /* רשימת המוצרים */
 .product-list {
@@ -131,4 +144,22 @@
     font-size: 1.2rem;
     font-weight: bold;
     color: #333;
+}
+
+/* ✅ אנימציית טעינה */
+.loading-container {
+    min-height: 500px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 18px;
+    font-weight: bold;
+    color: #777;
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+/* ✅ אנימציה להופעת הנתונים */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
 }

@@ -10,6 +10,7 @@ import { Routes, Route} from "react-router-dom"
 import Home from './pages/Home'
 import SignUp from './pages/SignUp'
 import AddProduct from './pages/AddProduct'
+import UpdateProduct from './pages/UpdateProduct'
 
 
 function App() {
@@ -27,6 +28,7 @@ function App() {
         <Route path="/cart" element={<Cart />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/add-product" element={<AddProduct />} />
+        <Route path="/update-product" element={<UpdateProduct/>} />
       </Routes>
 
     </>

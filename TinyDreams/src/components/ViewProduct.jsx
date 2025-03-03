@@ -6,9 +6,6 @@ function ViewProduct({ product }) {
 
     const { name, description, images, stock, price, categories, sizes, colors, tag } = product;
     const disp = useDispatch();
-    console.log();
-
-    console.log(store.getState().cart.products);
 
     return (
         <>

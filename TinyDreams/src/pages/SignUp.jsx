@@ -17,8 +17,9 @@ function SignUp() {
         try {
             console.log("data: ", data);
             const user = await signUp(data);
-            console.log("user(after signingUp): ", user);
 
+            console.log("user after sign up: ", user);
+            
             dispatch(userIn({ username: user.username, email: user.email }));
             navigate("/products")
         }

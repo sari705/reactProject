@@ -1,7 +1,7 @@
 import { useForm } from "react-hook-form";
 import {updateProduct}from "../api/productService";
 
-function UpdateProduct() {
+function UpdateProduct({product}) {
 
     const { register, handleSubmit, control, reset, formState: { errors, isValid } } = useForm();
     const [categories, setCategories] = useState([]);
@@ -9,9 +9,17 @@ function UpdateProduct() {
     const [colors, setColors] = useState([]);
 
     async function onSubmit(data) {
-            console.log("Product Data:", data);
+
+        if (!product || !product._id) {
+            alert("מזהה המוצר חסר! לא ניתן לעדכן.");
+            return;
+        }
+
+        const productToUpdate = { ...data, _id: product._id }; // ודאי שהמזהה קיים
+            console.log("Product Data: ", productToUpdate);
+        
             try {
-                const response = await updateProduct(data);
+                const response = await updateProduct(productToUpdate);
                 console.log("respones" + response.data);
                 alert("updated");
             }

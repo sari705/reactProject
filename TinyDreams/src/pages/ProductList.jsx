@@ -6,6 +6,7 @@ import ViewProduct from "../components/ViewProduct";
 import "./css/productList.css"
 import axios from "axios";
 import ReducedCart from "../components/ReducedCart";
+import { Outlet } from "react-router-dom";
 
 export default function ProductList() {
     const [products, setProducts] = useState([])
@@ -127,9 +128,9 @@ export default function ProductList() {
         <input type="search" placeholder="חפש מוצר לפי שם" name="" id="" onBlur={(e) => { setSearchValue(e.target.value) }} />
         <div className="product-page">
 
-            <div className="product-details">
+            {/* <div className="product-details">
                 <ViewProduct product={choiseProduct} />
-            </div>
+            </div> */}
 
             <div className="product-list-container">
                 {loading ? (
@@ -155,6 +156,7 @@ export default function ProductList() {
                     ))}
                 </div>}
             </div>
+            <Outlet></Outlet>
         </div>
         {viewReducedCart && <ReducedCart></ReducedCart>}
 

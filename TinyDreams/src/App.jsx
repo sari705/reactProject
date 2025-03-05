@@ -11,6 +11,7 @@ import Home from './pages/Home'
 import SignUp from './pages/SignUp'
 import AddProduct from './pages/AddProduct'
 import UpdateProduct from './pages/UpdateProduct'
+import ViewProduct from './components/ViewProduct'
 
 
 function App() {
@@ -24,7 +25,10 @@ function App() {
         <Route path="/home" element={<Home /> } />
         <Route path="/login" element={<Login/>} />
         <Route path="/signup" element={<SignUp/>} />
-        <Route path="/products" element={<ProductList/>} />
+        <Route path="/products" element={<ProductList/>}>
+          <Route path="details/:id" element={<ViewProduct></ViewProduct>}>
+          </Route>
+        </Route>
         <Route path="/cart" element={<Cart />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/add-product" element={<AddProduct />} />

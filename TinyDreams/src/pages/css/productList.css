@@ -12,7 +12,7 @@ body {
     padding: 20px;
     align-items: flex-start;
     min-height: 100vh;
-    margin-top: 20px; /* ✅ מרחיק עוד יותר מה-NavBar */
+    margin-top: 800px; /* ✅ מרחיק עוד יותר מה-NavBar */
 }
 
 /* צד שמאל - פרטי מוצר נשאר קבוע */
@@ -29,6 +29,12 @@ body {
     min-height: 500px; /* ✅ מונע קריסה של הגובה לפני טעינת המוצרים */
 }
 
+.product-list-select{
+
+}
+.product-list-input{
+
+}
 /* צד ימין - רשימת מוצרים */
 .product-list-container {
     margin-top: 4300px;
@@ -99,19 +105,6 @@ body {
     background-color: black;
     color: #fff;
     border: 1px solid black;
-}
-
-.modal-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.5);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 1000;
 }
 
 .view-product-container {

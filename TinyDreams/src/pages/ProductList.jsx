@@ -123,18 +123,13 @@ export default function ProductList() {
 
     return (<>
 
-        <select name="categoriesSelect" id="" onChange={(e) => { setChoiseCategory(e.target.value) }}>
+        <select className="product-list-select" name="categoriesSelect" id="" onChange={(e) => { setChoiseCategory(e.target.value) }}>
             {categories && categories.map((category) => {
                 return <option key={category}>{category}</option>
             })}
         </select>
-        <input type="search" placeholder="חפש מוצר לפי שם" name="" id="" onBlur={(e) => { setSearchValue(e.target.value) }} />
+        <input className="product-list-input" type="search" placeholder="חפש מוצר לפי שם" name="" id="" onBlur={(e) => { setSearchValue(e.target.value) }} />
         <div className="product-page">
-
-            {/* <div className="product-details">
-                <ViewProduct product={choiseProduct} />
-            </div> */}
-
             <div className="product-list-container">
                 {loading ? (
                     <div className="loading-container">🔄 טוען מוצרים...</div>
@@ -161,12 +156,6 @@ export default function ProductList() {
             </div>
             <Outlet></Outlet>
         </div>
-
-        {/* {choiseProduct && (
-            <div onClick={() => setChoiseProduct(null)} className="modal-overlay">
-                <ViewProduct product={choiseProduct} />
-            </div>
-        )} */}
 
         {viewReducedCart && <ReducedCart></ReducedCart>}
 

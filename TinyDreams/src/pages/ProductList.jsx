@@ -10,7 +10,7 @@ import { Outlet } from "react-router-dom";
 
 export default function ProductList() {
     const [products, setProducts] = useState([])
-    const [choiseProduct, setChoiseProduct] = useState({});
+    const [choiseProduct, setChoiseProduct] = useState(null);
     const [totalPages, setTotalPages] = useState(0)
     const [page, setPage] = useState(1)
     const [categories, setCategories] = useState([])
@@ -19,6 +19,9 @@ export default function ProductList() {
     const [viewReducedCart, setViewReducedCart] = useState(false)
     const [loading, setLoading] = useState(true);
 
+    const handleProductClick = (product) => {
+        setChoiseProduct(product);
+    };
 
     async function getProducts(pageNumber) {
         try {
@@ -27,7 +30,7 @@ export default function ProductList() {
             console.log("fetching products...");
             let response = await getAllProducts(pageNumber);
             setProducts(response.data.products);
-            setChoiseProduct({})
+            setChoiseProduct(null)
         }
         catch (e) {
             console.log(e);
@@ -48,7 +51,7 @@ export default function ProductList() {
                 let response = await getProductsByCategory(category);
                 // console.log("all product " + response.data.products[0].name);
                 setProducts(response.data.products);
-                setChoiseProduct({})
+                setChoiseProduct(null)
             }
             catch (e) {
                 console.log(e);
@@ -139,11 +142,11 @@ export default function ProductList() {
                     <ul className="product-list">
                         {products.map((product) => (
                             <li key={product._id}>
-                                <OneProduct product={product} setChoiseProduct={setChoiseProduct} />
+                                <OneProduct product={product} onClick={() => handleProductClick(product)} />
                             </li>
                         ))}
                     </ul>
-                )}                
+                )}
                 {choiseCategory == "בחר קטגוריה" && searchValue == "" && <div className="pagination">
                     {[...Array(totalPages)].map((_, index) => (
                         <button
@@ -158,6 +161,13 @@ export default function ProductList() {
             </div>
             <Outlet></Outlet>
         </div>
+
+        {/* {choiseProduct && (
+            <div onClick={() => setChoiseProduct(null)} className="modal-overlay">
+                <ViewProduct product={choiseProduct} />
+            </div>
+        )} */}
+
         {viewReducedCart && <ReducedCart></ReducedCart>}
 
     </>

@@ -1,29 +1,51 @@
-import { useDispatch, useSelector } from "react-redux";
-import { addToCart } from "../features/cartSlice"
-import { store } from "../app/store.js"
-import { useParams } from "react-router-dom";
+import { Link, useParams, useNavigate } from "react-router-dom";
+import { getProduct } from "../api/productService.js";
+import { useState, useEffect } from "react";
+import "./css/ViewProduct.css"
+
 
 function ViewProduct() {
     const { id } = useParams()
-    const { name, description, images, stock, price, categories, sizes, colors, tag } = product;
-    const disp = useDispatch();
+    const [product, setProduct] = useState(null)
+    const navigate = useNavigate()
+
+    const fetchProduct = async () => {
+        try {
+            const response = await getProduct(id)
+            console.log("response", response)
+            setProduct(response.data.data)
+            console.log("product: ", product)
+        }
+        catch (e) {
+            console.log("error fetching product: " + e)
+        }
+    }
+
+    useEffect(() => {
+        fetchProduct()
+    }, [id])
 
     return (
         <>
             {
-                product.name ? <div>
-                    {images && <img src={`/images/${images[0]}`} alt={product.images[0]} />}
-                    <h2>{name}</h2>
-                    <p>{description}</p>
-                    <p>Price: ${price}</p>
-                    <p>{stock > 0 ? `In Stock: ${stock}` : "Out of Stock"}</p>
-                    <p>Category: {categories}</p>
+                product &&
+                <div className="modal-overlay" onClick={() => { navigate("/products") }}>
+                    <div className="flex-container" >
+                        <img className="flex-item" src={`/images/${product.images[0]}`} alt={product.images[0]} />
+                        <h2 className="flex-item">{product.name}</h2>
+                        <p className="flex-item">{product.description}</p>
+                        <p className="flex-item">Price: ${product.price}</p>
+                        <p className="flex-item">{product.stock > 0 ? `In Stock: ${product.stock}` : "Out of Stock"}</p>
+                        <p className="flex-item">Category: {product.categories}</p>
 
-                    {sizes.length > 0 && <p>Sizes: {sizes.join(", ")}</p>}
-                    {colors && <p>Colors: {colors.join(", ")}</p>}
-                    {tag && <p>Tags: {tag.join(", ")}</p>}
+                        {product.sizes?.length > 0 && <p className="flex-item">Sizes: {product.sizes.join(", ")}</p>}
+                        {product.colors && <p className="flex-item">Colors: {product.colors.join(", ")}</p>}
+                        {product.tag && <p className="flex-item">Tags: {product.tag.join(", ")}</p>}
 
-                </div> : <h1>בחר מוצר להצגה מפורטת</h1>
+                        <button className="close-button" onClick={() => navigate("/products")}>סגור</button>
+                    </div>
+                </div>
+
             }
 
 

@@ -15,8 +15,13 @@ export function getTotalPages() {
 }
 
 
-export function addProduct(product) {
-    return axios.post(baseUrl, product)
+export function addProduct(product, token) {
+    return axios.post(baseUrl, product, {
+        headers: {
+            'Authorization': 
+            `Bearer ${token}` 
+        }
+    });
 }
 
 export function deleteProduct(productId) {

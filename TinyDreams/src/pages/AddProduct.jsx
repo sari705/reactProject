@@ -1,8 +1,11 @@
-import { getCategories, getTags, getColors } from "../api/enumService";
-import { addProduct } from "../api/productService";
 import { Controller, useForm } from "react-hook-form";
 import { MenuItem, Select } from "@mui/material";
 import { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
+
+import { getCategories, getTags, getColors } from "../api/enumService";
+import { addProduct } from "../api/productService";
+
 
 function AddProduct() {
     const { register, handleSubmit, control, reset, formState: { errors, isValid } } = useForm();
@@ -10,11 +13,19 @@ function AddProduct() {
     const [tags, setTags] = useState([]);
     const [colors, setColors] = useState([]);
 
+    const token = useSelector(state => state.user.currentUser.token); // העבר את השורה הזו לכאן
+
+    // const currentUser = useSelector(state => state.currentUser);
+    // const token = currentUser ? currentUser.token : null;
 
     async function onSubmit(data) {
+        
         console.log("Product Data:", data);
+        // const token = useSelector( => state.currentUser.token);
+        console.log("manager token:", token);
+
         try {
-            const response = await addProduct(data);
+            const response = await addProduct(data, token);
             console.log("respones" + response.data.newProduct);
             alert("added");
         }

@@ -16,20 +16,29 @@ export function getTotalPages() {
 
 
 export function addProduct(product, token) {
+    console.log("token: ", token)
     return axios.post(baseUrl, product, {
         headers: {
-            'Authorization': 
+            'authorization': 
             `Bearer ${token}` 
         }
     });
 }
 
-export function deleteProduct(productId) {
-    return axios.delete(`${baseUrl}/${productId}`)
+export function deleteProduct(productId, token) {
+    return axios.delete(`${baseUrl}/${productId}`, {
+        headers: {
+            "authorization": `Bearer ${token}`
+        }
+    })
 }
 
-export function updateProduct(product) {
-    return axios.put(`${baseUrl}/${product._id}`, product)
+export function updateProduct(product, token) {
+    return axios.put(`${baseUrl}/${product._id}`, product, {
+        headers: {
+            'authorization': `Bearer ${token}`
+        }
+    })
 }
 
 export function getProductsByCategory(category) {

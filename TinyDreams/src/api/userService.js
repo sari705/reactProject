@@ -18,8 +18,12 @@ export function signUp(body) {
     return axios.post(`${baseUrl}`, body)
 }
 
-export function updateUser(id, body) {
-    return axios.put(`${baseUrl}/${id}`, body)
+export function updateUser(id, {username, email}, token) {
+    return axios.put(`${baseUrl}/${id}`, {username, email}, {
+        headers: {
+            authorization: `Bearer ${token}`,
+        }
+    })
 }
 
 export function updatePassword(body) {

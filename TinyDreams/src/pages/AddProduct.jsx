@@ -24,6 +24,8 @@ function AddProduct() {
         // const token = useSelector( => state.currentUser.token);
         console.log("manager token:", token);
 
+        data.images = data.images.split(",").map(img => img.trim());
+
         try {
             const response = await addProduct(data, token);
             console.log("respones" + response.data.newProduct);
@@ -181,7 +183,7 @@ function AddProduct() {
                 <label>צבעים (הפרד עם פסיקים):</label>
                 <br />
                 <Controller
-                    name="color"
+                    name="colors"
                     control={control}
                     defaultValue={[]}
                     render={({ field }) => (

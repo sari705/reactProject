@@ -4,56 +4,16 @@ body {
     padding-top: 100px; /* ✅ מבטיח שהתוכן יתחיל אחרי ה-NavBar */
 }
 
-/* עיצוב עמוד המוצרים - מחלק את הדף לשני חלקים */
-.product-page {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-    padding: 20px;
-    align-items: flex-start;
-    min-height: 100vh;
-    margin-top: 800px; /* ✅ מרחיק עוד יותר מה-NavBar */
-}
-
-/* צד שמאל - פרטי מוצר נשאר קבוע */
-.product-details {
-    flex: 0.5;
-    background: #f9f9f9;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    position: sticky;
-    top: 120px;
-    max-height: 80vh;
-    overflow-y: auto;
-    min-height: 500px; /* ✅ מונע קריסה של הגובה לפני טעינת המוצרים */
-}
-
-.product-list-select{
-
-}
-.product-list-input{
-
-}
-/* צד ימין - רשימת מוצרים */
-.product-list-container {
-    margin-top: 4300px;
-    flex: 0.5;
-    min-height: 500px; /* ✅ גובה מינימלי כדי שהתוכן לא יקפוץ */
-    background: #fff;
-    border-radius: 8px;
-    padding: 20px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    transition: all 0.3s ease-in-out;
-}
-
-
-
 /* רשימת המוצרים */
-.product-list {
+.product-list-container {
+    display: grid;
+    grid-template-columns: auto auto auto;
     list-style: none;
     padding: 0;
-    margin: 0;
+    margin-right: auto;
+    margin-left: auto;
+    
+    
 }
 
 /* כל מוצר */
@@ -66,9 +26,6 @@ body {
     text-align: center;
     cursor: pointer;
     transition: transform 0.2s ease-in-out;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
 }
 
 /* תמונות המוצרים */

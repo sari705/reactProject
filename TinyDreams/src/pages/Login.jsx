@@ -73,6 +73,7 @@ import "./css/login.css"; // קובץ ה-CSS
 import { FaEye, FaEyeSlash } from "react-icons/fa"; // אייקוני הצגת סיסמה
 
 function Login() {
+
     const { register, formState: { errors }, handleSubmit } = useForm();
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -83,8 +84,11 @@ function Login() {
     async function submit(user) {
         console.log("in submit");
         try {
-            let response = await logIn(user);
+            let response = await logIn(user);            
             console.log("res in login: ", response);
+
+            localStorage.setItem("currentUser",  JSON.stringify(response));//הוספתי את ה-currentUser ל -localStorage
+
             alert("Logged in successfully!");
             dispatch(userIn({ ...response.data.data, token: response.data.token }));
             navigate("/products");

@@ -41,7 +41,8 @@ function ResponsiveAppBar() {
         ] : [])
     ];
 
-    const settings = ['Profile', 'Logout ↪️'];
+    const settings = [{ name: 'Profile', path: '' },
+    { name: 'Logout ↪️', path: '/logout' }];
 
     return (
         <>
@@ -111,11 +112,22 @@ function ResponsiveAppBar() {
                                 onClose={handleCloseUserMenu}
                                 className="settingsMenu"
                             >
+
+                                {settings.map((setting) => (
+                                    <MenuItem key={setting.name} onClick={handleCloseUserMenu}>
+                                        <Typography component={Link} to={setting.path} className="menuItem">
+                                            {setting.name}
+                                        </Typography>
+                                    </MenuItem>
+                                ))}
+
+
+                                {/* 
                                 {settings.map((setting) => (
                                     <MenuItem key={setting} onClick={handleCloseUserMenu}>
                                         <Typography className="menuItem">{setting}</Typography>
                                     </MenuItem>
-                                ))}
+                                ))} */}
                             </Menu>
                         </Box>
                     </Toolbar>

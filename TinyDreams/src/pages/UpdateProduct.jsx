@@ -1,19 +1,39 @@
-import {updateProduct}from "../api/productService";
 import { useState, useEffect } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { MenuItem, Select } from "@mui/material";
+import { useSelector } from "react-redux";
 
 import { getCategories, getTags, getColors } from "../api/enumService";
+import { updateProduct } from "../api/productService";
 
 
+const product = {
+    _id: "67ccce2a408b3e71784dc431",
+    name: "car",
+    description: "a white car",
+    images: ["tois20.jpg"],
+    stock: 10,
+    price: 680,
+    categories: "צעצועים",
+    sizes: ["M"],
+    colors: [],
+    tag: ["צעצועי התפתחות"],
+    __v: 0
+};
 
-function UpdateProduct({product}) {
+// function UpdateProduct({product}) {
+    function UpdateProduct() {
 
     const { register, handleSubmit, control, reset, formState: { errors, isValid } } = useForm();
     const [categories, setCategories] = useState([]);
     const [tags, setTags] = useState([]);
     const [colors, setColors] = useState([]);
 
+    const token = useSelector(state => state.user.currentUser.token);//writed me "undifind" not clear why in addProduct the same action works OK
+    // ללבדוק למה קשור הבעיה כיגם הוספצ מוצר לא עובד מאותה סיבה ולפני כן זה עבד .אולי משהו ברידקס השתבש?
+
+    console.log("token: ", token);
+    
     async function onSubmit(data) {
 
         if (!product || !product._id) {
@@ -25,7 +45,7 @@ function UpdateProduct({product}) {
             console.log("Product Data: ", productToUpdate);
         
             try {
-                const response = await updateProduct(productToUpdate);
+                const response = await updateProduct(productToUpdate, token);
                 console.log("respones" + response.data);
                 alert("updated");
             }
@@ -66,12 +86,14 @@ function UpdateProduct({product}) {
             console.log("tags error: " + err);
         }
     }
-    useEffect(() => {
-        getCategoryEnam()
-        getTagEnam()
-        getColorEnam()
-    }, [])
 
+    useEffect(() => {
+        getCategoryEnam();
+        getTagEnam();
+        getColorEnam();
+        reset(product); // איפוס השדות לערכים של המוצר
+    }, [product]); 
+    
     return (
         <form onSubmit={handleSubmit(onSubmit)}>
             {/**שם */}
@@ -229,7 +251,7 @@ function UpdateProduct({product}) {
                 />
             </div>
 
-            <button type="submit">הוסף מוצר</button>
+            <button type="submit">עדכן מוצר</button>
         </form>);
 }
 

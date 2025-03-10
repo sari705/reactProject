@@ -3,10 +3,12 @@ import { getCategories } from "../api/enumService";
 import { useEffect, useState } from "react";
 import OneProduct from "../components/OneProduct";
 import ViewProduct from "../components/ViewProduct";
-import "./css/productList.css"
+import "./css/ProductList.css"
 import axios from "axios";
 import ReducedCart from "../components/ReducedCart";
-import { Outlet } from "react-router-dom";
+import { Outlet, useLocation } from "react-router-dom";
+import UpdateProduct from "./UpdateProduct";
+import { CircularProgress } from "@mui/material";
 
 export default function ProductList() {
     const [products, setProducts] = useState([])
@@ -18,6 +20,9 @@ export default function ProductList() {
     const [searchValue, setSearchValue] = useState("")
     const [viewReducedCart, setViewReducedCart] = useState(false)
     const [loading, setLoading] = useState(true);
+    const [viewUpdateForm, setViewUpdateForm] = useState(false)
+    const [productForUpdate, setProductForUpdate] = useState(null)
+    const location = useLocation(); // בודק את ה-URL
 
     const handleProductClick = (product) => {
         setChoiseProduct(product);
@@ -110,7 +115,7 @@ export default function ProductList() {
     useEffect(() => {
         getProducts(page)
         setTimeout(() => { setViewReducedCart(false) }, 5000)
-    }, [page])
+    }, [page, viewUpdateForm])
 
     useEffect(() => {
         getProductsCategory(choiseCategory)
@@ -120,7 +125,13 @@ export default function ProductList() {
         getSearchProduct()
     }, [searchValue])
 
-
+    useEffect(() => {
+        const params = new URLSearchParams(location.search);
+        const token = params.get("token");
+        if (token) {
+            localStorage.setItem("token", token);
+        }
+    })
     return (<>
 
         <select className="product-list-select" name="categoriesSelect" id="" onChange={(e) => { setChoiseCategory(e.target.value) }}>
@@ -129,35 +140,41 @@ export default function ProductList() {
             })}
         </select>
         <input className="product-list-input" type="search" placeholder="חפש מוצר לפי שם" name="" id="" onBlur={(e) => { setSearchValue(e.target.value) }} />
-        <div className="product-page">
-            <div className="product-list-container">
-                {loading ? (
-                    <div className="loading-container">🔄 טוען מוצרים...</div>
-                ) : (
-                    <ul className="product-list">
-                        {products.map((product) => (
-                            <li key={product._id}>
-                                <OneProduct product={product} onClick={() => handleProductClick(product)} />
-                            </li>
-                        ))}
-                    </ul>
-                )}
-                {choiseCategory == "בחר קטגוריה" && searchValue == "" && <div className="pagination">
-                    {[...Array(totalPages)].map((_, index) => (
-                        <button
-                            key={index + 1}
-                            onClick={() => setPage(index + 1)}
-                            className={page === index + 1 ? "active" : ""}
-                        >
-                            {index + 1}
-                        </button>
+        {loading ? (
+            <div><CircularProgress color="secondary" />
+                <CircularProgress color="success" />
+                <CircularProgress color="inherit" /></div>
+
+        ) : (
+            <div className="product-list-div">
+                <ul className="product-list-container">
+                    {products.map((product) => (
+                        <li key={product._id} >
+                            <OneProduct setProductForUpdate={setProductForUpdate} setViewUpdateForm={setViewUpdateForm} product={product} onClick={() => handleProductClick(product)} />
+                        </li>
                     ))}
-                </div>}
+                </ul>
             </div>
-            <Outlet></Outlet>
+        )}
+
+        {choiseCategory == "בחר קטגוריה" && searchValue == "" && <div className="pagination">
+            {[...Array(totalPages)].map((_, index) => (
+                <button
+                    key={index + 1}
+                    onClick={() => setPage(index + 1)}
+                    className={page === index + 1 ? "active" : ""}
+                >
+                    {index + 1}
+                </button>
+            ))}
         </div>
+        }
+
+        <Outlet></Outlet>
 
         {viewReducedCart && <ReducedCart></ReducedCart>}
+
+        {viewUpdateForm && <UpdateProduct setViewUpdateForm={setViewUpdateForm} product={productForUpdate}></UpdateProduct>}
 
     </>
     )

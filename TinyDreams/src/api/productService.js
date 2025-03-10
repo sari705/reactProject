@@ -16,23 +16,28 @@ export function getTotalPages() {
 
 
 export function addProduct(product, token) {
+    console.log("token: ", token)
     return axios.post(baseUrl, product, {
         headers: {
-            'authorization': 
-            `Bearer ${token}` 
+            'authorization':
+                `Bearer ${token}`
         }
     });
 }
 
-export function deleteProduct(productId) {
-    return axios.delete(`${baseUrl}/${productId}`)
+export function deleteProduct(productId, token) {
+    return axios.delete(`${baseUrl}/${productId}`, {
+        headers: {
+            "authorization": `Bearer ${token}`
+        }
+    })
 }
 
 export function updateProduct(product, token) {
     return axios.put(`${baseUrl}/${product._id}`, product, {
         headers: {
-            'authorization': 
-            `Bearer ${token}` 
+            'authorization':
+                `Bearer ${token}`
         }
     });
 }
@@ -44,7 +49,5 @@ export function getProductsByCategory(category) {
 export function searchProducts(query) {
     const encodedQuery = encodeURIComponent(query);
     console.log("Encoded query:", encodedQuery); // בדיקה
-
-
     return axios.get(`https://nodeproject-gd82.onrender.com/api/product/search?query=${encodedQuery}`);
 }

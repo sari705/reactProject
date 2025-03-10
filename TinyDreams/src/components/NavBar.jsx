@@ -1,6 +1,7 @@
 import * as React from 'react';
-import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { Link, Navigate, useNavigate } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { userOut } from '../features/userSlice';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -22,11 +23,13 @@ function ResponsiveAppBar() {
 
     const [anchorElNav, setAnchorElNav] = React.useState(null);
     const [anchorElUser, setAnchorElUser] = React.useState(null);
-
+    const userName = useSelector(state => state.user.currentUser?.name);
     const handleOpenNavMenu = (event) => setAnchorElNav(event.currentTarget);
     const handleOpenUserMenu = (event) => setAnchorElUser(event.currentTarget);
     const handleCloseNavMenu = () => setAnchorElNav(null);
     const handleCloseUserMenu = () => setAnchorElUser(null);
+    const disp = useDispatch();
+    const navigate = useNavigate();
 
     // דפים לפי הרשאות
     const pages = [
@@ -103,7 +106,7 @@ function ResponsiveAppBar() {
                         <Box className="userMenu">
                             <Tooltip title="Open settings">
                                 <IconButton onClick={handleOpenUserMenu} className="avatarButton">
-                                    <Avatar alt="User Avatar" src="/static/images/avatar/2.jpg" />
+                                    <Avatar alt={userName} src="/static/images/avatar/2.jpg" />
                                 </IconButton>
                             </Tooltip>
                             <Menu
@@ -112,22 +115,12 @@ function ResponsiveAppBar() {
                                 onClose={handleCloseUserMenu}
                                 className="settingsMenu"
                             >
-
-                                {settings.map((setting) => (
-                                    <MenuItem key={setting.name} onClick={handleCloseUserMenu}>
-                                        <Typography component={Link} to={setting.path} className="menuItem">
-                                            {setting.name}
-                                        </Typography>
-                                    </MenuItem>
-                                ))}
-
-
-                                {/* 
-                                {settings.map((setting) => (
-                                    <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                                        <Typography className="menuItem">{setting}</Typography>
-                                    </MenuItem>
-                                ))} */}
+                                <MenuItem key="Profile" onClick={() => { navigate("/profile"); handleCloseUserMenu(); }}>
+                                    <Typography className="menuItem">Profile</Typography>
+                                </MenuItem>
+                                <MenuItem key="Logout ↪️" onClick={() => { disp(userOut()); handleCloseUserMenu() }}>
+                                    <Typography className="menuItem">Logout ↪️</Typography>
+                                </MenuItem>
                             </Menu>
                         </Box>
                     </Toolbar>

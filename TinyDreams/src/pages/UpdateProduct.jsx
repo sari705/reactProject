@@ -100,6 +100,12 @@ function UpdateProduct({ product, setViewUpdateForm }) {
         }
     }, [product, reset]);
 
+    useEffect(() => {
+        getCategoryEnam()
+        getColorEnam()
+        getTagEnam()
+    }, [])
+
     return (
         <div className="update-form-div">
             <form onSubmit={handleSubmit(onSubmit)} className="update-form-form">

@@ -9,6 +9,7 @@ import ReducedCart from "../components/ReducedCart";
 import { Outlet, useLocation } from "react-router-dom";
 import UpdateProduct from "./UpdateProduct";
 import { CircularProgress } from "@mui/material";
+import { useSelector } from "react-redux";
 
 export default function ProductList() {
     const [products, setProducts] = useState([])
@@ -23,6 +24,7 @@ export default function ProductList() {
     const [viewUpdateForm, setViewUpdateForm] = useState(false)
     const [productForUpdate, setProductForUpdate] = useState(null)
     const location = useLocation(); // בודק את ה-URL
+    const amountInCart = useSelector((state) => state.cart.amountInCart)
 
     const handleProductClick = (product) => {
         setChoiseProduct(product);
@@ -30,8 +32,7 @@ export default function ProductList() {
 
     async function getProducts(pageNumber) {
         try {
-            setLoading(true);
-            setViewReducedCart(true)
+            setLoading(true);            
             console.log("fetching products...");
             let response = await getAllProducts(pageNumber);
             setProducts(response.data.products);
@@ -113,8 +114,12 @@ export default function ProductList() {
     }, [])
 
     useEffect(() => {
-        getProducts(page)
+        setViewReducedCart(true)
         setTimeout(() => { setViewReducedCart(false) }, 5000)
+    }, [amountInCart])
+
+    useEffect(() => {
+        getProducts(page)
     }, [page, viewUpdateForm])
 
     useEffect(() => {
@@ -172,7 +177,7 @@ export default function ProductList() {
 
         <Outlet></Outlet>
 
-        {viewReducedCart && <ReducedCart></ReducedCart>}
+        {viewReducedCart && <ReducedCart setViewReducedCart={setViewReducedCart}></ReducedCart>}
 
         {viewUpdateForm && <UpdateProduct setViewUpdateForm={setViewUpdateForm} product={productForUpdate}></UpdateProduct>}
 

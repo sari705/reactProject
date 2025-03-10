@@ -2,10 +2,8 @@ import { Controller, useForm } from "react-hook-form";
 import { MenuItem, Select } from "@mui/material";
 import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
-
 import { getCategories, getTags, getColors } from "../api/enumService";
 import { addProduct } from "../api/productService";
-
 
 function AddProduct() {
     const { register, handleSubmit, control, reset, formState: { errors, isValid } } = useForm();

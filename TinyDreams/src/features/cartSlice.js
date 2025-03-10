@@ -1,7 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit'
 
 const initialState = {
-
     products: [],
     sum: 0,
     amountInCart: 0
@@ -35,12 +34,11 @@ const cartSlice = createSlice({
         },
 
         removeProduct: (state, action) => {
-            let index = state.products.findIndex(p => p._id === action.payload._id)
+            let index = state.products.findIndex(p => p._id === action.payload._id)            
             let qty = state.products[index].amount
             state.amountInCart -= qty
             state.sum -= action.payload.price * qty;
             state.products.splice(index, 1)
-
         }
 
     }

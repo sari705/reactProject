@@ -15,6 +15,9 @@ import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
+import { Badge as CartBadge } from "@mui/material";
+import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+
 import "./css/navBar.css"; // קובץ ה-CSS
 
 function ResponsiveAppBar() {
@@ -30,6 +33,7 @@ function ResponsiveAppBar() {
     const handleCloseUserMenu = () => setAnchorElUser(null);
     const disp = useDispatch();
     const navigate = useNavigate();
+    const amountInCart = useSelector((state)=>state.cart.amountInCart)
 
     // דפים לפי הרשאות
     const pages = [
@@ -84,13 +88,20 @@ function ResponsiveAppBar() {
                                 sx={{ display: { xs: 'block', md: 'none' } }}
                             >
                                 {pages.map((page) => (
+                                    page.name == 'סל הקניות' &&
                                     <MenuItem key={page.name} onClick={handleCloseNavMenu}>
                                         <Typography component={Link} to={page.path} className="menuLink">
                                             {page.name}
                                         </Typography>
                                     </MenuItem>
                                 ))}
+
                             </Menu>
+                            <IconButton component={Link} to="/cart">
+                                <CartBadge badgeContent={amountInCart} color="primary" overlap="circular">
+                                    <ShoppingCartIcon fontSize="small" />
+                                </CartBadge>
+                            </IconButton>
                         </Box>
 
                         {/* תפריט ניווט ראשי - מחולק שווה ברוחב */}

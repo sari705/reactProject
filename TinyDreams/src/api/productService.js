@@ -19,8 +19,8 @@ export function addProduct(product, token) {
     console.log("token: ", token)
     return axios.post(baseUrl, product, {
         headers: {
-            'authorization': 
-            `Bearer ${token}` 
+            'authorization':
+                `Bearer ${token}`
         }
     });
 }
@@ -36,16 +36,10 @@ export function deleteProduct(productId, token) {
 export function updateProduct(product, token) {
     return axios.put(`${baseUrl}/${product._id}`, product, {
         headers: {
-<<<<<<< HEAD
-            'authorization': `Bearer ${token}`
-        }
-    })
-=======
-            'authorization': 
-            `Bearer ${token}` 
+            'authorization':
+                `Bearer ${token}`
         }
     });
->>>>>>> 90dcaa36d4e28916d6cc614a524d266cb5b4d10a
 }
 
 export function getProductsByCategory(category) {
@@ -55,7 +49,5 @@ export function getProductsByCategory(category) {
 export function searchProducts(query) {
     const encodedQuery = encodeURIComponent(query);
     console.log("Encoded query:", encodedQuery); // בדיקה
-
-
     return axios.get(`https://nodeproject-gd82.onrender.com/api/product/search?query=${encodedQuery}`);
 }

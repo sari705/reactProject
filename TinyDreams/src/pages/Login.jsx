@@ -6,23 +6,26 @@ import { userIn } from "../features/userSlice";
 import { useNavigate } from "react-router-dom";
 import "./css/Login.css"; // קובץ ה-CSS
 import { FaEye, FaEyeSlash } from "react-icons/fa"; // אייקוני הצגת סיסמה
+import FetchGoogleUser from "../components/FetchGoogleUser";
 
 function Login() {
-
     const { register, formState: { errors }, handleSubmit } = useForm();
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const [showPassword, setShowPassword] = useState(false);
-    
+
     console.log("user in redux: ", useSelector((state) => state.user.currentUser));
 
     async function submit(user) {
         console.log("in submit");
         try {
-            let response = await logIn(user);            
+            let response = await logIn(user);
             console.log("res in login: ", response);
 
-            localStorage.setItem("currentUser",  JSON.stringify(response));//הוספתי את ה-currentUser ל -localStorage
+            localStorage.setItem("currentUser", JSON.stringify({
+                ...response.data.data,
+                token: response.data.token
+            }));//הוספתי את ה-currentUser ל -localStorage
 
             alert("Logged in successfully!");
             dispatch(userIn({ ...response.data.data, token: response.data.token }));
@@ -36,8 +39,9 @@ function Login() {
     return (
         <div className="login-container">
             <h2 className="login-title">Welcome Back!</h2>
+            <FetchGoogleUser />
             <form onSubmit={handleSubmit(submit)} className="login-form">
-                
+
                 {/* שדה אימייל */}
                 <div className="input-group">
                     <label>Email:</label>
@@ -59,8 +63,7 @@ function Login() {
                             type={showPassword ? "text" : "password"}
                             {...register("password", {
                                 required: "Password is required",
-                                minLength: { value: 6, message: "Must be at least 6 characters" },
-                                pattern: { value: /^(?=.*[a-zA-Z])(?=.*\d)[A-Za-z\d]{7,15}$/, message: "Password must contain letters and numbers" }
+                                pattern: { value: /^(?=.*[a-zA-Z])(?=.*\d)[A-Za-z\d]{7,15}$/, message: "Password must be 7-15 characters, and include letters & numbers" }
                             })}
                         />
                         <span className="toggle-password" onClick={() => setShowPassword(!showPassword)}>
@@ -71,6 +74,17 @@ function Login() {
                 </div>
 
                 <button type="submit" className="login-button">Login</button>
+
+                <button
+                    type="button"
+                    className="google-login-button"
+                    onClick={() => {
+                        window.location.href = "https://nodeproject-gd82.onrender.com/api/user/google";
+                    }}
+                >
+                    <img src="/google-logo.png" alt="Google Logo" className="google-icon" />
+                    Login with Google 🟢
+                </button>
             </form>
         </div>
     );

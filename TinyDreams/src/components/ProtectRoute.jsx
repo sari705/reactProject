@@ -3,11 +3,18 @@ import { useSelector } from "react-redux";
 
 const ProtectRoute = ({children, role}) => {
     let user = useSelector((state)=>state.user.currentUser);
-    if (user && (user.role === role || user.role == "MANAGER")) {                
+    if (role === "USER") {
+        if (user) {
+            return children;
+        }
+        return <Navigate to="/login"/>;
+    }
+    else if (user.role == "MANAGER") {                
         return children;
     }
-    console.log("not ok");
     return <Navigate to="/login"/>;
+    console.log("not ok");
+    
 }
  
 export default ProtectRoute;

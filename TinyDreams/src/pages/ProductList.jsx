@@ -6,8 +6,9 @@ import ViewProduct from "../components/ViewProduct";
 import "./css/ProductList.css"
 import axios from "axios";
 import ReducedCart from "../components/ReducedCart";
-import { Outlet } from "react-router-dom";
+import { Outlet, useLocation } from "react-router-dom";
 import UpdateProduct from "./UpdateProduct";
+import { CircularProgress } from "@mui/material";
 
 export default function ProductList() {
     const [products, setProducts] = useState([])
@@ -21,6 +22,7 @@ export default function ProductList() {
     const [loading, setLoading] = useState(true);
     const [viewUpdateForm, setViewUpdateForm] = useState(false)
     const [productForUpdate, setProductForUpdate] = useState(null)
+    const location = useLocation(); // בודק את ה-URL
 
     const handleProductClick = (product) => {
         setChoiseProduct(product);
@@ -123,7 +125,13 @@ export default function ProductList() {
         getSearchProduct()
     }, [searchValue])
 
-
+    useEffect(() => {
+        const params = new URLSearchParams(location.search);
+        const token = params.get("token");
+        if (token) {
+            localStorage.setItem("token", token);
+        }
+    })
     return (<>
 
         <select className="product-list-select" name="categoriesSelect" id="" onChange={(e) => { setChoiseCategory(e.target.value) }}>
@@ -133,7 +141,10 @@ export default function ProductList() {
         </select>
         <input className="product-list-input" type="search" placeholder="חפש מוצר לפי שם" name="" id="" onBlur={(e) => { setSearchValue(e.target.value) }} />
         {loading ? (
-            <div className="loading-container">🔄 טוען מוצרים...</div>
+            <div><CircularProgress color="secondary" />
+                <CircularProgress color="success" />
+                <CircularProgress color="inherit" /></div>
+
         ) : (
             <div className="product-list-div">
                 <ul className="product-list-container">
@@ -146,20 +157,20 @@ export default function ProductList() {
             </div>
         )}
 
-                {choiseCategory == "בחר קטגוריה" && searchValue == "" && <div className="pagination">
-                    {[...Array(totalPages)].map((_, index) => (
-                        <button
-                            key={index + 1}
-                            onClick={() => setPage(index + 1)}
-                            className={page === index + 1 ? "active" : ""}
-                        >
-                            {index + 1}
-                        </button>
-                    ))}
-                </div>
-                }
+        {choiseCategory == "בחר קטגוריה" && searchValue == "" && <div className="pagination">
+            {[...Array(totalPages)].map((_, index) => (
+                <button
+                    key={index + 1}
+                    onClick={() => setPage(index + 1)}
+                    className={page === index + 1 ? "active" : ""}
+                >
+                    {index + 1}
+                </button>
+            ))}
+        </div>
+        }
 
-                <Outlet></Outlet>        
+        <Outlet></Outlet>
 
         {viewReducedCart && <ReducedCart></ReducedCart>}
 

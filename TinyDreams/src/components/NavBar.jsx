@@ -115,31 +115,12 @@ function ResponsiveAppBar() {
                                 onClose={handleCloseUserMenu}
                                 className="settingsMenu"
                             >
-<<<<<<< HEAD
                                 <MenuItem key="Profile" onClick={() => { navigate("/profile"); handleCloseUserMenu(); }}>
                                     <Typography className="menuItem">Profile</Typography>
                                 </MenuItem>
-                                <MenuItem key="Logout ↪️" onClick={() => { disp(userOut); handleCloseUserMenu }}>
+                                <MenuItem key="Logout ↪️" onClick={() => { disp(userOut()); handleCloseUserMenu() }}>
                                     <Typography className="menuItem">Logout ↪️</Typography>
                                 </MenuItem>
-=======
-
-                                {settings.map((setting) => (
-                                    <MenuItem key={setting.name} onClick={handleCloseUserMenu}>
-                                        <Typography component={Link} to={setting.path} className="menuItem">
-                                            {setting.name}
-                                        </Typography>
-                                    </MenuItem>
-                                ))}
-
-
-                                {/* 
-                                {settings.map((setting) => (
-                                    <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                                        <Typography className="menuItem">{setting}</Typography>
-                                    </MenuItem>
-                                ))} */}
->>>>>>> 90dcaa36d4e28916d6cc614a524d266cb5b4d10a
                             </Menu>
                         </Box>
                     </Toolbar>

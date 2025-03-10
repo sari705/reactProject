@@ -3,7 +3,7 @@ import { Routes, Route } from "react-router-dom"
 import { useDispatch } from 'react-redux'
 
 import ProductList from './pages/ProductList'
-import Cart from './pages/Cart'
+import Cart from '../pages/Cart'
 import Login from './pages/Login'
 import NavBar from './components/NavBar'
 import Home from './pages/Home'
@@ -26,11 +26,12 @@ function App() {
       user = JSON.parse(user);
       dispatch(userIn(user));
     }
+
     let cart = localStorage.getItem("cart");
     if(cart) {
       cart = JSON.parse(cart);
-      dispatch((cart));
-    }
+      dispatch("..."(cart));
+    }//צריך להוסיף את סל הקניות ללוקל סטורג'
   }, [])
 
   return (

@@ -1,21 +1,53 @@
+<<<<<<< HEAD
 import { updateProduct } from "../api/productService";
+=======
+>>>>>>> 90dcaa36d4e28916d6cc614a524d266cb5b4d10a
 import { useState, useEffect } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { MenuItem, Select } from "@mui/material";
+import { useSelector } from "react-redux";
 
 import { getCategories, getTags, getColors } from "../api/enumService";
+<<<<<<< HEAD
 import { useSelector } from "react-redux";
 import "./css/UpdateProduct.css"
+=======
+import { updateProduct } from "../api/productService";
+>>>>>>> 90dcaa36d4e28916d6cc614a524d266cb5b4d10a
 
 
+const product = {
+    _id: "67ccce2a408b3e71784dc431",
+    name: "car",
+    description: "a white car",
+    images: ["tois20.jpg"],
+    stock: 10,
+    price: 680,
+    categories: "צעצועים",
+    sizes: ["M"],
+    colors: [],
+    tag: ["צעצועי התפתחות"],
+    __v: 0
+};
 
+<<<<<<< HEAD
 function UpdateProduct({ product, setViewUpdateForm }) {
+=======
+// function UpdateProduct({product}) {
+    function UpdateProduct() {
+
+>>>>>>> 90dcaa36d4e28916d6cc614a524d266cb5b4d10a
     const { register, handleSubmit, control, reset, formState: { errors, isValid } } = useForm();
     const [categories, setCategories] = useState([]);
     const [tags, setTags] = useState([]);
     const [colors, setColors] = useState([]);
     const token = useSelector((state) => state.user?.currentUser.token);
 
+    const token = useSelector(state => state.user.currentUser.token);//writed me "undifind" not clear why in addProduct the same action works OK
+    // ללבדוק למה קשור הבעיה כיגם הוספצ מוצר לא עובד מאותה סיבה ולפני כן זה עבד .אולי משהו ברידקס השתבש?
+
+    console.log("token: ", token);
+    
     async function onSubmit(data) {
         if (!product || !product._id) {
             alert("מזהה המוצר חסר! לא ניתן לעדכן.");
@@ -23,6 +55,7 @@ function UpdateProduct({ product, setViewUpdateForm }) {
         }
 
         const productToUpdate = { ...data, _id: product._id }; // ודאי שהמזהה קיים
+<<<<<<< HEAD
         console.log("Product Data: ", productToUpdate);
 
         try {
@@ -31,6 +64,19 @@ function UpdateProduct({ product, setViewUpdateForm }) {
             console.log("respones" + response.data);
             alert("updated");
             setViewUpdateForm(false);
+=======
+            console.log("Product Data: ", productToUpdate);
+        
+            try {
+                const response = await updateProduct(productToUpdate, token);
+                console.log("respones" + response.data);
+                alert("updated");
+            }
+            catch (error) {
+                alert(error);
+                console.log(error);
+            }
+>>>>>>> 90dcaa36d4e28916d6cc614a524d266cb5b4d10a
         }
         catch (error) {
             alert(error);
@@ -69,13 +115,9 @@ function UpdateProduct({ product, setViewUpdateForm }) {
             console.log("tags error: " + err);
         }
     }
-    useEffect(() => {
-        getCategoryEnam()
-        getTagEnam()
-        getColorEnam()
-    }, [])
 
     useEffect(() => {
+<<<<<<< HEAD
         if (product) {
             reset({
                 name: product.name || "",
@@ -91,6 +133,14 @@ function UpdateProduct({ product, setViewUpdateForm }) {
         }
     }, [product, reset]);
 
+=======
+        getCategoryEnam();
+        getTagEnam();
+        getColorEnam();
+        reset(product); // איפוס השדות לערכים של המוצר
+    }, [product]); 
+    
+>>>>>>> 90dcaa36d4e28916d6cc614a524d266cb5b4d10a
     return (
         <div className="update-form-div">
             <form onSubmit={handleSubmit(onSubmit)} className="update-form-form">
@@ -221,6 +271,7 @@ function UpdateProduct({ product, setViewUpdateForm }) {
                     />
                 </div>
 
+<<<<<<< HEAD
                 {/**תגיות */}
                 <div>
                     <label>תגיות:</label>
@@ -254,6 +305,10 @@ function UpdateProduct({ product, setViewUpdateForm }) {
             </form>
         </div>
     );
+=======
+            <button type="submit">עדכן מוצר</button>
+        </form>);
+>>>>>>> 90dcaa36d4e28916d6cc614a524d266cb5b4d10a
 }
 
 export default UpdateProduct;

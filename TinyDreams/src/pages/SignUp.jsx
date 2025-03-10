@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 
 import { signUp } from '../api/userService.js';
 import { userIn } from "../features/userSlice";
+import { useEffect } from "react";
 
 
 function SignUp() {
@@ -13,12 +14,16 @@ function SignUp() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
+  
+
     async function save(data) {
         try {
             console.log("data: ", data);
             const user = await signUp(data);
 
             console.log("user after sign up: ", user);
+            localStorage.setItem("currentUser", JSON.stringify(user));//הוספתי את ה-currentUser ל -localStorage
+
             
             dispatch(userIn({ username: user.username, email: user.email }));
             navigate("/products")

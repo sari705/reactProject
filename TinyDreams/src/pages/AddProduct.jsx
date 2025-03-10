@@ -13,6 +13,9 @@ function AddProduct() {
     const [tags, setTags] = useState([]);
     const [colors, setColors] = useState([]);
 
+    const currentUser = useSelector(state => state.user.currentUser);
+    console.log("all Current user:", currentUser);
+
     const token = useSelector(state => state.user.currentUser.token); // העבר את השורה הזו לכאן
 
     // const currentUser = useSelector(state => state.currentUser);

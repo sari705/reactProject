@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { getOrderByUser } from '../api/orderService.js'
-import OneOrder from '../components/OneOrderForUser.jsx';
 import ForUserOneOrderForUser from '../components/OneOrderForUser.jsx';
 
 function UserOrders() {
@@ -11,16 +10,19 @@ function UserOrders() {
     // let {_id} = params;
     let _id = useSelector(state => state.user.currentUser._id);
     let [orders, setOrders] = useState([]);
+    let [errors, setErros] = useState([]);
 
     async function getOrdersByUserId() {
 
         try {
             let response = await getOrderByUser(_id);
-            setOrders(response.data);
-
-        } catch (err) {
+            if (response) {}
+                setOrders(response.data);
+           
+        } 
+        catch (err) {
+            setErros({title:err.title, message:err.message});
             console.log(err);
-
         }
     }
     useEffect(() => {

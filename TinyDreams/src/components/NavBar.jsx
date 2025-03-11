@@ -88,14 +88,14 @@ function ResponsiveAppBar() {
                                 className="mobileMenu"
                                 sx={{ display: { xs: 'block', md: 'none' } }}
                             >
-                                {pages.map((page) => (
+                                {/* {pages.map((page) => (
                                     page.name == 'סל הקניות' &&
                                     <MenuItem key={page.name} onClick={handleCloseNavMenu}>
                                         <Typography component={Link} to={page.path} className="menuLink">
                                             {page.name}
                                         </Typography>
                                     </MenuItem>
-                                ))}
+                                ))} */}
 
                             </Menu>
                             <IconButton component={Link} to="/cart">

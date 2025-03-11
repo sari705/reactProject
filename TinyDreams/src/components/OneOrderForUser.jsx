@@ -3,8 +3,6 @@ function OneOrderForUser({order}) {
 
     const isBeforeToday = order.deadLine < new Date();
 
-
-
     return (<div>
 
         <h2></h2>
@@ -12,12 +10,13 @@ function OneOrderForUser({order}) {
 
         {order.deadLine && isBeforeToday && (<h3>order will arrive until: {order.deadLine.toString()}</h3>)}
         <h2>toAdress: {toAdress}</h2>
+        <h2> num products: {order.minimalProduct.length}</h2>
         <h3>final price: {order.finalPrice}</h3>
 
     </div>);
 }
 
-export default ForUserOneOrderForUser;
+export default OneOrderForUser;
 // date:Date,
 // deadline: Date,
 // address: String,

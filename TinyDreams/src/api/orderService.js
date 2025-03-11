@@ -2,8 +2,12 @@ import axios  from "axios";
 
 let baseUrl = "https://nodeproject-gd82.onrender.com/api/order";
 
-export function getAllOrders(index) {
-    return axios.get(`${baseUrl}?limit=15&page=${index}`);
+export function getAllOrders(token) {
+    return axios.get(baseUrl, {
+        headers: {
+            "Authorization" : `Bearer ${token}`
+        }
+    });
 }
 
 export function getOrderByUser(userId) {

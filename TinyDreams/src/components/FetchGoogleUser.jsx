@@ -29,7 +29,7 @@ function FetchGoogleUser() {
             throw new Error("Failed to fetch user data");
           }
           localStorage.setItem("currentUser", JSON.stringify(response.data));
-          dispatch(userIn(response.data));
+          dispatch(userIn({...response.data, token: token}));
           navigate("/products");
         } 
         catch (error) {

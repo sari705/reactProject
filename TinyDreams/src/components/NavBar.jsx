@@ -17,7 +17,6 @@ import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
 import { Badge as CartBadge } from "@mui/material";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
-
 import "./css/navBar.css"; // קובץ ה-CSS
 
 function ResponsiveAppBar() {
@@ -45,7 +44,8 @@ function ResponsiveAppBar() {
         { name: 'כל ההזמנות שלי', path: '/userorders' },
         ...(isManager ? [
             { name: 'הוסף מוצר', path: '/add-product' },
-            { name: 'עדכן מוצר', path: '/update-product' }
+            { name: 'הזמנות', path: '/orders' },
+            { name: 'משתמשים', path: '/users' }
         ] : [])
     ];
 
@@ -54,7 +54,7 @@ function ResponsiveAppBar() {
 
     return (
         <>
-            <AppBar position="fixed" className="navBar" sx={{ backgroundColor: "#c17c74" }}>
+            <AppBar position="fixed" className="navBar" sx={{ backgroundColor: "#BF7069" }}>
                 <Container maxWidth="xl">
                     <Toolbar disableGutters>
                         {/* אייקון הלוגו */}
@@ -88,15 +88,6 @@ function ResponsiveAppBar() {
                                 className="mobileMenu"
                                 sx={{ display: { xs: 'block', md: 'none' } }}
                             >
-                                {/* {pages.map((page) => (
-                                    page.name == 'סל הקניות' &&
-                                    <MenuItem key={page.name} onClick={handleCloseNavMenu}>
-                                        <Typography component={Link} to={page.path} className="menuLink">
-                                            {page.name}
-                                        </Typography>
-                                    </MenuItem>
-                                ))} */}
-
                             </Menu>
                             <IconButton component={Link} to="/cart">
                                 <CartBadge badgeContent={amountInCart} color="primary" overlap="circular">

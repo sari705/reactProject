@@ -1,198 +1,109 @@
 /* סגנון בסיסי לגוף הדף */
 body {
-    margin: 0;
-    padding: 0;
-    padding-top: 100px; /* מרווח כדי שה-NavBar לא יחפוף */
-    background-color: #f9f9f9;
-    font-family: "Arial", sans-serif;
-    direction: rtl; /* אם השפה שלך היא עברית, השאר כך */
-  }
-  
-  /* מעטפת גלובלית לתוכן */
-  .product-list-div {
-    max-width: 1200px; /* רוחב מקסימלי */
-    margin: 0 auto;    /* ממרכז את התוכן */
-    padding: 1rem;     /* רווח פנימי מסביב */
-  }
-  
-  /* רשימת מוצרים רספונסיבית */
-  .product-list-container {
-    display: flex;
-    flex-wrap: wrap;            /* מאפשר לרדת שורות אוטומטית */
-    gap: 20px;                  /* רווח בין הכרטיסים */
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    justify-content: center;    /* מרכז את הכרטיסים */
-  }
-  
-  /* כרטיס בודד */
-  .product-list-container li {
-    background: #fff;
-    border-radius: 8px;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1); /* צל עדין */
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-    cursor: pointer;
-    max-width: 400px; /* רוחב מרבי לכל כרטיס */
-    flex: 1 1 300px;  /* מאפשר להימתח עד 300px ומינימום 250px */
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin: 0 auto;
-    padding: 16px;
-    box-sizing: border-box;
-    text-align: center;
-  }
-  
-  /* הנפשה בהובר: הרמה קלה וצל חזק יותר */
-  .product-list-container li:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
-  }
-  
-  /* תמונת המוצר */
-  .product-list-container li img {
-    width: 100%;
-    height: auto;
-    max-height: 220px; /* אפשר להגדיל/להקטין */
-    object-fit: contain; 
-    border-radius: 8px;
-    margin-bottom: 12px;
-  }
-  
-  /* כותרת המוצר */
-  .product-list-container li h3 {
-    margin: 0 0 8px;
-    font-size: 1.1rem;
-    color: #333;
-  }
-  
-  /* תיאור / טקסט נוסף של המוצר */
-  .product-list-container li p {
-    margin: 0 0 10px;
-    font-size: 0.95rem;
-    color: #555;
-  }
-  
-  /* מחיר המוצר (אם יש) */
-  .product-list-container li .price {
-    font-weight: bold;
-    color: #e74c3c; /* אדום עדין למחיר */
-    margin-bottom: 12px;
-  }
-  
-  /* כפתורים (למשל הוספה לסל / פרטים נוספים) */
-  .product-list-container li .buttons {
-    display: flex;
-    gap: 8px;
-    flex-wrap: wrap;
-    justify-content: center;
-    margin-top: auto; /* דוחף את הכפתורים לתחתית */
-  }
-  
-  .product-list-container li .buttons button {
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    outline: none;
-    padding: 8px 12px;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 0.9rem;
-    transition: background-color 0.2s;
-  }
-  
-  .product-list-container li .buttons button:hover {
-    background-color: #0056b3;
-  }
-  
-  /* פג'ינציה (מספרי עמודים) */
-  .pagination {
-    display: flex;
-    justify-content: center;
-    margin-top: 20px;
-    gap: 5px;
-  }
-  
-  .pagination button {
-    background: #f0f0f0;
-    border: 1px solid #ccc;
-    padding: 8px 12px;
-    cursor: pointer;
-    border-radius: 4px;
-    transition: background-color 0.2s;
-  }
-  
-  .pagination button:hover {
-    background: #ddd;
-  }
-  
-  .pagination .active {
-    background-color: #333;
-    color: #fff;
-    border: 1px solid #333;
-  }
-  
-  /* קונטיינר טעינה (אם צריך) */
-  .loading-container {
-    min-height: 500px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 18px;
-    font-weight: bold;
-    color: #777;
-    animation: fadeIn 0.5s ease-in-out;
-  }
-  
-  /* אנימציה */
-  @keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
-  }
-  
-  /* צפייה מפורטת במוצר (מודאל/דיוו) */
-  .view-product-container {
-    width: 100%;
-    max-width: 600px;
-    margin: 0 auto;
-    background: #fff;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    animation: fadeIn 0.3s ease-in-out;
-  }
-  
-  .view-product-container img {
-    width: 100%;
-    height: auto;
-    max-height: 400px;
-    object-fit: contain;
-    border-radius: 8px;
-    margin-bottom: 15px;
-  }
-  
-  .view-product-title {
-    font-size: 1.5rem;
-    font-weight: bold;
-    margin: 10px 0;
-    color: #444;
-  }
-  
-  .view-product-description {
-    font-size: 1rem;
-    color: #555;
-    margin-bottom: 15px;
-  }
-  
-  .view-product-price {
-    font-size: 1.2rem;
-    font-weight: bold;
-    color: #333;
-    margin-bottom: 20px;
-  }
-  
+  margin: 0;
+  padding: 0;
+  padding-top: 100px; /* מרווח כדי שה-NavBar לא יחפוף */
+  background-color: rgba(217, 177, 163, 0.2);
+  font-family: "Arial", sans-serif;
+  direction: rtl; /* אם השפה שלך היא עברית, השאר כך */
+}
+
+/* מעטפת גלובלית לתוכן */
+.product-list-div {
+  max-width: 1200px; /* רוחב מקסימלי */
+  margin: 0 auto;    /* ממרכז את התוכן */
+  padding: 1rem;     /* רווח פנימי מסביב */
+}
+
+/* רשימת מוצרים רספונסיבית */
+.product-list-container {
+  display: flex;
+  flex-wrap: wrap; /* מאפשר לרדת שורות אוטומטית */
+  gap: 20px; /* רווח בין הכרטיסים */
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  justify-content: center; /* מרכז את הכרטיסים */
+  align-items: stretch;
+}
+
+.product-list-container li {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%; /* יוודא שכל הכרטיסים מיושרים לגובה מלא */
+}
+
+.product-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 450px; /* גובה אחיד לכרטיס */
+}
+
+/* עיצוב תגיות */
+.tag {
+  font-size: 12px;
+  padding: 4px 8px;
+  border-radius: 12px;
+  background-color: #84B1D9;
+  color: white;
+}
+
+/* פג'ינציה (מספרי עמודים) */
+.pagination {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+  gap: 5px;
+}
+
+.pagination button {
+  background: #f0f0f0;
+  border: 1px solid #ccc;
+  padding: 8px 12px;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background-color 0.2s;
+}
+
+.pagination button:hover {
+  background: #ddd;
+}
+
+.pagination .active {
+  background-color: #333;
+  color: #fff;
+  border: 1px solid #333;
+}
+
+/* אנימציה */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* צפייה מפורטת במוצר */
+.view-product-container {
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+  background: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+.view-product-container img {
+  width: 100%;
+  height: auto;
+  max-height: 400px;
+  object-fit: contain;
+  border-radius: 8px;
+  margin-bottom: 15px;
+}

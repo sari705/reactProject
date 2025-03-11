@@ -1,4 +1,4 @@
-.update-form-div {
+/* .update-form-div {
     position: fixed;
     top: 0;
     left: 0;
@@ -16,6 +16,81 @@
     width: 60%;
     height: 90%;
 
+}
+
+.MuiPopover-root {
+    z-index: 3000;
+} */
+ /* עיצוב לטופס עדכון מוצר */
+.update-form-div {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;
+}
+
+.update-form-form {
+    background-color: aliceblue;
+    width: 60%;
+    height: auto;
+    max-height: 90%;
+    overflow-y: auto;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.update-form-form label {
+    font-size: 16px;
+    font-weight: bold;
+    color: #333;
+    margin-top: 10px;
+}
+
+.update-form-form input,
+.update-form-form textarea,
+.update-form-form select {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+.update-form-form textarea {
+    resize: vertical;
+    min-height: 80px;
+}
+
+.update-form-form button {
+    background-color: #84B1D9;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-top: 15px;
+}
+
+.update-form-form button:hover {
+    background-color: #5A8AB1;
+}
+
+.update-form-form .MuiSelect-root,
+.update-form-form .MuiMenuItem-root {
+    width: 100%;
+    font-size: 14px;
 }
 
 .MuiPopover-root {

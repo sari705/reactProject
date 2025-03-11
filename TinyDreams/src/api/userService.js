@@ -2,8 +2,12 @@ import axios from 'axios'
 
 let baseUrl = "https://nodeproject-gd82.onrender.com/api/user";
 
-export function getAllUsers() {
-    return axios.get(baseUrl);
+export function getAllUsers(token) {
+    return axios.get(baseUrl, {
+        headers: {
+            "Authorization" :`Bearer ${token}`
+        }
+    });
 }
 
 export function getUser(id) {

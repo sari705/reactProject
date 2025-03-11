@@ -21,7 +21,7 @@ function Cart() {
         <h2>sum: {reduxSum>0?reduxSum:0}</h2>
 
 
-            <Link to="/checkout">    <button>המשך בקנייה</button></Link>
+            <Link to="/checkout">    <button>לתשלום</button></Link>
     </>);//כאן אמור להיות כפתור "המשך בקניה" / "לתשלום
 }
 

@@ -44,8 +44,7 @@ function ResponsiveAppBar() {
         { name: 'הרשם', path: '/signup' },
         { name: 'כל ההזמנות שלי', path: '/userorders' },
         ...(isManager ? [
-            { name: 'הוסף מוצר', path: '/add-product' },
-            { name: 'עדכן מוצר', path: '/update-product' }
+            { name: 'הוסף מוצר', path: '/add-product' }
         ] : [])
     ];
 

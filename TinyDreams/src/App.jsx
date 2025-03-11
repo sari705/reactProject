@@ -17,6 +17,7 @@ import OrderCompletion from './pages/LogOut'
 import { userIn } from './features/userSlice';
 import './App.css'
 import UserOrders from "./pages/UserOrders"
+import CheckOut from "./pages/CheckOut"
 
 
 function App() {
@@ -59,12 +60,12 @@ function App() {
           <UpdateProduct/>
           </ProtectRoute>} />
         <Route path="/profile" element={<ProtectRoute role="USER"><Profile /></ProtectRoute>} />
-        <Route path="/checkout" element={<ProtectRoute role="USER"><OrderCompletion/></ProtectRoute>}/>
+        <Route path="/checkout" element={<ProtectRoute role="USER"><CheckOut/></ProtectRoute>}/>
         {/* {
       לבדוק את סיום ההזמנה בלי פרוטקטרוט
         } */}
 
-        <Route path="/userorders" element={<UserOrders/>}></Route>
+        <Route path="/userorders" element={<ProtectRoute role="USER"><UserOrders/></ProtectRoute>}></Route>
       </Routes>
 
 

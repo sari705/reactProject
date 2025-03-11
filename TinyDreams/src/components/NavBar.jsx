@@ -42,6 +42,7 @@ function ResponsiveAppBar() {
         { name: 'סל הקניות', path: '/cart' },
         { name: 'התחבר', path: '/login' },
         { name: 'הרשם', path: '/signup' },
+        { name: 'כל ההזמנות שלי', path: '/userorders' },
         ...(isManager ? [
             { name: 'הוסף מוצר', path: '/add-product' },
             { name: 'עדכן מוצר', path: '/update-product' }

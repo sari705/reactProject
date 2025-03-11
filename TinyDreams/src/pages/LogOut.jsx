@@ -13,6 +13,7 @@ function LogOut() {
     useEffect(() => {
         try {
             localStorage.removeItem("currentUser"); // מחיקת המשתמש מה-LocalStorage
+            localStorage.removeItem("cart"); // מחיקת סל הקניות מה-LocalStorage
             dispatch(userOut()); // עדכון Redux
             alert("LogOut!");
             navigate("/login"); // ניווט לדף ההתחברות

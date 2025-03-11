@@ -13,8 +13,10 @@ import Login from './pages/Login'
 import Cart from './pages/Cart'
 import Home from './pages/Home'
 import LogOut from './pages/LogOut'
+import OrderCompletion from './pages/LogOut'
 import { userIn } from './features/userSlice';
 import './App.css'
+import UserOrders from "./pages/UserOrders"
 
 
 function App() {
@@ -43,7 +45,8 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/home" element={<Home />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/signup" element={<SignUp />} />
+        <Route path="/signup" element={<SignUp/>} />
+        <Route path="/logout" element={<LogOut/>} /> 
         <Route path="/products" element={<ProductList />}>
           <Route path="details/:id" element={<ViewProduct></ViewProduct>}>
           </Route>
@@ -52,11 +55,18 @@ function App() {
 
         <Route path="/signup" element={<SignUp />} />
         <Route path="/add-product" element={<ProtectRoute role="MANAGER"><AddProduct /></ProtectRoute>} />
-        <Route path="/profile" element={<ProtectRoute role="USER"><Profile /></ProtectRoute>} />
         <Route path="/update-product" element={<ProtectRoute role="MANAGER">
           <UpdateProduct/>
           </ProtectRoute>} />
+        <Route path="/profile" element={<ProtectRoute role="USER"><Profile /></ProtectRoute>} />
+        <Route path="/checkout" element={<ProtectRoute role="USER"><OrderCompletion/></ProtectRoute>}/>
+        {/* {
+      לבדוק את סיום ההזמנה בלי פרוטקטרוט
+        } */}
+
+        <Route path="/userorders" element={<UserOrders/>}></Route>
       </Routes>
+
 
     </>
   )

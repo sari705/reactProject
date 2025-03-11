@@ -82,7 +82,6 @@ function Login() {
                         window.location.href = "https://nodeproject-gd82.onrender.com/api/user/google";
                     }}
                 >
-                    <img src="/google-logo.png" alt="Google Logo" className="google-icon" />
                     Login with Google 🟢
                 </button>
             </form>

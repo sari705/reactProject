@@ -21,11 +21,13 @@ const product = {
 };
 
 function UpdateProduct({ product, setViewUpdateForm }) {
+    console.log(product);
+    
     const { register, handleSubmit, control, reset, formState: { errors, isValid } } = useForm();
     const [categories, setCategories] = useState([]);
     const [tags, setTags] = useState([]);
     const [colors, setColors] = useState([]);
-    const token = useSelector((state) => state.user?.currentUser.token);
+    const token = useSelector((state) => state.user?.currentUser?.token);
     // ללבדוק למה קשור הבעיה כיגם הוספצ מוצר לא עובד מאותה סיבה ולפני כן זה עבד .אולי משהו ברידקס השתבש?
 
     console.log("token: ", token);
@@ -76,7 +78,7 @@ function UpdateProduct({ product, setViewUpdateForm }) {
 
     async function getColorEnam() {
         try {
-            const res = await getColors()
+            const res = await getColors()            
             setColors(res.data.Colors);
         }
         catch (err) {
@@ -94,7 +96,7 @@ function UpdateProduct({ product, setViewUpdateForm }) {
                 price: product.price || 0,
                 categories: product.categories || "",
                 sizes: product.sizes || [],
-                color: product.color || [],
+                color: product.color || colors,
                 tag: product.tag || []
             });
         }
@@ -179,7 +181,7 @@ function UpdateProduct({ product, setViewUpdateForm }) {
                     <select {...register("categories",
                         { required: { value: true, message: "categories is required" } }
                     )}>
-                        <option value="">בחר קטגוריה</option>
+                        <option value="">{product.categories}</option>
                         {categories.length && categories.map((category) => (
                             <option key={category} value={category}>
                                 {category}
@@ -221,6 +223,7 @@ function UpdateProduct({ product, setViewUpdateForm }) {
                         defaultValue={[]}
                         render={({ field }) => (
                             <Select
+                            
                                 multiple
                                 {...field}
                                 value={field.value || []}

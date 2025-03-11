@@ -3,13 +3,14 @@ import { getCategories } from "../api/enumService";
 import { useEffect, useState } from "react";
 import OneProduct from "../components/OneProduct";
 import ViewProduct from "../components/ViewProduct";
-import "./css/ProductList.css"
+
 import axios from "axios";
 import ReducedCart from "../components/ReducedCart";
 import { Outlet, useLocation } from "react-router-dom";
 import UpdateProduct from "./UpdateProduct";
 import { CircularProgress } from "@mui/material";
 import { useSelector } from "react-redux";
+import "./css/ProductList.css"
 
 export default function ProductList() {
     const [products, setProducts] = useState([])
@@ -32,7 +33,7 @@ export default function ProductList() {
 
     async function getProducts(pageNumber) {
         try {
-            setLoading(true);            
+            setLoading(true);
             console.log("fetching products...");
             let response = await getAllProducts(pageNumber);
             setProducts(response.data.products);
@@ -115,7 +116,7 @@ export default function ProductList() {
 
     useEffect(() => {
         setViewReducedCart(true)
-        setTimeout(() => { setViewReducedCart(false) }, 5000)
+        setTimeout(() => { setViewReducedCart(false) }, 50000)
     }, [amountInCart])
 
     useEffect(() => {

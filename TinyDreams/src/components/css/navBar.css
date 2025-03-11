@@ -25,7 +25,7 @@
   
   /* עיצוב כפתורי הניווט */
   .menuButton {
-    color: white !important;
+    color: #E9ECF2 !important;
     font-weight: bold;
     text-transform: none;
     font-size: 16px;
@@ -33,7 +33,7 @@
   
   /* שינוי צבע בריחוף */
   .menuButton:hover {
-    background-color: rgba(255, 255, 255, 0.2);
+    background-color: rgba(89, 2, 2, 0.2);
   }
   
   /* תפריט נייד - מוצג רק במסכים קטנים */
@@ -61,7 +61,7 @@
     left: 0;
     width: 100%;
     z-index: 1000;
-    background-color: #e0afa0; /* ✅ ניתן לשנות צבע רקע לפי הצורך */
+    background-color: #BF7069; /* ✅ ניתן לשנות צבע רקע לפי הצורך */
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
     padding: 10px 0; /* ✅ מוסיף ריווח פנימי */
 }
@@ -90,6 +90,8 @@ body {
     font-size: 16px;
     padding: 10px 15px;
     transition: all 0.3s ease-in-out;
+    height: 40px;
+
 }
 
 /* 📌 שינוי צבע בריחוף */

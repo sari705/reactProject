@@ -3,6 +3,8 @@ import { useDispatch } from "react-redux";
 import { useNavigate, useLocation } from "react-router-dom";
 import { userIn } from "../features/userSlice";
 import { getUserByToken } from "../api/userService";
+import Swal from 'sweetalert2'
+
 
 function FetchGoogleUser() {
   const dispatch = useDispatch();
@@ -30,10 +32,21 @@ function FetchGoogleUser() {
           }
           localStorage.setItem("currentUser", JSON.stringify(response.data));
           dispatch(userIn({...response.data, token: token}));
+          Swal.fire({
+            title: "ברוכים הבאים",
+            text: "נרשמת בהצלחה, גלישה מהנה",
+            icon: "success"
+          });
           navigate("/products");
         } 
         catch (error) {
           console.log("Error fetching Google user data:", error);
+          Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: e.response.data.message,
+            footer: '<a href="#">Why do I have this issue?</a>'
+          });
         }
       }
 

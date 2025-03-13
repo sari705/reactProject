@@ -116,7 +116,7 @@ export default function ProductList() {
 
     useEffect(() => {
         setViewReducedCart(true)
-        setTimeout(() => { setViewReducedCart(false) }, 50000)
+        setTimeout(() => { setViewReducedCart(false) }, 5000)
     }, [amountInCart])
 
     useEffect(() => {

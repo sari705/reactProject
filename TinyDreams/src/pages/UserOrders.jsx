@@ -16,12 +16,12 @@ function UserOrders() {
 
         try {
             let response = await getOrderByUser(_id);
-            if (response) {}
-                setOrders(response.data);
-           
-        } 
+            if (response) { }
+            setOrders(response.data);
+
+        }
         catch (err) {
-            setErros({title:err.title, message:err.message});
+            setErros({ title: err.title, message: err.message });
             console.log(err);
         }
     }
@@ -30,8 +30,7 @@ function UserOrders() {
     }, [])
 
 
-    return (<>
-        return (
+    return (
         <>
             {orders && orders.length > 0 ? (
                 orders.map((ord) => (<ForUserOneOrderForUser key={ord._id} order={ord} />))
@@ -39,9 +38,8 @@ function UserOrders() {
                 <p>No orders found.</p>
             )}
         </>
-        );
-    </>);
- }
+    );
+}
 
 export default UserOrders;
 // 0768074011/33 מרכנתיל י. הנשיא

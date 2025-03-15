@@ -57,6 +57,7 @@ function Cart() {
 
                         <Divider sx={{ my: 3 }} />
 
+   {/* //כאן אמור להיות כפתור "המשך בקניה" / "לתשלום */}
                         {/* סיכום קנייה */}
                         <Box sx={{ textAlign: "center", mb: 2 }}>
                             <Typography variant="h6">סה"כ פריטים בעגלה: <b>{reduxAmount}</b></Typography>

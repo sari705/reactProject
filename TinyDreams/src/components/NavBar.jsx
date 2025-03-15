@@ -43,6 +43,7 @@ function ResponsiveAppBar() {
         { name: 'הרשם', path: '/signup' },
         { name: 'כל ההזמנות שלי', path: '/userorders' },
         ...(isManager ? [
+
             { name: 'הוסף מוצר', path: '/add-product' },
             { name: 'הזמנות', path: '/orders' },
             { name: 'משתמשים', path: '/users' }

@@ -18,8 +18,10 @@ import OrderCompletion from './pages/LogOut'
 import { userIn } from './features/userSlice';
 import './App.css'
 import UserOrders from "./pages/UserOrders"
+import CheckOut from "./pages/CheckOut"
 import Orders from "./pages/Orders"
 import Users from "./pages/Users"
+import Checkout from "./pages/MuiCheckOut"
 
 
 function App() {
@@ -69,6 +71,16 @@ function App() {
           <Route path="/update-product" element={<ProtectRoute role="MANAGER">
             <UpdateProduct />
           </ProtectRoute>} />
+        <Route path="/profile" element={<ProtectRoute role="USER"><Profile /></ProtectRoute>} />
+        <Route path="/checkout" element={<ProtectRoute role="USER"><Checkout/></ProtectRoute>}/>
+        {/* {
+      לבדוק את סיום ההזמנה בלי פרוטקטרוט
+        } */}
+
+        <Route path="/userorders" element={<ProtectRoute role="USER"><UserOrders/></ProtectRoute>}></Route>
+
+
+
           <Route path="/profile" element={<ProtectRoute role="USER"><Profile /></ProtectRoute>} />
           <Route path="/checkout" element={<ProtectRoute role="USER"><OrderCompletion /></ProtectRoute>} />
           <Route path="/orders" element={<ProtectRoute role="MANAGER"><Orders /></ProtectRoute>} />

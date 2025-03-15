@@ -43,3 +43,11 @@ function UserOrders() {
 
 export default UserOrders;
 // 0768074011/33 מרכנתיל י. הנשיא
+// date:Date,
+// deadline: Date,
+// address: String,
+// userId: {type: ObjectId, ref: "user"},
+// minimalProduct:[{productName:String, amount:Number}],
+// isSetOff:Boolean,
+// shippingPrice:Number,
+// finalPrice:Number, 

@@ -114,6 +114,7 @@ import { Box, Button, Container, Grid, Typography, Card, CardContent, CardMedia 
 import { styled } from "@mui/material/styles";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
+import SwingingImage from "../components/SwingingImage";
 
 // 🎨 צבעים רכים שמתאימים למותג
 const themeColors = {
@@ -172,6 +173,7 @@ export default function Home() {
           <Typography variant="h2" fontWeight="bold">
             ברוכים הבאים ל- Tiny Dreams 🍼✨
           </Typography>
+          <SwingingImage></SwingingImage>
         </motion.div>
 
         <motion.div

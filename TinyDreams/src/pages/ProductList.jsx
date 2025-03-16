@@ -10,7 +10,8 @@ import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import Box from "@mui/material/Box";
 import "./css/ProductList.css"
-import {Typography} from "@mui/material";
+import { Typography } from "@mui/material";
+import SwingingImage from "../components/SwingingImage";
 
 
 export default function ProductList() {
@@ -169,6 +170,26 @@ export default function ProductList() {
 
         {
             loading ? (
+                // <Box
+                //     sx={{
+                //         display: "flex",
+                //         flexDirection: "column",
+                //         alignItems: "center",
+                //         justifyContent: "center",
+                //         height: "50vh",
+                //         gap: 2, // ריווח בין האלמנטים
+                //     }}
+                // >
+                //     <Typography variant="h6" sx={{ color: "#590202", fontWeight: "bold" }}>
+                //         טוען מוצרים...
+                //     </Typography>
+
+                //     <Box sx={{ display: "flex", gap: 2 }}>
+                //         <CircularProgress size={50} thickness={5} color="secondary" sx={{ color: "#84B1D9" }} />
+                //         <CircularProgress size={50} thickness={5} color="success" sx={{ color: "#D9B1A3" }} />
+                //         <CircularProgress size={50} thickness={5} color="inherit" sx={{ color: "#590202" }} />
+                //     </Box>
+                // </Box>
                 <Box
                     sx={{
                         display: "flex",
@@ -177,18 +198,10 @@ export default function ProductList() {
                         justifyContent: "center",
                         height: "50vh",
                         gap: 2, // ריווח בין האלמנטים
-                    }}
-                >
-                    <Typography variant="h6" sx={{ color: "#590202", fontWeight: "bold" }}>
-                        טוען מוצרים...
-                    </Typography>
-
-                    <Box sx={{ display: "flex", gap: 2 }}>
-                        <CircularProgress size={50} thickness={5} color="secondary" sx={{ color: "#84B1D9" }} />
-                        <CircularProgress size={50} thickness={5} color="success" sx={{ color: "#D9B1A3" }} />
-                        <CircularProgress size={50} thickness={5} color="inherit" sx={{ color: "#590202" }} />
-                    </Box>
+                    }}>
+                    <SwingingImage></SwingingImage>
                 </Box>
+
 
             ) : (
                 <div className="product-list-div">

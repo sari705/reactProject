@@ -1,21 +1,21 @@
-.tag {
-    font-size: 12px; /* גודל קטן יותר */
+/* .tag {
+    font-size: 12px; 
     padding: 4px 8px;
     border-radius: 12px;
-}
-.product-list-container li {
+} */
+/* .product-list-container li {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    height: 100%; /* יוודא שכל הכרטיסים מיושרים לגובה מלא */
-}
+    height: 100%; 
+} */
 
-.product-card {
+/* .product-card {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    min-height: 450px; /* הגובה האחיד לכרטיס */
-}
-.product-card-content {
+    min-height: 450px;
+} */
+/* .product-card-content {
     flex-grow: 1;
-}
+} */

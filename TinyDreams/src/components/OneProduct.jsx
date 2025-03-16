@@ -95,48 +95,46 @@ function OneProduct({ product, setViewUpdateForm, setProductForUpdate }) {
                     display: "flex",
                     flexDirection: "column",
                     justifyContent: "space-between",
-                    minHeight: "450px"
+                    minHeight: "600px",                    
+                    height: "100%", // 🔹 הכרטיס יתמלא לגובה אחיד
                 }}>
-                    <Box sx={{ backgroundColor: "#fff", borderRadius: "20px 20px 0 0", padding: "10px" }}>
+                    <Box sx={{ backgroundColor: "#fff", borderRadius: "20px 20px 0 0", padding: "10px", flexGrow: 1 , minHeight:"350px"}}>
                         <CardMedia
                             component="img"
-                            height="200"
+                            height="270" // ✅ הגדלת התמונה עוד יותר
                             image={`/images/${product.images[0]}`}
                             alt={product.name}
-                            sx={{ objectFit: "contain", backgroundColor: "white", width: "100%" , cursor: "pointer" }}
+                            sx={{ objectFit: "contain", backgroundColor: "white", width: "100%", cursor: "pointer" }}
                             onClick={() => navigate(`details/${product._id}`)}
-                            
                         />
                     </Box>
-                    <CardContent className="product-card-content" sx={{ textAlign: "center", display: "flex", flexDirection: "column", justifyContent: "space-between", flexGrow: 1 }}>
-                        <Typography variant="h6" fontWeight="bold" color="#590202">
+                    <CardContent className="product-card-content" sx={{ textAlign: "center", display: "flex", flexDirection: "column", justifyContent: "center", flexGrow: 0.3, fontSize: "0.85rem" }}> {/* ✅ הקטנת הפרטים */}
+                        <Typography variant="h6" fontWeight="bold" color="#590202" sx={{ fontSize: "0.9rem" }}> {/* ✅ הקטנת הטקסט */}
                             {product.name}
                         </Typography>
-                        <Typography variant="h5" color="#BF7069" fontWeight="bold" sx={{ mt: 1 }}>
+                        <Typography variant="h5" color="#BF7069" fontWeight="bold" sx={{ mt: 1, fontSize: "1rem" }}> {/* ✅ הקטנת המחיר */}
                             ₪{product.price}
                         </Typography>
                         {/* הצגת תגיות */}
                         {product.tag && (
                             <Box sx={{ display: "flex", justifyContent: "center", gap: 1, flexWrap: "wrap", mt: 1 }}>
                                 {product.tag.map((productTag, index) => (
-                                    <Chip key={index} label={productTag} sx={{ backgroundColor: "#84B1D9", color: "white", fontSize: "12px", height: "20px", padding: "4px 8px", borderRadius: "12px" }} />
+                                    <Chip key={index} label={productTag} sx={{ backgroundColor: "#84B1D9", color: "white", fontSize: "10px", height: "18px", padding: "2px 6px", borderRadius: "10px" }} />
                                 ))}
                             </Box>
                         )}
                         <Box display="flex" justifyContent="center" gap={1} mt={2}>
                             <Button
                                 variant="contained"
-                                sx={{ backgroundColor: "#84B1D9", color: "white" }}
+                                sx={{ backgroundColor: "#84B1D9", color: "white", fontSize: "0.85rem" }}
                                 onClick={() => dispatch(addToCart(product))}
                             >
                                 הוסף לסל
                             </Button>
-
-                            {/* {role && role == "MANAGER" && */}
                                 <>
                                     <Button
                                         variant="contained"
-                                        sx={{ backgroundColor: "#D9B1A3", color: "#590202" }}
+                                        sx={{ backgroundColor: "#D9B1A3", color: "#590202", fontSize: "0.85rem" }}
                                         startIcon={<EditIcon />}
                                         onClick={() => { setViewUpdateForm(true); setProductForUpdate(product); }}
                                     >
@@ -144,14 +142,13 @@ function OneProduct({ product, setViewUpdateForm, setProductForUpdate }) {
                                     </Button>
                                     <Button
                                         variant="contained"
-                                        sx={{ backgroundColor: "#BF7069", color: "white" }}
+                                        sx={{ backgroundColor: "#BF7069", color: "white", fontSize: "0.85rem" }}
                                         startIcon={<DeleteIcon />}
                                         onClick={handleOpen} // כאן נפתח את הדיאלוג
                                     >
                                         מחק
                                     </Button>
                                 </>
-                                {/* } */}
                         </Box>
                     </CardContent>
                 </Card>

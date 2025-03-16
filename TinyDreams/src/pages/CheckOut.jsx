@@ -10,7 +10,7 @@ import AddressForm from "../components/AddressForm.jsx";
 import PaymentForm from "../components/PaymentForm.jsx";
 import ReviewOrder from "../components/ReviewOrder.jsx";
 import { addOrder } from "../api/orderService.js";
-import {emptyingCart} from "../features/cartSlice.js";
+import { emptyingCart } from "../features/cartSlice.js";
 
 
 const steps = ["Shipping address", "Payment details", "Review your order"];
@@ -19,6 +19,7 @@ export default function Checkout() {
 
     const [activeStep, setActiveStep] = useState(0);
     const [error, setError] = useState(null);
+    const [isSubmitting, setIsSubmitting] = useState(false);
     const user = useSelector(state => state.user.currentUser);
     const products = useSelector(state => state.cart.products);
     const dispatch = useDispatch();
@@ -65,6 +66,11 @@ export default function Checkout() {
     };
 
     const onSubmit = async () => {
+
+        if (isSubmitting) return; // אם ההזמנה כבר נשלחת, לא לעשות כלום
+
+        setIsSubmitting(true); // לחסום לחיצות נוספות
+
         const order = { ...formData, minimalProduct, userId: user._id };
         console.log("Final Order Data:", order);
 
@@ -76,15 +82,18 @@ export default function Checkout() {
                 localStorage.removeItem("cart");
                 dispatch(emptyingCart());
                 navigate("/Home");
-                
+
             }
         } catch (err) {
             alert(err);
             console.log(err);
         }
+        finally {
+            setIsSubmitting(false); // להפעיל מחדש את הכפתור אם קרתה שגיאה
+        }
     };
 
-   
+
     const getStepContent = (step) => {
         try {
             console.log("step", step);

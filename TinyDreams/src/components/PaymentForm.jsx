@@ -44,7 +44,6 @@ const PaymentForm = ({ onNext, onChange, formData, setFormData }) => {
           />
         </Grid>
       </Grid>
-      <Button type="submit" variant="contained" sx={{ mt: 2 }}>אישור תשלום</Button>
     </form>
   );
 };

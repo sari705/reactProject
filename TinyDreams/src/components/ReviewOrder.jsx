@@ -11,9 +11,7 @@ function ReviewOrder({ formData, onBack }) {
             <Typography>card number : {formData.cardNumber}</Typography>
             <Typography>expiry: {formData.expiry}</Typography>
             <Typography>CVV: {formData.cvv}</Typography>
-            <Button variant="outlined" sx={{ mt: 2 }} onClick={onBack}>חזור</Button>
-            <Button variant="contained" sx={{ mt: 2, ml: 2 }}>בצע הזמנה</Button>
-        </Paper>
+             </Paper>
     );
 }
 export default ReviewOrder;

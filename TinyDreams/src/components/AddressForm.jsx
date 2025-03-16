@@ -132,7 +132,6 @@ const AddressForm = ({ onNext, onChange, formData, setFormData }) => {
           </Grid>
         ))}
       </Grid>
-      <Button type="submit" variant="contained" sx={{ mt: 2 }}>המשך</Button>
     </form>
   );
 };

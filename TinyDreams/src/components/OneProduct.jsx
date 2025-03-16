@@ -56,7 +56,7 @@ function OneProduct({ product, setViewUpdateForm, setProductForUpdate }) {
     const dispatch = useDispatch();
     const token = useSelector((state) => state.user?.currentUser?.token); // קבלת ה-token מהסטייט
     const [open, setOpen] = useState(false); // ניהול פתיחת הדיאלוג
-    const role = useSelector((state) => state.currentUser?.role);
+    const role = useSelector((state) => state.user?.currentUser?.role);
     const navigate = useNavigate();
 
     // פתיחת הדיאלוג
@@ -133,22 +133,23 @@ function OneProduct({ product, setViewUpdateForm, setProductForUpdate }) {
                                 הוסף לסל
                             </Button>
                                 <>
-                                    <Button
+                                {/* בשביל שתי הכפתורים הבאים. ביני role-הוספתי בדיקה על ה   */}
+                                 {role=='MANAGER' && <Button
                                         variant="contained"
                                         sx={{ backgroundColor: "#D9B1A3", color: "#590202", fontSize: "0.85rem" }}
                                         startIcon={<EditIcon />}
                                         onClick={() => { setViewUpdateForm(true); setProductForUpdate(product); }}
                                     >
                                         ערוך
-                                    </Button>
-                                    <Button
+                                    </Button>}
+                                    {role=='MANAGER' && <Button
                                         variant="contained"
                                         sx={{ backgroundColor: "#BF7069", color: "white", fontSize: "0.85rem" }}
                                         startIcon={<DeleteIcon />}
                                         onClick={handleOpen} // כאן נפתח את הדיאלוג
                                     >
                                         מחק
-                                    </Button>
+                                    </Button>}
                                 </>
                         </Box>
                     </CardContent>

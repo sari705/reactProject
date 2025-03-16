@@ -1,164 +1,254 @@
-import React, { useState, useEffect } from "react";
-import { useSelector } from "react-redux";
-import { useDispatch } from "react-redux";
+// import React, { useState } from "react";
+// import { useSelector, useDispatch } from "react-redux";
+// import { useNavigate } from "react-router-dom";
+// import { Container, Typography, Stepper, Step, StepLabel, Paper, Box, Grid, Button, CircularProgress, Drawer } from "@mui/material";
+// import ChevronLeftRoundedIcon from "@mui/icons-material/ChevronLeftRounded";
+// import ChevronRightRoundedIcon from "@mui/icons-material/ChevronRightRounded";
+// import { toast } from "react-toastify";
+// import { IconButton } from "@mui/material";
+// import { useMediaQuery } from "@mui/material";
+
+
+// import AddressForm from "../components/AddressForm.jsx";
+// import PaymentForm from "../components/PaymentForm.jsx";
+// import ReviewOrder from "../components/ReviewOrder.jsx";
+// import { addOrder } from "../api/orderService.js";
+// import { emptyingCart } from "../features/cartSlice.js";
+// import OrderSummary from "../components/OrderSummary.jsx";
+
+// const steps = ["Shipping address", "Payment details", "Review your order"];
+
+// export default function Checkout() {
+//     const [activeStep, setActiveStep] = useState(0);
+//     const [isSubmitting, setIsSubmitting] = useState(false);
+//     const [openSummary, setOpenSummary] = useState(false);
+//     const user = useSelector((state) => state.user.currentUser);
+//     const products = useSelector((state) => state.cart.products);
+//     const dispatch = useDispatch();
+//     const navigate = useNavigate();
+//     const [formData, setFormData] = useState({});
+//     const [paymentForm, setPaymentForm] = useState({});
+//     const isSmallScreen = useMediaQuery((theme) => theme.breakpoints.down("md"));
+
+
+//     const handleNext = () => setActiveStep((prevStep) => prevStep + 1);
+//     const handleBack = () => setActiveStep((prevStep) => prevStep - 1);
+//     const handleFormDataChange = (name, value) => {
+//         setFormData((prevData) => ({ ...prevData, [name]: value }));
+//     };
+
+//     const minimalProduct = products.map((product) => ({
+//         _id: product._id,
+//         productName: product.name,
+//         price: product.price,
+//         amount: product.amount ?? 1,
+//     }));
+
+//     const onSubmit = async () => {
+//         if (isSubmitting) return;
+//         setIsSubmitting(true);
+//         console.log("formData: ", formData);
+
+//         const order = { ...formData, minimalProduct, userId: user._id };
+//         console.log("order: ", order);
+
+//         try {
+//             const response = await addOrder(order);
+//             if (response) {
+//                 toast.success("Order submitted successfully!", { position: "top-center", autoClose: 3000 });
+//                 localStorage.removeItem("cart");
+//                 dispatch(emptyingCart());
+//                 setTimeout(() => navigate("/Home"), 3000);
+//             }
+//         } catch (err) {
+//             toast.error("Error submitting order. Please try again!", { position: "top-center", autoClose: 3000 });
+//             console.log(err);
+//         } finally {
+//             setIsSubmitting(false);
+//         }
+//     };
+
+//     return (
+//         <Container component="main" maxWidth="lg" sx={{ mt: 5, mb: 5 }}>
+//             <Grid container spacing={3}>
+//                 <Grid item xs={12} md={7} sx={{ width: "70%" }}>
+//                     <Paper sx={{ p: 4 }}>
+//                         <Typography variant="h5" gutterBottom>
+//                             Checkout Process
+//                         </Typography>
+//                         {/* <Button variant="contained" onClick={() => setOpenSummary(true)} sx={{ width: "100%", mb: 2 }}>
+//                             הצג תקציר הזמנה (Total: ₪{products.reduce((sum, item) => sum + item.price * (item.amount || 1), 0).toFixed(2)})
+//                         </Button> */}
+//                         {isSmallScreen && (
+//                             <Button variant="contained" onClick={() => setOpenSummary(true)} sx={{ width: "100%", mb: 2 }}>
+//                                 הצג תקציר הזמנה (Total: ₪{products.reduce((sum, item) => sum + item.price * (item.amount || 1), 0).toFixed(2)})
+//                             </Button>
+//                         )}
+
+//                         <Stepper activeStep={activeStep} sx={{ mb: 3 }}>
+//                             {steps.map((label) => (
+//                                 <Step key={label}>
+//                                     <StepLabel>{label}</StepLabel>
+//                                 </Step>
+//                             ))}
+//                         </Stepper>
+//                         {activeStep === 0 && <AddressForm onNext={handleNext} formData={formData} setFormData={setFormData} onChange={handleFormDataChange} />}
+//                         {activeStep === 1 && <PaymentForm onNext={handleNext} formData={paymentForm} setFormData={setPaymentForm} onChange={handleFormDataChange} />}
+//                         {activeStep === 2 && <ReviewOrder onNext={handleNext} formData={formData} onBack={handleBack} />}
+//                         <Box sx={{ display: 'flex', justifyContent: 'space-between', mt: 3 }}>
+//                             {activeStep !== 0 && (
+//                                 <Button startIcon={<ChevronLeftRoundedIcon />} onClick={handleBack} variant="text">
+//                                     Back
+//                                 </Button>
+//                             )}
+//                             {activeStep === steps.length - 1 ? (
+//                                 <Button variant="contained" onClick={onSubmit} disabled={isSubmitting}>
+//                                     {isSubmitting ? <CircularProgress size={24} color="inherit" /> : "Submit Order"}
+//                                 </Button>
+//                             ) : (
+//                                 <Button variant="contained" onClick={handleNext}>
+//                                     Next
+//                                 </Button>
+//                             )}
+//                         </Box>
+//                     </Paper>
+//                 </Grid>
+//                 <Grid item xs={12} md={5} sx={{ width: "30%", height: "100vh", position: "sticky", top: 0, display: { xs: "none", md: "block" } }}>
+//                     <OrderSummary products={minimalProduct} />
+//                 </Grid>
+//             </Grid>
+//             <Drawer anchor="top" open={openSummary} onClose={() => setOpenSummary(false)}>
+//                 <Box sx={{ p: 2 }}>
+//                     <IconButton onClick={() => setOpenSummary(false)} sx={{ position: "absolute", right: 10, top: 10 }}>
+//                         {/* <CloseIcon /> */}
+//                     </IconButton>
+//                     <OrderSummary products={minimalProduct} />
+//                 </Box>
+//             </Drawer>
+//         </Container>
+//     );
+// }
+
+import React, { useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { Container, Typography, TextField, Button, Grid, Paper, Stepper, Step, StepLabel, Box } from "@mui/material";
+import { Container, Typography, Stepper, Step, StepLabel, Paper, Box, Grid, Button, CircularProgress, Drawer, useMediaQuery } from "@mui/material";
 import ChevronLeftRoundedIcon from "@mui/icons-material/ChevronLeftRounded";
-import ChevronRightRoundedIcon from "@mui/icons-material/ChevronRightRounded";
+import { toast } from "react-toastify";
+import { IconButton } from "@mui/material";
 
 import AddressForm from "../components/AddressForm.jsx";
 import PaymentForm from "../components/PaymentForm.jsx";
 import ReviewOrder from "../components/ReviewOrder.jsx";
 import { addOrder } from "../api/orderService.js";
 import { emptyingCart } from "../features/cartSlice.js";
-
+import OrderSummary from "../components/OrderSummary.jsx";
 
 const steps = ["Shipping address", "Payment details", "Review your order"];
 
 export default function Checkout() {
-
     const [activeStep, setActiveStep] = useState(0);
-    const [error, setError] = useState(null);
     const [isSubmitting, setIsSubmitting] = useState(false);
-    const user = useSelector(state => state.user.currentUser);
-    const products = useSelector(state => state.cart.products);
+    const [openSummary, setOpenSummary] = useState(false);
+    const user = useSelector((state) => state.user.currentUser);
+    const products = useSelector((state) => state.cart.products);
     const dispatch = useDispatch();
     const navigate = useNavigate();
+    const [formData, setFormData] = useState({});
+    const [paymentForm, setPaymentForm] = useState({});
+    
+    const isSmallScreen = useMediaQuery((theme) => theme.breakpoints.down("md"));
 
-    let minimalProduct = products.map(product => ({
+    const handleNext = () => setActiveStep((prevStep) => prevStep + 1);
+    const handleBack = () => setActiveStep((prevStep) => prevStep - 1);
+    const handleFormDataChange = (name, value) => {
+        setFormData((prevData) => ({ ...prevData, [name]: value }));
+    };
+
+    const minimalProduct = products.map((product) => ({
         _id: product._id,
         productName: product.name,
         price: product.price,
-        amount: product.amount ?? 1
+        amount: product.amount ?? 1,
     }));
 
-    const [formData, setFormData] = useState({});
-    const [paymentForm, setPaymentForm] = useState({});
-
-    const handleNext1 = () => {
-        setActiveStep(activeStep + 1);
-    };
-
-    const handleBack = () => {
-        setActiveStep(activeStep - 1);
-    };
-
-    const handleFormDataChange = (name, value) => {
-        console.log("🔵 נתונים שהתקבלו:", name, ": ", value);
-
-        setFormData((prevData) => ({
-            ...prevData,
-            [name]: value,
-        }));
-    };
-
-    const handleNext = (data) => {
-        console.log("🚀 Form data at Checkout:", data);
-        // setFormData(data); // שמירת הנתונים לפני המעבר לשלב הבא
-        setActiveStep((prevStep) => prevStep + 1);
-    }
-    const handleFormDataChange1 = (newData) => {
-        console.log("🔵 נתונים שהתקבלו מ- AddressForm:", newData);
-        setFormData(prev => ({ ...prev, ...newData }));
-        console.log("formData in handleFormDataChange: ", formData);
-
-        handleNext(); // מעבר לשלב הבא אחרי מילוי השדות
-    };
-
     const onSubmit = async () => {
-
-        if (isSubmitting) return; // אם ההזמנה כבר נשלחת, לא לעשות כלום
-
-        setIsSubmitting(true); // לחסום לחיצות נוספות
-
+        if (isSubmitting) return;
+        setIsSubmitting(true);
+        console.log("formData: ", formData);
+        
         const order = { ...formData, minimalProduct, userId: user._id };
-        console.log("Final Order Data:", order);
-
+        console.log("order: ", order);
+        
         try {
             const response = await addOrder(order);
             if (response) {
-                alert("ההזמנה נוספה בהצלחה");
-                console.log(response.data);
+                toast.success("Order submitted successfully!", { position: "top-center", autoClose: 3000 });
                 localStorage.removeItem("cart");
                 dispatch(emptyingCart());
-                navigate("/Home");
-
+                setTimeout(() => navigate("/Home"), 3000);
             }
         } catch (err) {
-            alert(err);
+            toast.error("Error submitting order. Please try again!", { position: "top-center", autoClose: 3000 });
             console.log(err);
-        }
-        finally {
-            setIsSubmitting(false); // להפעיל מחדש את הכפתור אם קרתה שגיאה
-        }
-    };
-
-
-    const getStepContent = (step) => {
-        try {
-            console.log("step", step);
-            console.log("formData", formData);
-            switch (step) {
-                case 0:
-                    return <AddressForm onNext={handleNext} setFormData={setFormData} formData={formData} onChange={handleFormDataChange} />;
-                case 1:
-                    return <PaymentForm onNext={handleNext} setFormData={setPaymentForm} formData={paymentForm} onChange={handleFormDataChange} />;
-                case 2:
-                    return <ReviewOrder onNext={handleNext} formData={formData} onBack={handleBack} />;
-                default:
-                    throw new Error("Unknown step");
-            }
-        } catch (error) {
-            console.log("🚨 שגיאה ב-getStepContent:", error);
-            return <Typography color="error">שגיאה בטעינת שלב התהליך</Typography>;
+        } finally {
+            setIsSubmitting(false);
         }
     };
-
-
 
     return (
-
-        <Container component={Paper} maxWidth="md" sx={{ p: 4, mt: 5 }}>
-            <Typography variant="h5" gutterBottom>תהליך הזמנה</Typography>
-            <Stepper activeStep={activeStep} sx={{ mb: 3 }}>
-                {steps.map((label) => (
-                    <Step key={label}>
-                        <StepLabel>{label}</StepLabel>
-                    </Step>
-                ))}
-            </Stepper>
-            {getStepContent(activeStep)}
-            <Box sx={{ display: 'flex', justifyContent: 'space-between', mt: 3 }}>
-                {activeStep !== 0 && (
-                    <Button startIcon={<ChevronLeftRoundedIcon />} onClick={handleBack} variant="text">
-                        חזור
-                    </Button>
-                )}
-                {activeStep === steps.length - 1 ? (
-                    // <Button variant="contained" color="primary" onClick={handleSubmit(onSubmit)}>
-                    //     סיום הזמנה
-                    // </Button>
-                    <Button variant="contained"
-                        // endIcon={<ChevronRightRoundedIcon />}
-                        onClick={(e) => {
-                            e.preventDefault();
-                            console.log("Form Submitted!");
-                            onSubmit();
-                        }}>
-                        send order
-                    </Button>
-
-
-
-                ) : (
-                    // <Button variant="contained" endIcon={<ChevronRightRoundedIcon />}onClick={handleSubmit(onSubmit)}>
-                    //     הבא
-                    // </Button>
-                    <Button variant="contained" onClick={handleNext}>next</Button>
-
-                )}
-            </Box>
+        <Container component="main" maxWidth="lg" sx={{ mt: 5, mb: 5 }}>
+            <Grid container spacing={3}>
+                <Grid item xs={12} md={7} sx={{ width: "70%" }}>
+                    <Paper sx={{ p: 4 }}>
+                        <Typography variant="h5" gutterBottom>
+                            Checkout Process
+                        </Typography>
+                        {isSmallScreen && (
+                            <Button variant="contained" onClick={() => setOpenSummary(true)} sx={{ width: "100%", mb: 2 }}>
+                                הצג תקציר הזמנה (Total: ₪{products.reduce((sum, item) => sum + item.price * (item.amount || 1), 0).toFixed(2)})
+                            </Button>
+                        )}
+                        <Stepper activeStep={activeStep} sx={{ mb: 3 }}>
+                            {steps.map((label) => (
+                                <Step key={label}>
+                                    <StepLabel>{label}</StepLabel>
+                                </Step>
+                            ))}
+                        </Stepper>
+                        {activeStep === 0 && <AddressForm onNext={handleNext} formData={formData} setFormData={setFormData} onChange={handleFormDataChange} />}
+                        {activeStep === 1 && <PaymentForm onNext={handleNext} formData={paymentForm} setFormData={setPaymentForm} onChange={handleFormDataChange} />}
+                        {activeStep === 2 && <ReviewOrder onNext={handleNext} formData={formData} onBack={handleBack} />}
+                        <Box sx={{ display: 'flex', justifyContent: 'space-between', mt: 3 }}>
+                            {activeStep !== 0 && (
+                                <Button startIcon={<ChevronLeftRoundedIcon />} onClick={handleBack} variant="text">
+                                    Back
+                                </Button>
+                            )}
+                            {activeStep === steps.length - 1 ? (
+                                <Button variant="contained" onClick={onSubmit} disabled={isSubmitting}>
+                                    {isSubmitting ? <CircularProgress size={24} color="inherit" /> : "Submit Order"}
+                                </Button>
+                            ) : (
+                                <Button variant="contained" onClick={handleNext}>
+                                    Next
+                                </Button>
+                            )}
+                        </Box>
+                    </Paper>
+                </Grid>
+                <Grid item xs={12} md={5} sx={{ width: "30%", height: "100vh", position: "sticky", top: 0, display: { xs: "none", md: "block" } }}>
+                    <OrderSummary products={minimalProduct} />
+                </Grid>
+            </Grid>
+            <Drawer anchor="top" open={openSummary} onClose={() => setOpenSummary(false)}>
+                <Box sx={{ p: 2 }}>
+                    <IconButton onClick={() => setOpenSummary(false)} sx={{ position: "absolute", right: 10, top: 10 }}>
+                        {/* <CloseIcon /> */}
+                    </IconButton>
+                    <OrderSummary products={minimalProduct} />
+                </Box>
+            </Drawer>
         </Container>
-
     );
 }

@@ -1,9 +1,11 @@
 import { useDispatch } from 'react-redux'
 import { Routes, Route } from "react-router-dom"
 import { useState, useEffect } from 'react'
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css"; // ייבוא העיצוב של Toastify
+
 import { userIn } from './features/userSlice';
 import { pushFromLocalStorage } from './features/cartSlice';
-
 import UpdateProduct from './pages/UpdateProduct'
 import ProtectRoute from './components/ProtectRoute'
 import ProductList from './pages/ProductList'
@@ -68,6 +70,8 @@ function App() {
           <Route path="/users" element={<ProtectRoute role="MANAGER"><Users /></ProtectRoute>} />
         
         </Routes>
+        <ToastContainer position="top-center" autoClose={3000} hideProgressBar={false} />
+
     </>
   )
 }

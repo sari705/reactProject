@@ -1,17 +1,23 @@
-import { getAllProducts, getTotalPages, getProductsByCategory, searchProducts } from "../api/productService";
-import { MenuItem, Select, TextField, FormControl, InputLabel } from "@mui/material";
-import { CircularProgress, Pagination, Stack } from "@mui/material";
-import { Outlet, useLocation } from "react-router-dom";
-import ReducedCart from "../components/ReducedCart";
-import { getCategories } from "../api/enumService";
-import OneProduct from "../components/OneProduct";
-import UpdateProduct from "./UpdateProduct";
-import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
+import { useEffect, useState } from "react";
+import { Outlet, useLocation } from "react-router-dom";
+import { CircularProgress, Pagination, Stack } from "@mui/material";
+import { MenuItem, Select, TextField, FormControl, InputLabel,Typography } from "@mui/material";
 import Box from "@mui/material/Box";
+import axios from "axios";
+
+import { getAllProducts, getTotalPages, getProductsByCategory, searchProducts } from "../api/productService";
+import ViewProduct from "../components/ViewProduct";
+import OneProduct from "../components/OneProduct";
+import { getCategories } from "../api/enumService";
+import ReducedCart from "../components/ReducedCart";
+import UpdateProduct from "./UpdateProduct";
 import "./css/ProductList.css"
+<<<<<<< HEAD
 import { Typography } from "@mui/material";
 import SwingingImage from "../components/SwingingImage";
+=======
+>>>>>>> afc5cfdca0d7e3d5170f12bfbef495c8e7a4759a
 
 
 export default function ProductList() {

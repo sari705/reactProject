@@ -1,12 +1,33 @@
-// import { useForm } from "react-hook-form";
-// import { useState } from "react";
-// import { logIn } from "../api/userService";
-// import { useDispatch, useSelector } from "react-redux";
-// import { userIn } from "../features/userSlice";
-// import { useNavigate } from "react-router-dom";
-// import "./css/Login.css"; // קובץ ה-CSS
-// import { FaEye, FaEyeSlash } from "react-icons/fa"; // אייקוני הצגת סיסמה
+import * as React from 'react';
+import {
+  Box,
+  Button,
+  Checkbox,
+  CssBaseline,
+  Divider,
+  FormControlLabel,
+  FormLabel,
+  FormControl,
+  Link,
+  TextField,
+  Typography,
+  Stack,
+  Card as MuiCard,
+  Alert,
+} from '@mui/material';
+import { styled } from '@mui/material/styles';
+import { Google as GoogleIcon } from '@mui/icons-material';
+import { useForm } from "react-hook-form";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import Swal from 'sweetalert2'
+import { useState } from "react";
+import { FaEye, FaEyeSlash } from "react-icons/fa"; // אייקוני הצגת סיסמה
+
+import { logIn } from "../api/userService";
+import { userIn } from "../features/userSlice";
 import FetchGoogleUser from "../components/FetchGoogleUser";
+import "./css/Login.css"; // קובץ ה-CSS
 
 // function Login() {
 //     const { register, formState: { errors }, handleSubmit } = useForm();
@@ -91,34 +112,6 @@ import FetchGoogleUser from "../components/FetchGoogleUser";
 
 // export default Login;
 
-
-import * as React from 'react';
-import {
-  Box,
-  Button,
-  Checkbox,
-  CssBaseline,
-  Divider,
-  FormControlLabel,
-  FormLabel,
-  FormControl,
-  Link,
-  TextField,
-  Typography,
-  Stack,
-  Card as MuiCard,
-  Alert,
-} from '@mui/material';
-import { styled } from '@mui/material/styles';
-import { Google as GoogleIcon } from '@mui/icons-material';
-import { useForm } from "react-hook-form";
-import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
-import { logIn } from "../api/userService";
-import { userIn } from "../features/userSlice";
-import { useState } from "react";
-import { FaEye, FaEyeSlash } from "react-icons/fa";
-import Swal from 'sweetalert2'
 
 
 // 🎨 התאמת צבעים כמו בדף ההרשמה

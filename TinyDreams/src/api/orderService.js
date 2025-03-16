@@ -10,8 +10,12 @@ export function getAllOrders(token) {
     });
 }
 
-export function getOrderByUser(userId) {
-    return axios.get(`${baseUrl}/${userId}`)
+export function getOrderByUser(userId, token) {
+    return axios.get(`${baseUrl}/${userId}`,  {
+        headers: {
+            "Authorization" : `Bearer ${token}`
+        }
+    })
 }
 
 export function getTotalPages() {

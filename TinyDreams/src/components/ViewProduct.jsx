@@ -1,6 +1,7 @@
 import { Link, useParams, useNavigate } from "react-router-dom";
 import { getProduct } from "../api/productService.js";
 import { useState, useEffect } from "react";
+
 import "./css/ViewProduct.css"
 
 

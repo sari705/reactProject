@@ -29,11 +29,12 @@
 
 
 import { useSelector } from "react-redux";
-import ProductInCart from "../components/ProductInCart";
 import { Link } from "react-router-dom";
 import { Box, Typography, Button, Paper, Divider } from "@mui/material";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import PaymentIcon from "@mui/icons-material/Payment";
+
+import ProductInCart from "../components/ProductInCart";
 
 function Cart() {
     const reduxProducts = useSelector((state) => state.cart.products);
@@ -57,8 +58,6 @@ function Cart() {
 
                         <Divider sx={{ my: 3 }} />
 
-   {/* //כאן אמור להיות כפתור "המשך בקניה" / "לתשלום */}
-                        {/* סיכום קנייה */}
                         <Box sx={{ textAlign: "center", mb: 2 }}>
                             <Typography variant="h6">סה"כ פריטים בעגלה: <b>{reduxAmount}</b></Typography>
                             <Typography variant="h5" color="#BF7069" fontWeight="bold">סה"כ לתשלום: ₪{reduxSum > 0 ? reduxSum : 0}</Typography>

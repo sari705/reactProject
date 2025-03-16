@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { Link, Navigate, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { userOut } from '../features/userSlice';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -17,6 +16,8 @@ import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
 import { Badge as CartBadge } from "@mui/material";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+
+import { userOut } from '../features/userSlice';
 import "./css/navBar.css"; // קובץ ה-CSS
 
 function ResponsiveAppBar() {

@@ -1,10 +1,30 @@
-// import { useForm } from "react-hook-form";
-// import { useDispatch } from 'react-redux';
-// import { useNavigate } from "react-router-dom";
+import * as React from 'react';
+import {
+  Box,
+  Button,
+  Checkbox,
+  CssBaseline,
+  Divider,
+  FormControlLabel,
+  FormLabel,
+  FormControl,
+  Link,
+  TextField,
+  Typography,
+  Stack,
+  Card as MuiCard,
+  Alert,
+} from '@mui/material';
+import { styled } from '@mui/material/styles';
+import { Google as GoogleIcon } from '@mui/icons-material';
+import { useForm } from "react-hook-form";
+import { useDispatch } from 'react-redux';
+import { useNavigate } from "react-router-dom";
+import Swal from 'sweetalert2'
+import { useEffect } from "react";
 
-// import { signUp } from '../api/userService.js';
-// import { userIn } from "../features/userSlice";
-// import { useEffect } from "react";
+import { signUp } from '../api/userService.js';
+import { userIn } from "../features/userSlice";
 
 
 // function SignUp() {
@@ -71,31 +91,6 @@
 
 // export default SignUp; 
 
-import * as React from 'react';
-import {
-  Box,
-  Button,
-  Checkbox,
-  CssBaseline,
-  Divider,
-  FormControlLabel,
-  FormLabel,
-  FormControl,
-  Link,
-  TextField,
-  Typography,
-  Stack,
-  Card as MuiCard,
-  Alert,
-} from '@mui/material';
-import { styled } from '@mui/material/styles';
-import { Google as GoogleIcon } from '@mui/icons-material';
-import { useForm } from "react-hook-form";
-import { useDispatch } from 'react-redux';
-import { useNavigate } from "react-router-dom";
-import { signUp } from '../api/userService.js';
-import { userIn } from "../features/userSlice";
-import Swal from 'sweetalert2'
 
 
 // 🎨 התאמת צבעים

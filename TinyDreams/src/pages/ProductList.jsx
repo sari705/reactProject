@@ -5,7 +5,6 @@ import { CircularProgress, Pagination, Stack } from "@mui/material";
 import { MenuItem, Select, TextField, FormControl, InputLabel,Typography } from "@mui/material";
 import Box from "@mui/material/Box";
 import axios from "axios";
-
 import { getAllProducts, getTotalPages, getProductsByCategory, searchProducts } from "../api/productService";
 import ViewProduct from "../components/ViewProduct";
 import OneProduct from "../components/OneProduct";
@@ -13,6 +12,7 @@ import { getCategories } from "../api/enumService";
 import ReducedCart from "../components/ReducedCart";
 import UpdateProduct from "./UpdateProduct";
 import "./css/ProductList.css"
+import SwingingImage from "../components/SwingingImage";
 
 
 export default function ProductList() {
@@ -171,6 +171,26 @@ export default function ProductList() {
 
         {
             loading ? (
+                // <Box
+                //     sx={{
+                //         display: "flex",
+                //         flexDirection: "column",
+                //         alignItems: "center",
+                //         justifyContent: "center",
+                //         height: "50vh",
+                //         gap: 2, // ריווח בין האלמנטים
+                //     }}
+                // >
+                //     <Typography variant="h6" sx={{ color: "#590202", fontWeight: "bold" }}>
+                //         טוען מוצרים...
+                //     </Typography>
+
+                //     <Box sx={{ display: "flex", gap: 2 }}>
+                //         <CircularProgress size={50} thickness={5} color="secondary" sx={{ color: "#84B1D9" }} />
+                //         <CircularProgress size={50} thickness={5} color="success" sx={{ color: "#D9B1A3" }} />
+                //         <CircularProgress size={50} thickness={5} color="inherit" sx={{ color: "#590202" }} />
+                //     </Box>
+                // </Box>
                 <Box
                     sx={{
                         display: "flex",
@@ -179,18 +199,10 @@ export default function ProductList() {
                         justifyContent: "center",
                         height: "50vh",
                         gap: 2, // ריווח בין האלמנטים
-                    }}
-                >
-                    <Typography variant="h6" sx={{ color: "#590202", fontWeight: "bold" }}>
-                        טוען מוצרים...
-                    </Typography>
-
-                    <Box sx={{ display: "flex", gap: 2 }}>
-                        <CircularProgress size={50} thickness={5} color="secondary" sx={{ color: "#84B1D9" }} />
-                        <CircularProgress size={50} thickness={5} color="success" sx={{ color: "#D9B1A3" }} />
-                        <CircularProgress size={50} thickness={5} color="inherit" sx={{ color: "#590202" }} />
-                    </Box>
+                    }}>
+                    <SwingingImage></SwingingImage>
                 </Box>
+
 
             ) : (
                 <div className="product-list-div">

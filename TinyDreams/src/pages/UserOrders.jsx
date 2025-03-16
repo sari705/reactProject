@@ -24,7 +24,6 @@ function UserOrders() {
             setOrders(response?.data.data);
             console.log(response.data);
             setStatus("complete");
-
         }
         catch (err) {
             setErros({ title: err.title, message: err.message });
@@ -37,7 +36,7 @@ function UserOrders() {
 
 
     return (<>
-
+   
         {status == "pending" ? <h1>loading...</h1> : status == "complete" && orders?.length != 0?( 
             orders.map((ord) => <ForUserOneOrderForUser key={ord._id} order={ord} />)
         ) : (

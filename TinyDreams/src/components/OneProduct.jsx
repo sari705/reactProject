@@ -47,6 +47,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { motion } from "framer-motion";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
+import { useNavigate } from "react-router-dom";
 
 import { addToCart } from "../features/cartSlice";
 import { deleteProduct } from "../api/productService"; // יבוא הפונקציה למחיקת מוצר
@@ -56,6 +57,7 @@ function OneProduct({ product, setViewUpdateForm, setProductForUpdate }) {
     const token = useSelector((state) => state.user?.currentUser?.token); // קבלת ה-token מהסטייט
     const [open, setOpen] = useState(false); // ניהול פתיחת הדיאלוג
     const role = useSelector((state) => state.currentUser?.role);
+    const navigate = useNavigate();
 
     // פתיחת הדיאלוג
     const handleOpen = () => setOpen(true);
@@ -102,7 +104,9 @@ function OneProduct({ product, setViewUpdateForm, setProductForUpdate }) {
                             height="200"
                             image={`/images/${product.images[0]}`}
                             alt={product.name}
-                            sx={{ objectFit: "contain", backgroundColor: "white", width: "100%" }}
+                            sx={{ objectFit: "contain", backgroundColor: "white", width: "100%" , cursor: "pointer" }}
+                            onClick={() => navigate(`details/${product._id}`)}
+                            
                         />
                     </Box>
                     <CardContent className="product-card-content" sx={{ textAlign: "center", display: "flex", flexDirection: "column", justifyContent: "space-between", flexGrow: 1 }}>
@@ -128,7 +132,8 @@ function OneProduct({ product, setViewUpdateForm, setProductForUpdate }) {
                             >
                                 הוסף לסל
                             </Button>
-                            {role && role == "MANAGER" &&
+
+                            {/* {role && role == "MANAGER" && */}
                                 <>
                                     <Button
                                         variant="contained"
@@ -146,7 +151,8 @@ function OneProduct({ product, setViewUpdateForm, setProductForUpdate }) {
                                     >
                                         מחק
                                     </Button>
-                                </>                            }
+                                </>
+                                {/* } */}
                         </Box>
                     </CardContent>
                 </Card>

@@ -15,18 +15,61 @@ body {
   padding: 1rem;     /* רווח פנימי מסביב */
 }
 
+.search-and-filter-div{
+  display: "flex"; 
+  gap: "10px";
+  justify-content: "center";
+  align-items: "center";
+  margin-bottom: "20px"
+}
+
+/* עיצוב של תיבת הבחירה */
+.product-list-select {
+  width: 250px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background-color: white;
+  font-size: 16px;
+  cursor: pointer;
+  transition: border-color 0.3s;
+  margin-bottom: 15px;
+}
+
+.product-list-select:hover,
+.product-list-select:focus {
+  border-color: #84B1D9;
+}
+
+/* עיצוב של שדה החיפוש */
+.product-list-input {
+  width: 250px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 16px;
+  transition: border-color 0.3s;
+  margin-bottom: 15px;
+}
+
+.product-list-input:focus {
+  border-color: #84B1D9;
+  outline: none;
+}
+
 /* רשימת מוצרים רספונסיבית */
 .product-list-container {
-  display: flex;
-  flex-wrap: wrap; /* מאפשר לרדת שורות אוטומטית */
-  gap: 20px; /* רווח בין הכרטיסים */
+  display: grid;
+  grid-template-columns: repeat(5, 1fr); /* 5 מוצרים בשורה */
+  gap: 20px; /* ריווח בין המוצרים */
   list-style: none;
   padding: 0;
-  margin: 0;
-  justify-content: center; /* מרכז את הכרטיסים */
+  margin: 0 auto;
+  justify-content: center;
   align-items: stretch;
 }
 
+/* כל פריט ברשימת המוצרים */
 .product-list-container li {
   display: flex;
   flex-direction: column;
@@ -39,6 +82,31 @@ body {
   flex-direction: column;
   justify-content: space-between;
   min-height: 450px; /* גובה אחיד לכרטיס */
+}
+
+/* התאמה למסכים קטנים יותר */
+@media (max-width: 1300px) {
+  .product-list-container {
+    grid-template-columns: repeat(4, 1fr); /* 4 מוצרים בשורה */
+  }
+}
+
+@media (max-width: 1000px) {
+  .product-list-container {
+    grid-template-columns: repeat(3, 1fr); /* 3 מוצרים בשורה */
+  }
+}
+
+@media (max-width: 700px) {
+  .product-list-container {
+    grid-template-columns: repeat(2, 1fr); /* 2 מוצרים בשורה */
+  }
+}
+
+@media (max-width: 500px) {
+  .product-list-container {
+    grid-template-columns: repeat(1, 1fr); /* מוצר אחד בשורה במסכים קטנים */
+  }
 }
 
 /* עיצוב תגיות */

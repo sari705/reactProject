@@ -20,7 +20,7 @@ import './App.css'
 import UserOrders from "./pages/UserOrders"
 import Orders from "./pages/Orders"
 import Users from "./pages/Users";
-import Checkout from './pages/Checkout';
+import Checkout from './pages/CheckOut';
 
 
 function App() {

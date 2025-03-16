@@ -50,7 +50,7 @@ function UpdateProduct({ product, setViewUpdateForm }) {
             setViewUpdateForm(false);
         }
         catch (error) {
-            alert(error);
+            alert(error.response.data.message);
             console.log(error);
         }
     }

@@ -18,6 +18,7 @@ import React from "react";
 import { Box, Typography, IconButton, Card, CardMedia, CardContent } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { useDispatch } from "react-redux";
+
 import { removeProduct } from "../features/cartSlice";
 
 function ProductInReducedCart({ product }) {

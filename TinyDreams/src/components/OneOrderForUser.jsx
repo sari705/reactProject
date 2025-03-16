@@ -9,7 +9,7 @@ function OneOrderForUser({order}) {
         {order.isSetOff && <h3>order is on way!</h3>}
 
         {order.deadLine && isBeforeToday && (<h3>order will arrive until: {order.deadLine.toString()}</h3>)}
-        <h2>toAdress: {toAdress}</h2>
+        <h2>toAdress: {order.adress}</h2>
         <h2> num products: {order.minimalProduct.length}</h2>
         <h3>final price: {order.finalPrice}</h3>
 

@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { MenuItem, Select } from "@mui/material";
 import { useSelector } from "react-redux";
+
 import { getCategories, getTags, getColors } from "../api/enumService";
 import "./css/UpdateProduct.css"
 

@@ -44,11 +44,12 @@
 import { useState } from "react";
 import { Card, CardContent, CardMedia, Typography, Button, Box, Chip, Dialog, DialogTitle, DialogContent, DialogActions } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
-import { addToCart } from "../features/cartSlice";
-import { deleteProduct } from "../api/productService"; // יבוא הפונקציה למחיקת מוצר
 import { motion } from "framer-motion";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
+
+import { addToCart } from "../features/cartSlice";
+import { deleteProduct } from "../api/productService"; // יבוא הפונקציה למחיקת מוצר
 
 function OneProduct({ product, setViewUpdateForm, setProductForUpdate }) {
     const dispatch = useDispatch();

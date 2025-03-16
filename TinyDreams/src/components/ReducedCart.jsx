@@ -22,9 +22,10 @@
 
 // export default ReducedCart;
 
-import ProductInReducedCart from "./ProductInReducedCart";
 import { useSelector } from "react-redux";
 import { Card, CardContent, Typography, Button, Divider, List, ListItem, Box } from "@mui/material";
+
+import ProductInReducedCart from "./ProductInReducedCart";
 
 function ReducedCart({ setViewReducedCart }) {
     const reduxProducts = useSelector((state) => state.cart.products);

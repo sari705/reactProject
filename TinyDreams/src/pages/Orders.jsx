@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+
 import { getAllOrders } from "../api/orderService";
 import OneOrderForManager from "../components/OneOrderForManager";
-import { useSelector } from "react-redux";
 
 
 const Orders = () => {

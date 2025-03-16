@@ -1,12 +1,13 @@
 import { useForm } from "react-hook-form";
 import { useState } from "react";
-import { logIn } from "../api/userService";
 import { useDispatch, useSelector } from "react-redux";
-import { userIn } from "../features/userSlice";
 import { useNavigate } from "react-router-dom";
-import "./css/Login.css"; // קובץ ה-CSS
 import { FaEye, FaEyeSlash } from "react-icons/fa"; // אייקוני הצגת סיסמה
+
+import { logIn } from "../api/userService";
+import { userIn } from "../features/userSlice";
 import FetchGoogleUser from "../components/FetchGoogleUser";
+import "./css/Login.css"; // קובץ ה-CSS
 
 function Login() {
     const { register, formState: { errors }, handleSubmit } = useForm();

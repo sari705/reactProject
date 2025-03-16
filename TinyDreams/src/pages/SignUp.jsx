@@ -1,10 +1,10 @@
 import { useForm } from "react-hook-form";
 import { useDispatch } from 'react-redux';
 import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 
 import { signUp } from '../api/userService.js';
 import { userIn } from "../features/userSlice";
-import { useEffect } from "react";
 
 
 function SignUp() {

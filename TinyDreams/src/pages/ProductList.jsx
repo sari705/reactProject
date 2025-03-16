@@ -1,15 +1,15 @@
 import { getAllProducts, getTotalPages, getProductsByCategory, searchProducts } from "../api/productService";
-import { getCategories } from "../api/enumService";
-import { useEffect, useState } from "react";
-import OneProduct from "../components/OneProduct";
-import ViewProduct from "../components/ViewProduct";
-
-import axios from "axios";
-import ReducedCart from "../components/ReducedCart";
-import { Outlet, useLocation } from "react-router-dom";
-import UpdateProduct from "./UpdateProduct";
-import { CircularProgress } from "@mui/material";
 import { useSelector } from "react-redux";
+import { useEffect, useState } from "react";
+import { Outlet, useLocation } from "react-router-dom";
+import { CircularProgress } from "@mui/material";
+import axios from "axios";
+
+import ViewProduct from "../components/ViewProduct";
+import OneProduct from "../components/OneProduct";
+import { getCategories } from "../api/enumService";
+import ReducedCart from "../components/ReducedCart";
+import UpdateProduct from "./UpdateProduct";
 import "./css/ProductList.css"
 
 export default function ProductList() {

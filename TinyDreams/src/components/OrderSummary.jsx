@@ -64,7 +64,7 @@ const OrderSummary = ({ products }) => {
   const totalPrice = total + shippingPrice;
 
   return (
-    <Paper sx={{ p: 3, bgcolor: "#FCE8E6", borderRadius: 2, boxShadow: 3 }}>
+    <Paper sx={{width: "100%", height: "100%", p: 3, bgcolor: "#FCE8E6", paddingTop: 10}}>
       <Typography variant="body2" sx={{ mb: 2 }}>
         מספר פריטים בהזמנה: {totalAmount}
       </Typography>

@@ -147,6 +147,7 @@ import OrderSummary from "../components/OrderSummary.jsx";
 const steps = ["Shipping address", "Payment details", "Review your order"];
 
 export default function Checkout() {
+    
     const [activeStep, setActiveStep] = useState(0);
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [openSummary, setOpenSummary] = useState(false);
@@ -206,9 +207,9 @@ export default function Checkout() {
     };
 
     return (
-        <Container component="main" maxWidth="lg" sx={{ mt: 5, mb: 5 }}>
-            <Grid container spacing={3}>
-                <Grid item xs={12} md={7} sx={{ width: "70%" }}>
+        <Container component="main" maxWidth="lg">
+            <Grid container spacing={0}>
+                <Grid item xs={12} md={7} sx={{ width: "100%" }}>
                     <Paper sx={{ p: 4 }}>
                         <Typography variant="h5" gutterBottom>
                             Checkout Process
@@ -246,7 +247,7 @@ export default function Checkout() {
                         </Box>
                     </Paper>
                 </Grid>
-                <Grid item xs={12} md={5} sx={{border:"none",borderRadius:"none", width: "30%", height: "100vh", position: "sticky", top: 0, display: { xs: "none", md: "block" } }}>
+                <Grid item xs={12} md={5} sx={{ position: "sticky", top: 0, display: { xs: "none", md: "block" } }}>
                     <OrderSummary products={minimalProduct} />
                 </Grid>
             </Grid>
@@ -261,3 +262,4 @@ export default function Checkout() {
         </Container>
     );
 }
+//לנסות לראות ב גיפי טי את הקקוד האחרון פלוס כפתור הX והצבעים האחרים כדאי לעשות קלון ולבדוק איזה פרוייקט טוב יותר.

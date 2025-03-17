@@ -7,7 +7,8 @@ import { store } from "./app/store.js"
 import { BrowserRouter } from "react-router-dom"
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 
-const theme = createTheme({
+const theme = createTheme({  
+  
   palette: {
     primary: {
       main: '#84B1D9', // צבע תכלת רך
@@ -22,6 +23,9 @@ const theme = createTheme({
       primary: '#590202', // צבע טקסט כהה
       secondary: '#555555', // צבע טקסט בינוני
     },
+  },
+  typography: {
+    fontFamily: '"Fredoka", "Arial", sans-serif',
   },
 });
 

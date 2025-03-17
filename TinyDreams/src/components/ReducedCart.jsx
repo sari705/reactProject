@@ -80,13 +80,10 @@ function ReducedCart({ setViewReducedCart }) {
                 </Typography>
 
                 <Box sx={{ display: "flex", justifyContent: "space-between", mt: 2 }}>
-                    <Button variant="contained" color="primary" sx={{backgroundColor:"#59020210", color:"#590202"}} onClick={() => window.location.href = "/products"}>
-                        המשך בקנייה
+                    <Button variant="contained" fullWidth color="success" sx={{backgroundColor:"#59020210", color:"#590202"}} onClick={() => window.location.href = "/cart"}>
+                        לסל הקניות
                     </Button>
-                    <Button variant="contained" color="success" sx={{backgroundColor:"#59020210", color:"#590202"}} onClick={() => window.location.href = "/checkout"}>
-                        לתשלום
-                    </Button>
-                    <Button variant="contained" sx={{backgroundColor:"#59020210", color:"#590202"}} onClick={() => (setViewReducedCart(false))}>
+                    <Button variant="contained" fullWidth sx={{backgroundColor:"#59020210", color:"#590202"}} onClick={() => (setViewReducedCart(false))}>
                         סגור
                     </Button>
                 </Box>

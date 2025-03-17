@@ -20,6 +20,7 @@ const PaymentForm = ({ onNext, onChange, formData, setFormData }) => {
   
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
+      
       <Typography variant="h6">פרטי תשלום</Typography>
       <Grid container spacing={2}>
         <Grid item xs={12}>

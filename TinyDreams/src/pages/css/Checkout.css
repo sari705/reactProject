@@ -1,67 +1,3 @@
-/*body {
-    background-color: #E9ECF2;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-family: 'Poppins', sans-serif;
-    min-height: 100vh;
-}
-
-.checkout-container {
-    background: white;
-    padding: 40px;
-    border-radius: 12px;
-    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
-    max-width: 600px;
-    width: 100%;
-    text-align: center;
-    animation: fadeIn 0.7s ease-in-out;
-}
-
-.checkout-title {
-    font-size: 24px;
-    font-weight: bold;
-    color: #590202;
-    margin-bottom: 20px;
-}
-
-.MuiStepIcon-root.MuiStepIcon-active {
-    color: #590202;
-}
-
-.checkout-button {
-    background: linear-gradient(135deg, #ff758c, #ff7eb3);
-    border-radius: 8px;
-    font-size: 18px;
-    font-weight: bold;
-    color: white;
-    padding: 12px;
-    margin-top: 20px;
-    width: 100%;
-    transition: all 0.3s ease;
-}
-
-.checkout-button:hover {
-    background: linear-gradient(135deg, #ff647c, #ff6d9b);
-    transform: scale(1.05);
-}
-
-.error-message {
-    color: red;
-    font-size: 14px;
-    margin-top: 5px;
-}
-
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(-20px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-} */
 :root {
     /* --background-color: #FCE8E6; */
     --background-color: white;
@@ -100,3 +36,38 @@ button.next-button:hover {
 .card {
     background-color: var(--card-bg);
 }
+
+.css-1timmfm-MuiGrid-root {
+    /* direction:ltr; */
+    margin-right: 0%;
+    height: 100%;
+}
+
+.css-1czmy4p-MuiPaper-root {
+    box-shadow: 0;
+    --Paper-shadow: none !important;
+    padding: 40px;
+}
+
+.css-5c1adp-MuiContainer-root {
+    height: 100%;
+}
+
+.css-11lq3yg-MuiGrid-root {
+    height: 100%;
+}
+
+/* body {
+    height: 90vh;
+} */
+
+.css-pb4yjz-MuiPaper-root {
+    padding: 0px;
+}
+
+.css-82y680-MuiGrid-root {
+    height: 400px;
+}
+/* .css-1sh66r7{
+    position: fixed;
+} */

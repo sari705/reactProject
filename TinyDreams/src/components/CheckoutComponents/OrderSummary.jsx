@@ -28,7 +28,7 @@
 //                  {product.amount>1 && <Typography variant="body2">{product.amount } פריטים :</Typography>}
 //                   <Typography variant="body2">{product.productName}</Typography>
 //                   <Typography variant="body2">₪{product.price.toFixed(2)}</Typography>
-                 
+
 //               </Box>
 //           ))}
 //           <Typography variant="h6" sx={{ mt: 2 }}>
@@ -64,7 +64,10 @@ const OrderSummary = ({ products }) => {
   const totalPrice = total + shippingPrice;
 
   return (
-    <Paper sx={{width: "100%", height: "100%", p: 3, bgcolor: "#FCE8E6", paddingTop: 10}}>
+    <Paper sx={{ width: "100%", height: "100%", p: 4, bgcolor: "#FCE8E6" }}>
+      <Typography variant="h5" gutterBottom sx={{ textAlign: "center", width: "100%", padding:"3px", marginBottom:"35px" }}>
+       תקציר הזמנה
+      </Typography>
       <Typography variant="body2" sx={{ mb: 2 }}>
         מספר פריטים בהזמנה: {totalAmount}
       </Typography>

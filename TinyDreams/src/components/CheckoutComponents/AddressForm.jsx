@@ -119,7 +119,7 @@ const AddressForm = ({ onNext, onChange, formData, setFormData }) => {
       {/* <Typography variant="h6">פרטי משלוח</Typography> */}
       <Grid container spacing={2}>
   {['firstName', 'lastName', 'phone', 'country', 'city', 'zip'].map((field, index) => (
-    <Grid item xs={12} sm={6} key={field}>
+    <Grid item xs={12} sm={6} key={field} >
       <TextField
         fullWidth
         label={field === 'firstName' ? 'שם פרטי' : field === 'lastName' ? 'שם משפחה' : field === 'phone' ? 'טלפון': field === 'country' ? 'מדינה' : field === 'city' ? 'עיר' : 'מיקוד'}

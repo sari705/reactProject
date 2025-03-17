@@ -25,7 +25,7 @@ export function signUp(body) {
 export function updateUser(id, { username, email }, token) {
     return axios.put(`${baseUrl}/${id}`, { username, email }, {
         headers: {
-            authorization: `Bearer ${token}`,
+            Authorization: `Bearer ${token}`,
         }
     })
 }

@@ -1,18 +1,18 @@
 import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
-import { Outlet, useLocation } from "react-router-dom";
-import { CircularProgress, Pagination, Stack } from "@mui/material";
-import { MenuItem, Select, TextField, FormControl, InputLabel,Typography } from "@mui/material";
+import { Outlet, useLocation, useNavigate } from "react-router-dom";
+import { Button, Pagination, Stack, Typography } from "@mui/material";
+import { MenuItem, Select, TextField, FormControl, InputLabel } from "@mui/material";
 import Box from "@mui/material/Box";
-import axios from "axios";
 import { getAllProducts, getTotalPages, getProductsByCategory, searchProducts } from "../api/productService";
-import ViewProduct from "../components/ViewProduct";
 import OneProduct from "../components/OneProduct";
 import { getCategories } from "../api/enumService";
 import ReducedCart from "../components/ReducedCart";
 import UpdateProduct from "./UpdateProduct";
 import "./css/ProductList.css"
 import SwingingImage from "../components/SwingingImage";
+import { fetchGoogleUser } from "../utils/fetchData";
+import { useDispatch } from "react-redux";
 
 
 export default function ProductList() {
@@ -29,6 +29,8 @@ export default function ProductList() {
     const [productForUpdate, setProductForUpdate] = useState(null)
     const location = useLocation(); // בודק את ה-URL
     const amountInCart = useSelector((state) => state.cart.amountInCart)
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     async function getProducts(pageNumber) {
         try {
@@ -51,6 +53,7 @@ export default function ProductList() {
             return;
         }
         else {
+            setSearchValue("")
             try {
                 setLoading(true);
                 console.log("fetching products...");
@@ -78,6 +81,7 @@ export default function ProductList() {
             }
         }
         else {
+            setChoiseCategory(" ")
             try {
                 setLoading(true);
                 let response = await searchProducts(searchValue);
@@ -132,16 +136,14 @@ export default function ProductList() {
     }, [choiseCategory])
 
     useEffect(() => {
-        getSearchProduct()
-    }, [searchValue])
-
-    useEffect(() => {
         const params = new URLSearchParams(location.search);
-        const token = params.get("token");
-        if (token) {
-            localStorage.setItem("token", token);
+        const tokenFromUrl = params.get("token");
+
+        if (tokenFromUrl) {
+            fetchGoogleUser(dispatch, navigate, tokenFromUrl);
         }
-    }, [])
+    }, [dispatch, navigate, location.search]);
+
 
     return (<>
         <Box sx={{ display: "flex", gap: 2, justifyContent: "center", alignItems: "center", marginBottom: 2 }}>            {/* בחירת קטגוריה */}
@@ -162,35 +164,17 @@ export default function ProductList() {
 
             {/* שדה חיפוש */}
             <TextField
+                value={searchValue}
                 variant="outlined"
                 placeholder="חפש מוצר לפי שם"
-                onBlur={(e) => setSearchValue(e.target.value)}
+                onChange={(e) => setSearchValue(e.target.value)}
                 sx={{ minWidth: 300 }}
             />
+            <Button variant="contained" sx={{ color: "white" }} onClick={getSearchProduct}>חפש</Button>
         </Box >
 
         {
             loading ? (
-                // <Box
-                //     sx={{
-                //         display: "flex",
-                //         flexDirection: "column",
-                //         alignItems: "center",
-                //         justifyContent: "center",
-                //         height: "50vh",
-                //         gap: 2, // ריווח בין האלמנטים
-                //     }}
-                // >
-                //     <Typography variant="h6" sx={{ color: "#590202", fontWeight: "bold" }}>
-                //         טוען מוצרים...
-                //     </Typography>
-
-                //     <Box sx={{ display: "flex", gap: 2 }}>
-                //         <CircularProgress size={50} thickness={5} color="secondary" sx={{ color: "#84B1D9" }} />
-                //         <CircularProgress size={50} thickness={5} color="success" sx={{ color: "#D9B1A3" }} />
-                //         <CircularProgress size={50} thickness={5} color="inherit" sx={{ color: "#590202" }} />
-                //     </Box>
-                // </Box>
                 <Box
                     sx={{
                         display: "flex",
@@ -206,13 +190,13 @@ export default function ProductList() {
 
             ) : (
                 <div className="product-list-div">
-                    <ul className="product-list-container">
+                    {products.length > 0 ? <ul className="product-list-container">
                         {products.map((product) => (
                             <li key={product._id} >
                                 <OneProduct setProductForUpdate={setProductForUpdate} setViewUpdateForm={setViewUpdateForm} product={product} onClick={() => setChoiseProduct(product)} />
                             </li>
                         ))}
-                    </ul>
+                    </ul> : <Typography>אין מוצרים בקטגוריה זו </Typography>}
                 </div>
             )
         }

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Link, Navigate, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
@@ -18,7 +18,7 @@ import { Badge as CartBadge } from "@mui/material";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 
 import { userOut } from '../features/userSlice';
-import "./css/navBar.css"; // קובץ ה-CSS
+import "./css/navBar.css";
 
 function ResponsiveAppBar() {
     const role = useSelector(state => state.user.currentUser?.role);
@@ -26,16 +26,42 @@ function ResponsiveAppBar() {
 
     const [anchorElNav, setAnchorElNav] = React.useState(null);
     const [anchorElUser, setAnchorElUser] = React.useState(null);
+    const [scrolling, setScrolling] = React.useState(false); // מצב שקיפות
+
     const userName = useSelector(state => state.user.currentUser?.name);
-    const handleOpenNavMenu = (event) => setAnchorElNav(event.currentTarget);
-    const handleOpenUserMenu = (event) => setAnchorElUser(event.currentTarget);
-    const handleCloseNavMenu = () => setAnchorElNav(null);
-    const handleCloseUserMenu = () => setAnchorElUser(null);
     const disp = useDispatch();
     const navigate = useNavigate();
-    const amountInCart = useSelector((state)=>state.cart.amountInCart)
+    const amountInCart = useSelector((state) => state.cart.amountInCart);
 
-    // דפים לפי הרשאות
+    React.useEffect(() => {
+        const handleScroll = () => {
+            if (window.scrollY > 50) {
+                setScrolling(true);
+            } else {
+                setScrolling(false);
+            }
+        };
+
+        window.addEventListener("scroll", handleScroll);
+        return () => {
+            window.removeEventListener("scroll", handleScroll);
+        };
+    }, []);
+
+    const handleLogOut = () => {
+        try {
+            localStorage.removeItem("currentUser");
+            localStorage.removeItem("cart");
+            localStorage.removeItem("token");
+            disp(userOut());
+            alert("LogOut!");
+            navigate("/login");
+        } catch (err) {
+            console.log(err);
+            alert(err.message);
+        }
+    };
+
     const pages = [
         { name: 'דף הבית', path: '/home' },
         { name: 'מוצרים', path: '/products' },
@@ -44,22 +70,24 @@ function ResponsiveAppBar() {
         { name: 'הרשם', path: '/signup' },
         { name: 'כל ההזמנות שלי', path: '/userorders' },
         ...(isManager ? [
-
             { name: 'הוסף מוצר', path: '/add-product' },
             { name: 'הזמנות', path: '/orders' },
             { name: 'משתמשים', path: '/users' }
         ] : [])
     ];
 
-    const settings = [{ name: 'Profile', path: '' },
-    { name: 'Logout ↪️', path: '/logout' }];
-
     return (
         <>
-            <AppBar position="fixed" className="navBar" sx={{ backgroundColor: "#BF7069" }}>
+            <AppBar
+                position="fixed"
+                className="navBar"
+                sx={{
+                    backgroundColor: scrolling ? "rgba(191, 112, 105, 0.8)" : "#BF7069",
+                    transition: "background-color 0.3s ease-in-out"
+                }}
+            >
                 <Container maxWidth="xl">
                     <Toolbar disableGutters>
-                        {/* אייקון הלוגו */}
                         <AdbIcon className="logoIcon" />
                         <Typography
                             variant="h6"
@@ -71,14 +99,11 @@ function ResponsiveAppBar() {
                             <img src="/logo/logo2.png" alt="Logo" className="logoImage" />
                         </Typography>
 
-
-                        {/* תפריט רספונסיבי */}
                         <Box className="menuIcon">
                             <IconButton
                                 size="large"
                                 aria-label="open navigation"
-                                onClick={handleOpenNavMenu}
-                                color="inherit"
+                                onClick={(e) => setAnchorElNav(e.currentTarget)}
                                 sx={{ display: { xs: 'flex', md: 'none' } }}
                             >
                                 <MenuIcon />
@@ -86,11 +111,15 @@ function ResponsiveAppBar() {
                             <Menu
                                 anchorEl={anchorElNav}
                                 open={Boolean(anchorElNav)}
-                                onClose={handleCloseNavMenu}
-                                className="mobileMenu"
-                                sx={{ display: { xs: 'block', md: 'none' } }}
+                                onClose={() => setAnchorElNav(null)}
                             >
+                                {pages.map((page) => (
+                                    <MenuItem key={page.name} component={Link} to={page.path} onClick={() => setAnchorElNav(null)}>
+                                        {page.name}
+                                    </MenuItem>
+                                ))}
                             </Menu>
+
                             <IconButton component={Link} to="/cart">
                                 <CartBadge badgeContent={amountInCart} color="primary" overlap="circular">
                                     <ShoppingCartIcon fontSize="small" />
@@ -98,7 +127,6 @@ function ResponsiveAppBar() {
                             </IconButton>
                         </Box>
 
-                        {/* תפריט ניווט ראשי - מחולק שווה ברוחב */}
                         <Box className="menuButtons" sx={{ display: { xs: 'none', md: 'flex' } }}>
                             {pages.map((page) => (
                                 <Button key={page.name} component={Link} to={page.path} className="menuButton">
@@ -107,23 +135,21 @@ function ResponsiveAppBar() {
                             ))}
                         </Box>
 
-                        {/* תפריט משתמש */}
                         <Box className="userMenu">
                             <Tooltip title="Open settings">
-                                <IconButton onClick={handleOpenUserMenu} className="avatarButton">
+                                <IconButton onClick={(e) => setAnchorElUser(e.currentTarget)} className="avatarButton">
                                     <Avatar alt={userName} src="/static/images/avatar/2.jpg" />
                                 </IconButton>
                             </Tooltip>
                             <Menu
                                 anchorEl={anchorElUser}
                                 open={Boolean(anchorElUser)}
-                                onClose={handleCloseUserMenu}
-                                className="settingsMenu"
+                                onClose={() => setAnchorElUser(null)}
                             >
-                                <MenuItem key="Profile" onClick={() => { navigate("/profile"); handleCloseUserMenu(); }}>
+                                <MenuItem key="Profile" onClick={() => { navigate("/profile"); setAnchorElUser(null); }}>
                                     <Typography className="menuItem">Profile</Typography>
                                 </MenuItem>
-                                <MenuItem key="Logout ↪️" onClick={() => { disp(userOut()); handleCloseUserMenu() }}>
+                                <MenuItem key="Logout ↪️" onClick={() => { handleLogOut(); setAnchorElUser(null) }}>
                                     <Typography className="menuItem">Logout ↪️</Typography>
                                 </MenuItem>
                             </Menu>
@@ -132,7 +158,6 @@ function ResponsiveAppBar() {
                 </Container>
             </AppBar>
 
-            {/* גוף הדף - מוסיפים padding-top כדי שהתוכן לא יוסתר מתחת ל-NavBar */}
             <div className="bodyContent">
                 {/* התוכן של הדף יבוא כאן */}
             </div>

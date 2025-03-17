@@ -58,6 +58,7 @@ import { Typography, Alert, Table, TableContainer, TableHead, TableRow, TableCel
 
 import { getOrderByUser } from "../api/orderService.js";
 import OneOrderForUser from "../components/OneOrderForUser.jsx";
+import SwingingImage from "../components/SwingingImage.jsx";
 
 function UserOrders() {
     const _id = useSelector((state) => state.user.currentUser._id);
@@ -89,7 +90,7 @@ function UserOrders() {
             </Typography>
 
             {status === "pending" ? (
-                <Typography variant="h6" sx={{ color: "gray" }}>טוען נתונים...</Typography>
+                <SwingingImage></SwingingImage>
             ) : error ? (
                 <Alert severity="error" sx={{ backgroundColor: "#590202", color: "white", padding: "16px", borderRadius: "8px" }}>
                     <Typography variant="h6">{error.title}</Typography>

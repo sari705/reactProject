@@ -1,19 +1,19 @@
 import * as React from 'react';
 import {
-  Box,
-  Button,
-  Checkbox,
-  CssBaseline,
-  Divider,
-  FormControlLabel,
-  FormLabel,
-  FormControl,
-  Link,
-  TextField,
-  Typography,
-  Stack,
-  Card as MuiCard,
-  Alert,
+    Box,
+    Button,
+    Checkbox,
+    CssBaseline,
+    Divider,
+    FormControlLabel,
+    FormLabel,
+    FormControl,
+    Link,
+    TextField,
+    Typography,
+    Stack,
+    Card as MuiCard,
+    Alert,
 } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import { Google as GoogleIcon } from '@mui/icons-material';
@@ -21,13 +21,14 @@ import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import Swal from 'sweetalert2'
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { FaEye, FaEyeSlash } from "react-icons/fa"; // אייקוני הצגת סיסמה
 
 import { logIn } from "../api/userService";
 import { userIn } from "../features/userSlice";
 import FetchGoogleUser from "../components/FetchGoogleUser";
 import "./css/Login.css"; // קובץ ה-CSS
+import { fetchGoogleUser } from '../utils/fetchData';
 
 // function Login() {
 //     const { register, formState: { errors }, handleSubmit } = useForm();
@@ -128,28 +129,28 @@ const themeColors = {
 };
 
 const Card = styled(MuiCard)(({ theme }) => ({
-  display: 'flex',
-  flexDirection: 'column',
-  alignSelf: 'center',
-  width: '100%',
-  padding: theme.spacing(4),
-  gap: theme.spacing(2),
-  margin: 'auto',
-  backgroundColor: themeColors.cardBg,
-  boxShadow: 'rgba(0, 0, 0, 0.1) 0px 5px 15px, rgba(0, 0, 0, 0.1) 0px 15px 35px -5px',
-  borderRadius: '16px',
-  [theme.breakpoints.up('sm')]: {
-    width: '500px',
-  },
+    display: 'flex',
+    flexDirection: 'column',
+    alignSelf: 'center',
+    width: '100%',
+    padding: theme.spacing(4),
+    gap: theme.spacing(2),
+    margin: 'auto',
+    backgroundColor: themeColors.cardBg,
+    boxShadow: 'rgba(0, 0, 0, 0.1) 0px 5px 15px, rgba(0, 0, 0, 0.1) 0px 15px 35px -5px',
+    borderRadius: '16px',
+    [theme.breakpoints.up('sm')]: {
+        width: '500px',
+    },
 }));
 
 const LoginContainer = styled(Stack)(() => ({
-  height: '100vh',
-  minHeight: '100%',
-  padding: '2rem',
-  display: 'flex',
-  justifyContent: 'center',
-  alignItems: 'center',
+    height: '100vh',
+    minHeight: '100%',
+    padding: '2rem',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
 }));
 
 export default function Login() {
@@ -158,6 +159,7 @@ export default function Login() {
     const navigate = useNavigate();
     const [serverError, setServerError] = useState("");
     const [showPassword, setShowPassword] = useState(false);
+    const [FetchGoogleUser, setFetchGoogleUser] = useState(false)
 
     console.log("user in redux: ", useSelector((state) => state.user.currentUser));
 
@@ -169,13 +171,13 @@ export default function Login() {
 
             localStorage.setItem("currentUser", JSON.stringify({
                 ...response.data.data,
-                token: response.data.token
             }));
+            localStorage.setItem("token", response.data.token);
             Swal.fire({
                 title: "ברוכים הבאים",
                 text: "התחברת בהצלחה, גלישה מהנה",
                 icon: "success"
-              });
+            });
             dispatch(userIn({ ...response.data.data, token: response.data.token }));
             navigate("/products");
         } catch (error) {
@@ -185,10 +187,18 @@ export default function Login() {
                 title: "Oops...",
                 text: e.response.data.message,
                 footer: '<a href="#">Why do I have this issue?</a>'
-              });
+            });
             setServerError(error.response.data.title);
         }
     }
+
+    useEffect(() => {
+        const token = localStorage.getItem("token");
+
+        if (token) {
+            fetchGoogleUser(dispatch, navigate, token);
+        }
+    }, [dispatch, navigate, location.search]);
 
     return (
         <LoginContainer>
@@ -201,7 +211,7 @@ export default function Login() {
                 >
                     התחבר
                 </Typography>
-                <FetchGoogleUser />
+                {FetchGoogleUser && <FetchGoogleUser />}
 
                 {serverError && <Alert severity="error">{serverError}</Alert>}
 
@@ -283,6 +293,7 @@ export default function Login() {
                         variant="contained"
                         sx={{
                             bgcolor: themeColors.buttonBg,
+                            color: "white",
                             py: 1.5,
                             fontSize: "1.1rem",
                             fontWeight: "bold",
@@ -305,7 +316,7 @@ export default function Login() {
                     <Button
                         fullWidth
                         variant="outlined"
-                        startIcon={<GoogleIcon sx={{ fontSize: 24, marginLeft: "8px" }}/>}
+                        startIcon={<GoogleIcon sx={{ fontSize: 24, marginLeft: "8px" }} />}
                         sx={{
                             color: themeColors.linkColor,
                             borderColor: themeColors.border,

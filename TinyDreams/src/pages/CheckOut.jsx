@@ -137,16 +137,18 @@ import ChevronLeftRoundedIcon from "@mui/icons-material/ChevronLeftRounded";
 import { toast } from "react-toastify";
 import { IconButton } from "@mui/material";
 
-import AddressForm from "../components/AddressForm.jsx";
-import PaymentForm from "../components/PaymentForm.jsx";
-import ReviewOrder from "../components/ReviewOrder.jsx";
+import AddressForm from "../components/CheckoutComponents/AddressForm.jsx";
+import PaymentForm from "../components/CheckoutComponents/PaymentForm.jsx";
+import ReviewOrder from "../components/CheckoutComponents/ReviewOrder.jsx";
 import { addOrder } from "../api/orderService.js";
 import { emptyingCart } from "../features/cartSlice.js";
-import OrderSummary from "../components/OrderSummary.jsx";
+import OrderSummary from "../components/CheckoutComponents/OrderSummary.jsx";
+import './css/Checkout.css'
 
-const steps = ["Shipping address", "Payment details", "Review your order"];
+const steps = ["כתובת למשלוח", "פרטי תשלום", "סקור את ההזמנה שלך"];
 
 export default function Checkout() {
+    
     const [activeStep, setActiveStep] = useState(0);
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [openSummary, setOpenSummary] = useState(false);
@@ -206,12 +208,12 @@ export default function Checkout() {
     };
 
     return (
-        <Container component="main" maxWidth="lg" sx={{ mt: 5, mb: 5 }}>
-            <Grid container spacing={3}>
-                <Grid item xs={12} md={7} sx={{ width: "70%" }}>
+        <Container component="main" maxWidth="lg"sx={{height: "76vh", paddingLeft: "0", paddingTop:"47px" }}>
+            <Grid container spacing={0}>
+                <Grid item xs={12} md={7} sx={{ width: "100%" }}>
                     <Paper sx={{ p: 4 }}>
-                        <Typography variant="h5" gutterBottom>
-                            Checkout Process
+                        <Typography variant="h5" gutterBottom sx={{fontWeight: "bold",textAlign: "center", padding:"3px", marginBottom:"35px"}}>
+                           תהליך התשלום
                         </Typography>
                         {isSmallScreen && (
                             <Button variant="contained" onClick={() => setOpenSummary(true)} sx={{ width: "100%", mb: 2 }}>
@@ -246,7 +248,7 @@ export default function Checkout() {
                         </Box>
                     </Paper>
                 </Grid>
-                <Grid item xs={12} md={5} sx={{border:"none",borderRadius:"none", width: "30%", height: "100vh", position: "sticky", top: 0, display: { xs: "none", md: "block" } }}>
+                <Grid item xs={12} md={5} sx={{ position: "sticky", padding:"47px", display: { xs: "none", md: "block" } }}>
                     <OrderSummary products={minimalProduct} />
                 </Grid>
             </Grid>
@@ -261,3 +263,4 @@ export default function Checkout() {
         </Container>
     );
 }
+//לנסות לראות ב גיפי טי את הקקוד האחרון פלוס כפתור הX והצבעים האחרים כדאי לעשות קלון ולבדוק איזה פרוייקט טוב יותר.

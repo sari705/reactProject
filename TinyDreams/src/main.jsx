@@ -14,13 +14,13 @@ const theme = createTheme({
       main: '#84B1D9', // צבע תכלת רך
     },
     secondary: {
-      main: '#BF7069', 
+      main: '#BF7069', //ורוד בערך כמו הנאבבאר
     },
     background: {
       default: '#f5f5f5', // צבע רקע בהיר
     },
     text: {
-      primary: '#590202', // צבע טקסט כהה
+      primary: '#590202', //בורדו צבע טקסט כהה
       secondary: '#555555', // צבע טקסט בינוני
     },
   },
@@ -28,7 +28,6 @@ const theme = createTheme({
     fontFamily: '"Fredoka", "Arial", sans-serif',
   },
 });
-
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>

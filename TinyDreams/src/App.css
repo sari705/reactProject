@@ -1,3 +1,14 @@
 body {
   font-family: "Fredoka", sans-serif;  
 }
+.bodyContent{
+background-color: blue ;
+margin-top:0px ;
+padding-bottom:0px;
+padding-top:0px;
+direction: ltr;
+}
+#root{
+margin-top: 0px;
+}
+

@@ -17,12 +17,13 @@ import AdbIcon from '@mui/icons-material/Adb';
 import { Badge as CartBadge } from "@mui/material";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 
-import { userOut } from '../features/userSlice';
 import "./css/navBar.css";
+import LogOut from '../pages/LogOut';
 
 function ResponsiveAppBar() {
     const role = useSelector(state => state.user.currentUser?.role);
     const isManager = role === "MANAGER";
+    const isUser = role === "USER";
 
     const [anchorElNav, setAnchorElNav] = React.useState(null);
     const [anchorElUser, setAnchorElUser] = React.useState(null);
@@ -48,27 +49,14 @@ function ResponsiveAppBar() {
         };
     }, []);
 
-    const handleLogOut = () => {
-        try {
-            localStorage.removeItem("currentUser");
-            localStorage.removeItem("cart");
-            localStorage.removeItem("token");
-            disp(userOut());
-            alert("LogOut!");
-            navigate("/login");
-        } catch (err) {
-            console.log(err);
-            alert(err.message);
-        }
-    };
 
     const pages = [
         { name: 'דף הבית', path: '/home' },
         { name: 'מוצרים', path: '/products' },
         { name: 'סל הקניות', path: '/cart' },
-        { name: 'התחבר', path: '/login' },
-        { name: 'הרשם', path: '/signup' },
-        { name: 'כל ההזמנות שלי', path: '/userorders' },
+        ...(!role ? [{ name: 'התחבר', path: '/login' },
+        { name: 'הרשם', path: '/signup' }] : []),
+        ...(isUser ? [{ name: 'כל ההזמנות שלי', path: '/userorders' }] : []),
         ...(isManager ? [
             { name: 'הוסף מוצר', path: '/add-product' },
             { name: 'הזמנות', path: '/orders' },
@@ -141,22 +129,26 @@ function ResponsiveAppBar() {
                                     <Avatar alt={userName} src="/static/images/avatar/2.jpg" />
                                 </IconButton>
                             </Tooltip>
-                            <Menu
-                                anchorEl={anchorElUser}
-                                open={Boolean(anchorElUser)}
-                                onClose={() => setAnchorElUser(null)}
-                            >
-                                <MenuItem key="Profile" onClick={() => { navigate("/profile"); setAnchorElUser(null); }}>
-                                    <Typography className="menuItem">Profile</Typography>
-                                </MenuItem>
-                                <MenuItem key="Logout ↪️" onClick={() => { handleLogOut(); setAnchorElUser(null) }}>
-                                    <Typography className="menuItem">Logout ↪️</Typography>
-                                </MenuItem>
-                            </Menu>
-                        </Box>
-                    </Toolbar>
-                </Container>
-            </AppBar>
+                            
+                        <Menu
+                            anchorEl={anchorElUser}
+                            open={Boolean(anchorElUser)}
+                            onClose={() => setAnchorElUser(null)}
+                        >
+                            <MenuItem key="Profile" onClick={() => { navigate("/profile"); setAnchorElUser(null); }}>
+                                <Typography className="menuItem">Profile</Typography>
+                            </MenuItem>
+
+                            {/* <MenuItem key="Logout ↪️" onClick={() => { handleLogOut(); setAnchorElUser(null); }}>
+                                <Typography className="menuItem">Logout ↪️</Typography>
+                            </MenuItem> */}
+                            <LogOut/>
+                        </Menu>
+
+                    </Box>
+                </Toolbar>
+            </Container>
+        </AppBar >
 
             <div className="bodyContent">
                 {/* התוכן של הדף יבוא כאן */}

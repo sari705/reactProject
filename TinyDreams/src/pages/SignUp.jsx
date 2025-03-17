@@ -259,6 +259,7 @@ export default function SignUp() {
             variant="contained"
             sx={{
               bgcolor: themeColors.buttonBg,
+              color:"white",
               py: 1.5,
               fontSize: "1.1rem",
               fontWeight: "bold",

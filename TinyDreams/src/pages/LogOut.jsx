@@ -1,12 +1,10 @@
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
-
 import { userOut } from "../features/userSlice.js";
 
 
 function LogOut() {
-
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
@@ -22,10 +20,6 @@ function LogOut() {
             alert(err.message);
         }
     }, [dispatch, navigate]); 
-
-
-
-
     return (<></>);
 }
 

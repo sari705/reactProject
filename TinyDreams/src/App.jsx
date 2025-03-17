@@ -23,6 +23,7 @@ import UserOrders from "./pages/UserOrders"
 import Orders from "./pages/Orders"
 import Users from "./pages/Users";
 import Checkout from './pages/CheckOut';
+import Footer from './components/Footer';
 
 
 function App() {
@@ -45,32 +46,34 @@ function App() {
 
   return (
     <>
-        <NavBar />
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/home" element={<Home />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/signup" element={<SignUp />} />
-          <Route path="/logout" element={<LogOut />} />
-          <Route path="/products" element={<ProductList />}>
-            <Route path="details/:id" element={<ViewProduct></ViewProduct>}> </Route>
-          </Route>
-          <Route path="/cart" element={<Cart />} />
-          <Route path="/signup" element={<SignUp />} />
-          <Route path="/add-product" element={<ProtectRoute role="MANAGER"><AddProduct /></ProtectRoute>} />
-          <Route path="/update-product" element={<ProtectRoute role="MANAGER"> <UpdateProduct />  </ProtectRoute>} />
+      <NavBar />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/home" element={<Home />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<SignUp />} />
+        <Route path="/logout" element={<LogOut />} />
+        <Route path="/products" element={<ProductList />}>
+          <Route path="details/:id" element={<ViewProduct></ViewProduct>}> </Route>
+        </Route>
+        <Route path="/cart" element={<Cart />} />
+        <Route path="/signup" element={<SignUp />} />
+        <Route path="/add-product" element={<ProtectRoute role="MANAGER"><AddProduct /></ProtectRoute>} />
+        <Route path="/update-product" element={<ProtectRoute role="MANAGER"> <UpdateProduct />  </ProtectRoute>} />
 
         <Route path="/profile" element={<ProtectRoute role="USER"><Profile /></ProtectRoute>} />
-        <Route path="/checkout" element={<ProtectRoute role="USER"><Checkout /></ProtectRoute>}/>
+        <Route path="/checkout" element={<ProtectRoute role="USER"><Checkout /></ProtectRoute>} />
 
-        <Route path="/userorders" element={<ProtectRoute role="USER"><UserOrders/></ProtectRoute>}></Route>
-          <Route path="/profile" element={<ProtectRoute role="USER"><Profile /></ProtectRoute>} />
-          {/* <Route path="/checkout" element={<ProtectRoute role="USER"><OrderCompletion /></ProtectRoute>} /> */}
-          <Route path="/orders" element={<ProtectRoute role="MANAGER"><Orders /></ProtectRoute>} />
-          <Route path="/users" element={<ProtectRoute role="MANAGER"><Users /></ProtectRoute>} />
-        
-        </Routes>
-        <ToastContainer position="top-center" autoClose={3000} hideProgressBar={false} />
+        <Route path="/userorders" element={<ProtectRoute role="USER"><UserOrders /></ProtectRoute>}></Route>
+        <Route path="/profile" element={<ProtectRoute role="USER"><Profile /></ProtectRoute>} />
+        {/* <Route path="/checkout" element={<ProtectRoute role="USER"><OrderCompletion /></ProtectRoute>} /> */}
+        <Route path="/orders" element={<ProtectRoute role="MANAGER"><Orders /></ProtectRoute>} />
+        <Route path="/users" element={<ProtectRoute role="MANAGER"><Users /></ProtectRoute>} />
+
+      </Routes>
+      <ToastContainer position="top-center" autoClose={3000} hideProgressBar={false} />
+      <Footer></Footer>
+
 
     </>
   )

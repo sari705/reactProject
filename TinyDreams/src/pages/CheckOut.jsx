@@ -212,7 +212,7 @@ export default function Checkout() {
             <Grid container spacing={0}>
                 <Grid item xs={12} md={7} sx={{ width: "100%" }}>
                     <Paper sx={{ p: 4 }}>
-                        <Typography variant="h5" gutterBottom sx={{textAlign: "center", padding:"3px", marginBottom:"35px"}}>
+                        <Typography variant="h5" gutterBottom sx={{fontWeight: "bold",textAlign: "center", padding:"3px", marginBottom:"35px"}}>
                            תהליך התשלום
                         </Typography>
                         {isSmallScreen && (

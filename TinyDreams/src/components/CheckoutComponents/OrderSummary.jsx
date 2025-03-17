@@ -48,7 +48,7 @@ import { Box, Paper, Typography } from "@mui/material";
 const OrderSummary = ({ products }) => {
   const total = products.reduce((sum, item) => sum + item.price * (item.amount || 1), 0);
 
-  let totalAmount = products.reduce((total, prod) => total + (prod.amount || 1), 0);
+  // let totalAmount = products.reduce((total, prod) => total + (prod.amount || 1), 0);
 
   // חישוב מחיר המשלוח
   let shippingPrice;
@@ -65,11 +65,11 @@ const OrderSummary = ({ products }) => {
 
   return (
     <Paper sx={{ width: "100%", height: "100%", p: 4, bgcolor: "#FCE8E6" }}>
-      <Typography variant="h5" gutterBottom sx={{ textAlign: "center", width: "100%", padding:"3px", marginBottom:"35px" }}>
+      <Typography variant="h5" gutterBottom sx={{fontWeight: "bold", textAlign: "center", width: "100%", padding:"3px", marginBottom:"35px" }}>
        תקציר הזמנה
       </Typography>
       <Typography variant="body2" sx={{ mb: 2 }}>
-        מספר פריטים בהזמנה: {totalAmount}
+        מספר פריטים בהזמנה
       </Typography>
       {products.map((product) => (
         <Box key={product._id} sx={{ display: "flex", justifyContent: "space-between", mb: 1 }}>
@@ -78,13 +78,16 @@ const OrderSummary = ({ products }) => {
           <Typography variant="body2">₪{product.price.toFixed(2)}</Typography>
         </Box>
       ))}
-      <Box sx={{ borderTop: "1px solid #ddd", mt: 2, pt: 2 }}>
-        <Typography variant="h6" sx={{ fontWeight: "bold" }}>
-          סה"כ לתשלום: ₪{totalPrice.toFixed(2)}
-        </Typography>
-        <Typography variant="body2" sx={{ mt: 1 }}>
+      <Box sx={{ borderTop: "1px solid #ddd", mt: 2, pt: 2 }}> 
+
+          <Typography variant="body2" sx={{ mt: 1 }}>
           מחיר משלוח: ₪{shippingPrice.toFixed(2)}
         </Typography>
+
+        <Typography variant="h6" sx={{ fontWeight: "bold", paddingTop:"10px" }}>
+          סה"כ לתשלום: ₪{totalPrice.toFixed(2)}
+        </Typography>
+     
       </Box>
     </Paper>
   );

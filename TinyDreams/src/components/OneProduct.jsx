@@ -110,7 +110,7 @@ function OneProduct({ product, setViewUpdateForm, setProductForUpdate }) {
                         />
                     </Box>
                     <CardContent className="product-card-content" sx={{ textAlign: "center", display: "flex", flexDirection: "column", justifyContent: "center", flexGrow: 0.3, fontSize: "0.85rem" }}> {/* ✅ הקטנת הפרטים */}
-                        <Typography variant="h6" fontWeight="bold" color="#590202" sx={{ fontSize: "0.9rem" }}> {/* ✅ הקטנת הטקסט */}
+                        <Typography variant="h6" color="#590202" sx={{ fontSize: "0.9rem" }}> {/* ✅ הקטנת הטקסט */}
                             {product.name}
                         </Typography>
                         <Typography variant="h5" color="#BF7069" fontWeight="bold" sx={{ mt: 1, fontSize: "1rem" }}> {/* ✅ הקטנת המחיר */}

@@ -140,9 +140,9 @@ const AnimatedButton = styled(motion(Button))({
 
 // 🍼 קטגוריות מוצרים בחנות התינוקות
 const categories = [
-  { title: "בגדי תינוקות", image: "https://source.unsplash.com/400x300/?baby-clothes" },
-  { title: "צעצועים חינוכיים", image: "https://source.unsplash.com/400x300/?baby-toys" },
-  { title: "מוצרי טקסטיל", image: "https://source.unsplash.com/400x300/?baby-blanket" },
+  { title: "בגדי תינוקות", image: "/images/clothes3.jpg" },
+  { title: "צעצועים חינוכיים", image: "/images/toys5.jpg" },
+  { title: "מוצרי אוכל", image: "/images/food3.jpg" },
 ];
 
 export default function Home() {

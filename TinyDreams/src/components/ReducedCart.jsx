@@ -41,7 +41,7 @@ function ReducedCart({ setViewReducedCart }) {
             right: 20,
             boxShadow: 3,
             borderRadius: 2,
-            backgroundColor: "#D9B1A390",
+            backgroundColor: "#D9B1A3",
         }}>
             <CardContent>
                 <Typography variant="h6" sx={{ fontWeight: "bold", mb: 1, color:"#590202"}}>

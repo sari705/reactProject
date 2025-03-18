@@ -24,31 +24,12 @@ function ResponsiveAppBar() {
     const role = useSelector(state => state.user.currentUser?.role);
     const isManager = role === "MANAGER";
     const isUser = role === "USER";
-
     const [anchorElNav, setAnchorElNav] = React.useState(null);
     const [anchorElUser, setAnchorElUser] = React.useState(null);
-    const [scrolling, setScrolling] = React.useState(false); // מצב שקיפות
-
     const userName = useSelector(state => state.user.currentUser?.name);
     const disp = useDispatch();
     const navigate = useNavigate();
     const amountInCart = useSelector((state) => state.cart.amountInCart);
-
-    React.useEffect(() => {
-        const handleScroll = () => {
-            if (window.scrollY > 50) {
-                setScrolling(true);
-            } else {
-                setScrolling(false);
-            }
-        };
-
-        window.addEventListener("scroll", handleScroll);
-        return () => {
-            window.removeEventListener("scroll", handleScroll);
-        };
-    }, []);
-
 
     const pages = [
         { name: 'דף הבית', path: '/home' },
@@ -70,9 +51,9 @@ function ResponsiveAppBar() {
                 position="fixed"
                 className="navBar"
                 sx={{
-                    backgroundColor: scrolling ? "rgba(191, 112, 105, 0.8)" : "#BF7069",
-                    transition: "background-color 0.3s ease-in-out"
-                }}
+                    backgroundColor: "#BF7069",
+                    transition: "background-color 0.3s ease-in-out",
+               }}
             >
                 <Container maxWidth="xl">
                     <Toolbar disableGutters>

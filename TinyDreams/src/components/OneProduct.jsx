@@ -51,6 +51,7 @@ import { useNavigate } from "react-router-dom";
 
 import { addToCart } from "../features/cartSlice";
 import { deleteProduct } from "../api/productService"; // יבוא הפונקציה למחיקת מוצר
+import { AddShoppingCart } from "@mui/icons-material";
 
 function OneProduct({ product, setViewUpdateForm, setProductForUpdate }) {
     const dispatch = useDispatch();
@@ -96,10 +97,10 @@ function OneProduct({ product, setViewUpdateForm, setProductForUpdate }) {
                     display: "flex",
                     flexDirection: "column",
                     justifyContent: "space-between",
-                    minHeight: "600px",                    
+                    minHeight: "300px",
                     height: "100%", // 🔹 הכרטיס יתמלא לגובה אחיד
                 }}>
-                    <Box sx={{ backgroundColor: "#fff", borderRadius: "20px 20px 0 0", padding: "10px", flexGrow: 1 , minHeight:"350px"}}>
+                    <Box sx={{ backgroundColor: "#fff", borderRadius: "20px 20px 0 0", padding: "10px", flexGrow: 1, minHeight: "50px" }}>
                         <CardMedia
                             component="img"
                             height="270" // ✅ הגדלת התמונה עוד יותר
@@ -109,7 +110,7 @@ function OneProduct({ product, setViewUpdateForm, setProductForUpdate }) {
                             onClick={() => navigate(`details/${product._id}`)}
                         />
                     </Box>
-                    <CardContent className="product-card-content" sx={{ textAlign: "center", display: "flex", flexDirection: "column", justifyContent: "center", flexGrow: 0.3, fontSize: "0.85rem" }}> {/* ✅ הקטנת הפרטים */}
+                    <CardContent className="product-card-content" sx={{ textAlign: "center", display: "flex", flexDirection: "column", justifyContent: "center", flexGrow: 0.3, fontSize: "0.85rem", minHeight: "200px" }}> {/* ✅ הקטנת הפרטים */}
                         <Typography variant="h6" color="#590202" sx={{ fontSize: "0.9rem" }}> {/* ✅ הקטנת הטקסט */}
                             {product.name}
                         </Typography>
@@ -126,31 +127,41 @@ function OneProduct({ product, setViewUpdateForm, setProductForUpdate }) {
                         )}
                         <Box display="flex" justifyContent="center" gap={1} mt={2}>
                             <Button
-                                variant="contained"
-                                sx={{ backgroundColor: "#84B1D9", color: "white", fontSize: "0.85rem" }}
+                                sx={{
+                                    color: "#590202",
+                                    "&:hover": {
+                                        color: "#84B1D9", // שינוי צבע רקע ב-hover
+                                    }, "& svg": { fontSize: "2rem !important" }
+                                }}
                                 onClick={() => dispatch(addToCart(product))}
                             >
-                                הוסף לסל
-                            </Button>
-                                <>
-                                {/* בשביל שתי הכפתורים הבאים. ביני role-הוספתי בדיקה על ה   */}
-                                 {role=='MANAGER' && <Button
-                                        variant="contained"
-                                        sx={{ backgroundColor: "#D9B1A3", color: "#590202", fontSize: "0.85rem" }}
-                                        startIcon={<EditIcon />}
-                                        onClick={() => { setViewUpdateForm(true); setProductForUpdate(product); }}
-                                    >
-                                        ערוך
-                                    </Button>}
-                                    {role=='MANAGER' && <Button
-                                        variant="contained"
-                                        sx={{ backgroundColor: "#BF7069", color: "white", fontSize: "0.85rem" }}
-                                        startIcon={<DeleteIcon />}
-                                        onClick={handleOpen} // כאן נפתח את הדיאלוג
-                                    >
-                                        מחק
-                                    </Button>}
-                                </>
+                                <AddShoppingCart></AddShoppingCart>
+                            </Button >
+
+                            {/* בשביל שתי הכפתורים הבאים. ביני role-הוספתי בדיקה על ה   */}
+                            {role == 'MANAGER' && <Button
+                                sx={{
+                                    color: "#590202",
+                                    "&:hover": {
+                                        color: "#84B1D9", // שינוי צבע רקע ב-hover
+                                    }, "& svg": { fontSize: "2rem !important" }
+                                }} startIcon={<EditIcon />}
+                                onClick={() => { setViewUpdateForm(true); setProductForUpdate(product); }}
+                            >
+
+                            </Button>}
+                            {role == 'MANAGER' && <Button
+                                sx={{
+                                    color: "#590202",
+                                    "&:hover": {
+                                        color: "#84B1D9", // שינוי צבע רקע ב-hover
+                                    }, "& svg": { fontSize: "2rem !important" }
+                                }} startIcon={<DeleteIcon />}
+                                onClick={handleOpen} // כאן נפתח את הדיאלוג
+                            >
+
+                            </Button>}
+
                         </Box>
                     </CardContent>
                 </Card>

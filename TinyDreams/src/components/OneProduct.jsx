@@ -1,168 +1,410 @@
+// import { useState } from "react";
+// import { Card, CardContent, CardMedia, Typography, Button, Box, Chip, Dialog, DialogTitle, DialogContent, DialogActions, Popover } from "@mui/material";
 // import { useDispatch, useSelector } from "react-redux";
+// import { motion } from "framer-motion";
+// import DeleteIcon from "@mui/icons-material/Delete";
+// import EditIcon from "@mui/icons-material/Edit";
+// import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 // import { useNavigate } from "react-router-dom";
-// import { deleteProduct } from "../api/productService";
 // import { addToCart } from "../features/cartSlice";
-// import "./css/oneProduct.css"
+// import { deleteProduct } from "../api/productService";
+// import { AddShoppingCart, LocalOffer } from "@mui/icons-material";
 
-// function OneProduct({ product, setChoiseProduct, setViewUpdateForm , setProductForUpdate}) {
-//     const navigate = useNavigate()
-//     const disp = useDispatch()
+// function OneProduct({ product, setViewUpdateForm, setProductForUpdate }) {
+//     const dispatch = useDispatch();
 //     const token = useSelector((state) => state.user?.currentUser?.token);
+//     const role = useSelector((state) => state.user?.currentUser?.role);
+//     const navigate = useNavigate();
 
+//     const [open, setOpen] = useState(false);
+//     const [anchorEl, setAnchorEl] = useState(null); // לניהול פתיחת `Popover`
+//     const [showTags, setShowTags] = useState(false); // ניהול תצוגת התגיות
+
+
+//     // פתיחת דיאלוג מחיקה
+//     const handleOpen = () => setOpen(true);
+//     const handleClose = () => setOpen(false);
+
+//     // פתיחת וסגירת ה-Popover של התגיות
+//     const handleTagClick = (event) => {
+//         setAnchorEl(anchorEl ? null : event.currentTarget);
+//     };
+
+//     // מחיקת מוצר
 //     const deleteProductById = async (id) => {
 //         try {
 //             const response = await deleteProduct(id, token);
-//             if (response){
-//                 console.log(response);
-//                 alert(response.data)
+//             if (response) {
+//                 console.log("מוצר נמחק:", response);
+//                 alert(response.data);
 //             }
+//         } catch (error) {
+//             console.log("שגיאה במחיקה:", error);
+//             alert(error.response?.data?.message || "שגיאה במחיקת המוצר");
 //         }
-//         catch (error) {
-//             console.log(error)
-//             alert(error.response.data.message)
-//         }
-//     }
+//     };
 
-//     return (<div>
+//     const handleDelete = () => {
+//         deleteProductById(product._id);
+//         handleClose();
+//     };
 
-//         <h2>{product.name}</h2>
-//         <img src={`/images/${product.images[0]}`} alt={product.images[0]} onClick={() => navigate(`details/${product._id}`)} />
-//         <h3>{product.price}</h3>
-//         <div className="tags-container">
-//                 {product.tag && product.tag.map((productTag, index) => (
-//                     <span key={index} className="tag">{productTag}</span>
-//                 ))}
-//         </div>
-//         <button onClick={() => { disp(addToCart(product)) }}>הוסף לסל</button>
-//         <button onClick={() => { setViewUpdateForm(true); setProductForUpdate(product)}}>ערוך מוצר</button>
-//         <button onClick={() => { deleteProductById(product._id)}}>מחק מוצר</button>
+//     return (
+//         <>
+//             <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+//                 <Card
+//                     className="product-card"
+//                     sx={{
+//                         maxWidth: 345,
+//                         backgroundColor: "transparent",
+//                         boxShadow: "none",
+//                         borderRadius: "0",
+//                         display: "flex",
+//                         flexDirection: "column",
+//                         justifyContent: "space-between",
+//                         alignItems: "center",
+//                         minHeight: "auto",
+//                         height: "100%",
+//                     }}
+//                 >
+//                     {/* תמונה עם רקע לבן */}
+//                     <Box
+//                         sx={{
+//                             backgroundColor: "#fff",
+//                             padding: "10px",
+//                             display: "flex",
+//                             justifyContent: "center",
+//                             alignItems: "center",
+//                             width: "100%",
+//                             flexDirection: "column",
+//                         }}
+//                     >
+//                         <CardMedia
+//                             component="img"
+//                             height="270"
+//                             image={`/images/${product.images[0]}`}
+//                             alt={product.name}
+//                             sx={{
+//                                 objectFit: "contain",
+//                                 backgroundColor: "white",
+//                                 width: "100%",
+//                                 cursor: "pointer",
+//                             }}
+//                             onClick={() => navigate(`details/${product._id}`)}
+//                         />
 
-//     </div>);
+//                         <Box display="flex" justifyContent="center" gap={1} mt={1}>
+
+//                             {product.tag && product.tag.length > 0 && (
+//                                 <>
+//                                     <Button
+//                                         onClick={handleTagClick}
+//                                         sx={{ color: "#590202", "&:hover": { color: "#84B1D9" },}}
+//                                     >
+//                                         <LocalOffer></LocalOffer>
+//                                     </Button>
+
+//                                     {/* Popover - תצוגת תגיות בלחיצה */}
+//                                     <Popover
+//                                         open={Boolean(anchorEl)}
+//                                         anchorEl={anchorEl}
+//                                         onClose={() => setAnchorEl(null)}
+//                                         anchorOrigin={{
+//                                             vertical: "bottom",
+//                                             horizontal: "center",
+//                                         }}
+//                                         transformOrigin={{
+//                                             vertical: "top",
+//                                             horizontal: "center",
+//                                         }}
+//                                     >
+//                                         <Box sx={{ p: 1, display: "flex", flexWrap: "wrap", gap: 1 }}>
+//                                             {product.tag.map((productTag, index) => (
+//                                                 <Chip
+//                                                     key={index}
+//                                                     label={productTag}
+//                                                     sx={{
+//                                                         backgroundColor: "#84B1D9",
+//                                                         color: "white",
+//                                                         fontSize: "10px",
+//                                                         height: "18px",
+//                                                         padding: "2px 6px",
+//                                                         borderRadius: "10px",
+//                                                     }}
+//                                                 />
+//                                             ))}
+//                                         </Box>
+//                                     </Popover>
+//                                 </>
+//                             )}
+//                             <Button
+//                                 sx={{
+//                                     color: "#590202",
+//                                     "&:hover": { color: "#84B1D9" },
+//                                 }}
+//                                 onClick={() => dispatch(addToCart(product))}
+//                             >
+//                                 <AddShoppingCart />
+//                             </Button>
+
+//                             {role === "MANAGER" && (
+//                                 <>
+//                                     <Button
+//                                         sx={{
+//                                             color: "#590202",
+//                                             "&:hover": { color: "#84B1D9" },
+//                                         }}
+//                                         startIcon={<EditIcon />}
+//                                         onClick={() => {
+//                                             setViewUpdateForm(true);
+//                                             setProductForUpdate(product);
+//                                         }}
+//                                     />
+
+//                                     <Button
+//                                         sx={{
+//                                             color: "#590202",
+//                                             "&:hover": { color: "#84B1D9" },
+//                                         }}
+//                                         startIcon={<DeleteIcon />}
+//                                         onClick={handleOpen}
+//                                     />
+//                                 </>
+//                             )}
+//                         </Box>
+//                     </Box>
+
+//                     {/* פרטי המוצר */}
+//                     <CardContent
+//                         sx={{
+//                             textAlign: "center",
+//                             display: "flex",
+//                             flexDirection: "column",
+//                             justifyContent: "center",
+//                             fontSize: "0.85rem",
+//                             minHeight: "auto",
+//                             backgroundColor: "transparent",
+//                             paddingBottom: "10px",
+//                             paddingTop: "10px",
+//                         }}
+//                     >
+//                         <Typography variant="h6" color="#590202" sx={{ fontSize: "0.9rem" }}>
+//                             {product.name}
+//                         </Typography>
+//                         <Typography variant="h5" color="#BF7069" fontWeight="bold" sx={{ fontSize: "1rem" }}>
+//                             ₪{product.price}
+//                         </Typography>
+
+//                         {/* כפתור הצגת תגיות */}
+
+//                     </CardContent>
+
+//                     {/* כפתורים */}
+
+//                 </Card>
+//             </motion.div>
+
+//             {/* דיאלוג אישור מחיקה */}
+//             <Dialog open={open} onClose={handleClose}>
+//                 <DialogTitle>אישור מחיקת מוצר</DialogTitle>
+//                 <DialogContent>
+//                     <Typography>האם אתה בטוח שברצונך למחוק את <b>{product.name}</b>?</Typography>
+//                 </DialogContent>
+//                 <DialogActions>
+//                     <Button onClick={handleClose} sx={{ color: "#333" }}>ביטול</Button>
+//                     <Button onClick={handleDelete} sx={{ color: "white", backgroundColor: "#D32F2F", "&:hover": { backgroundColor: "#B71C1C" } }}>
+//                         מחק
+//                     </Button>
+//                 </DialogActions>
+//             </Dialog>
+//         </>
+//     );
 // }
 
 // export default OneProduct;
+
 import { useState } from "react";
-import { Card, CardContent, CardMedia, Typography, Button, Box, Chip, Dialog, DialogTitle, DialogContent, DialogActions } from "@mui/material";
+import { Card, CardContent, CardMedia, Typography, Button, Box, Chip, Dialog, DialogTitle, DialogContent, DialogActions, Collapse } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { motion } from "framer-motion";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import { useNavigate } from "react-router-dom";
-
 import { addToCart } from "../features/cartSlice";
-import { deleteProduct } from "../api/productService"; // יבוא הפונקציה למחיקת מוצר
-import { AddShoppingCart } from "@mui/icons-material";
+import { deleteProduct } from "../api/productService";
+import { AddShoppingCart, LocalOffer, ExpandMore, ExpandLess } from "@mui/icons-material";
+import Swal from "sweetalert2";
 
 function OneProduct({ product, setViewUpdateForm, setProductForUpdate }) {
     const dispatch = useDispatch();
-    const token = useSelector((state) => state.user?.currentUser?.token); // קבלת ה-token מהסטייט
-    const [open, setOpen] = useState(false); // ניהול פתיחת הדיאלוג
+    const token = localStorage.getItem("token");
     const role = useSelector((state) => state.user?.currentUser?.role);
     const navigate = useNavigate();
 
-    // פתיחת הדיאלוג
-    const handleOpen = () => setOpen(true);
+    const [open, setOpen] = useState(false);
+    const [showTags, setShowTags] = useState(false); // ניהול תצוגת התגיות
 
-    // סגירת הדיאלוג
+    // פתיחת דיאלוג מחיקה
+    const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
 
-    // מחיקת מוצר לאחר אישור
+    // מחיקת מוצר
     const deleteProductById = async (id) => {
         try {
-            const response = await deleteProduct(id, token); // קריאה לפונקציה שמוחקת מוצר מה-API
+            const response = await deleteProduct(id, token);
             if (response) {
                 console.log("מוצר נמחק:", response);
-                alert(response.data); // הודעה על מחיקה מוצלחת
+                Swal.fire({
+                    title: "המוצר נמחק",
+                    text: response.data.name,
+                    icon: "success"
+                });
             }
         } catch (error) {
             console.log("שגיאה במחיקה:", error);
-            alert(error.response?.data?.message || "שגיאה במחיקת המוצר"); // הודעת שגיאה
+            alert(error.response?.data?.message || "שגיאה במחיקת המוצר");
         }
     };
 
     const handleDelete = () => {
-        deleteProductById(product._id); // קריאה לפונקציית המחיקה
+        deleteProductById(product._id);
         handleClose();
     };
 
     return (
         <>
             <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-                <Card className="product-card" sx={{
-                    maxWidth: 345,
-                    borderRadius: "20px",
-                    boxShadow: "0px 4px 20px rgba(0, 0, 0, 0.2)",
-                    transition: "0.3s",
-                    background: "linear-gradient(135deg, #E9ECF2, #D9B1A3)",
-                    display: "flex",
-                    flexDirection: "column",
-                    justifyContent: "space-between",
-                    minHeight: "300px",
-                    height: "100%", // 🔹 הכרטיס יתמלא לגובה אחיד
-                }}>
-                    <Box sx={{ backgroundColor: "#fff", borderRadius: "20px 20px 0 0", padding: "10px", flexGrow: 1, minHeight: "50px" }}>
+                <Card
+                    className="product-card"
+                    sx={{
+                        maxWidth: 345,
+                        backgroundColor: "transparent",
+                        boxShadow: "none",
+                        borderRadius: "0",
+                        display: "flex",
+                        flexDirection: "column",
+                        justifyContent: "space-between",
+                        alignItems: "center",
+                        minHeight: "auto",
+                        height: "100%",
+                    }}
+                >
+                    {/* תמונה עם רקע לבן */}
+                    <Box
+                        sx={{
+                            backgroundColor: "#fff",
+                            padding: "10px",
+                            display: "flex",
+                            justifyContent: "center",
+                            alignItems: "center",
+                            width: "100%",
+                            flexDirection: "column",
+                        }}
+                    >
                         <CardMedia
                             component="img"
-                            height="270" // ✅ הגדלת התמונה עוד יותר
+                            height="270"
                             image={`/images/${product.images[0]}`}
                             alt={product.name}
-                            sx={{ objectFit: "contain", backgroundColor: "white", width: "100%", cursor: "pointer" }}
+                            sx={{
+                                objectFit: "contain",
+                                backgroundColor: "white",
+                                width: "100%",
+                                cursor: "pointer",
+                            }}
                             onClick={() => navigate(`details/${product._id}`)}
                         />
-                    </Box>
-                    <CardContent className="product-card-content" sx={{ textAlign: "center", display: "flex", flexDirection: "column", justifyContent: "center", flexGrow: 0.3, fontSize: "0.85rem", minHeight: "200px" }}> {/* ✅ הקטנת הפרטים */}
-                        <Typography variant="h6" color="#590202" sx={{ fontSize: "0.9rem" }}> {/* ✅ הקטנת הטקסט */}
-                            {product.name}
-                        </Typography>
-                        <Typography variant="h5" color="#BF7069" fontWeight="bold" sx={{ mt: 1, fontSize: "1rem" }}> {/* ✅ הקטנת המחיר */}
-                            ₪{product.price}
-                        </Typography>
-                        {/* הצגת תגיות */}
-                        {product.tag && (
-                            <Box sx={{ display: "flex", justifyContent: "center", gap: 1, flexWrap: "wrap", mt: 1 }}>
-                                {product.tag.map((productTag, index) => (
-                                    <Chip key={index} label={productTag} sx={{ backgroundColor: "#84B1D9", color: "white", fontSize: "10px", height: "18px", padding: "2px 6px", borderRadius: "10px" }} />
-                                ))}
-                            </Box>
-                        )}
-                        <Box display="flex" justifyContent="center" gap={1} mt={2}>
+
+                        {/* כפתורים */}
+                        <Box display="flex" justifyContent="center" gap={1} mt={1}>
+                            {product.tag && product.tag.length > 0 && (
+                                <>
+                                    <Button
+                                        onClick={() => setShowTags(!showTags)}
+                                        sx={{ color: "#590202", "&:hover": { color: "#84B1D9" } }}
+                                    >
+                                        <LocalOffer />
+                                    </Button>
+                                </>
+                            )}
+
                             <Button
                                 sx={{
                                     color: "#590202",
-                                    "&:hover": {
-                                        color: "#84B1D9", // שינוי צבע רקע ב-hover
-                                    }, "& svg": { fontSize: "2rem !important" }
+                                    "&:hover": { color: "#84B1D9" },
                                 }}
                                 onClick={() => dispatch(addToCart(product))}
                             >
-                                <AddShoppingCart></AddShoppingCart>
-                            </Button >
+                                <AddShoppingCart />
+                            </Button>
 
-                            {/* בשביל שתי הכפתורים הבאים. ביני role-הוספתי בדיקה על ה   */}
-                            {role == 'MANAGER' && <Button
-                                sx={{
-                                    color: "#590202",
-                                    "&:hover": {
-                                        color: "#84B1D9", // שינוי צבע רקע ב-hover
-                                    }, "& svg": { fontSize: "2rem !important" }
-                                }} startIcon={<EditIcon />}
-                                onClick={() => { setViewUpdateForm(true); setProductForUpdate(product); }}
-                            >
+                            {role === "MANAGER" && (
+                                <>
+                                    <Button
+                                        sx={{
+                                            color: "#590202",
+                                            "&:hover": { color: "#84B1D9" },
+                                        }}
+                                        startIcon={<EditIcon />}
+                                        onClick={() => {
+                                            setViewUpdateForm(true);
+                                            setProductForUpdate(product);
+                                        }}
+                                    />
 
-                            </Button>}
-                            {role == 'MANAGER' && <Button
-                                sx={{
-                                    color: "#590202",
-                                    "&:hover": {
-                                        color: "#84B1D9", // שינוי צבע רקע ב-hover
-                                    }, "& svg": { fontSize: "2rem !important" }
-                                }} startIcon={<DeleteIcon />}
-                                onClick={handleOpen} // כאן נפתח את הדיאלוג
-                            >
-
-                            </Button>}
-
+                                    <Button
+                                        sx={{
+                                            color: "#590202",
+                                            "&:hover": { color: "#84B1D9" },
+                                        }}
+                                        startIcon={<DeleteIcon />}
+                                        onClick={handleOpen}
+                                    />
+                                </>
+                            )}
                         </Box>
+
+                        {/* הצגת תגיות בתוך הכרטיס עצמו */}
+                        <Collapse in={showTags}>
+                            <Box sx={{ display: "flex", justifyContent: "center", gap: 1, flexWrap: "wrap", mt: 1 }}>
+                                {product.tag.map((productTag, index) => (
+                                    <Chip
+                                        key={index}
+                                        label={productTag}
+                                        sx={{
+                                            backgroundColor: "#84B1D9",
+                                            color: "white",
+                                            fontSize: "10px",
+                                            height: "18px",
+                                            padding: "2px 6px",
+                                            borderRadius: "10px",
+                                        }}
+                                    />
+                                ))}
+                            </Box>
+                        </Collapse>
+                    </Box>
+
+                    {/* פרטי המוצר */}
+                    <CardContent
+                        sx={{
+                            textAlign: "center",
+                            display: "flex",
+                            flexDirection: "column",
+                            justifyContent: "center",
+                            fontSize: "0.85rem",
+                            minHeight: "auto",
+                            backgroundColor: "transparent",
+                            paddingBottom: "10px",
+                            paddingTop: "10px",
+                        }}
+                    >
+                        <Typography variant="h6" color="#590202" sx={{ fontSize: "0.9rem" }}>
+                            {product.name}
+                        </Typography>
+                        <Typography variant="h5" color="#BF7069" fontWeight="bold" sx={{ fontSize: "1rem" }}>
+                            ₪{product.price}
+                        </Typography>
                     </CardContent>
                 </Card>
             </motion.div>

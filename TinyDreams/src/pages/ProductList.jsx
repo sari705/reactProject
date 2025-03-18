@@ -146,7 +146,7 @@ export default function ProductList() {
 
 
     return (<>
-        <Box sx={{ display: "flex", gap: 2, justifyContent: "center", alignItems: "center", marginBottom: 2 }}>            {/* בחירת קטגוריה */}
+        <Box sx={{ display: "flex", gap: 2, justifyContent: "center", alignItems: "center", marginBottom: 5, marginTop:"80px" }}>            {/* בחירת קטגוריה */}
             <FormControl variant="outlined" sx={{ minWidth: 300 }}>
                 <InputLabel>בחר קטגוריה</InputLabel>
                 <Select

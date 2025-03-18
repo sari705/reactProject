@@ -11,4 +11,12 @@ direction: ltr;
 #root{
 margin-top: 0px;
 }
+/* מכאן עיצוב לנאבבאר */
+/* העיצוב הבא היה אמור לדרוס את העיצוב שיש לתמונה של החיה הנמצאת על הנאבבאר אך לא עשה את זה */
+.css-1umw9bq-MuiSvgIcon-root {
+  width: 0;
+  height: 0;
+  display: none;
+}
+
 

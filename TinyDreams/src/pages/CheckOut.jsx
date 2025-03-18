@@ -144,6 +144,7 @@ import { addOrder } from "../api/orderService.js";
 import { emptyingCart } from "../features/cartSlice.js";
 import OrderSummary from "../components/CheckoutComponents/OrderSummary.jsx";
 import './css/Checkout.css'
+import CloseIcon from '@mui/icons-material/Close';
 
 const steps = ["כתובת למשלוח", "פרטי תשלום", "סקור את ההזמנה שלך"];
 
@@ -217,7 +218,7 @@ export default function Checkout() {
                         </Typography>
                         {isSmallScreen && (
                             <Button variant="contained" onClick={() => setOpenSummary(true)} sx={{ width: "100%", mb: 2 }}>
-                                הצג תקציר הזמנה (Total: ₪{products.reduce((sum, item) => sum + item.price * (item.amount || 1), 0).toFixed(2)})
+                                הצג תקציר הזמנה 
                             </Button>
                         )}
                         <Stepper activeStep={activeStep} sx={{ mb: 3 }}>
@@ -253,9 +254,9 @@ export default function Checkout() {
                 </Grid>
             </Grid>
             <Drawer anchor="top" open={openSummary} onClose={() => setOpenSummary(false)}>
-                <Box sx={{ p: 2 }}>
+                <Box sx={{ p: 2,width:410 }}>
                     <IconButton onClick={() => setOpenSummary(false)} sx={{ position: "absolute", right: 10, top: 10 }}>
-                        {/* <CloseIcon /> */}
+                        <CloseIcon />
                     </IconButton>
                     <OrderSummary products={minimalProduct} />
                 </Box>

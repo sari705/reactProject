@@ -45,7 +45,7 @@ function ReducedCart({ setViewReducedCart }) {
         }}>
             <CardContent>
                 <Typography variant="h6" sx={{ fontWeight: "bold", mb: 1, color:"#590202"}}>
-                    עגלת הקניות שלך🛒
+                עגלת הקניות של🛒
                      
                 </Typography>
                 <Divider sx={{ mb: 2 }} />

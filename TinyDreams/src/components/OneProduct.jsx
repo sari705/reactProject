@@ -127,7 +127,7 @@ function OneProduct({ product, setViewUpdateForm, setProductForUpdate }) {
                         <Box display="flex" justifyContent="center" gap={1} mt={2}>
                             <Button
                                 variant="contained"
-                                sx={{ backgroundColor: "#84B1D9", color: "white", fontSize: "0.85rem" }}
+                                sx={{ backgroundColor: "#84B1D9", color: "white", fontSize: "0.25rem" }}
                                 onClick={() => dispatch(addToCart(product))}
                             >
                                 הוסף לסל
@@ -136,19 +136,19 @@ function OneProduct({ product, setViewUpdateForm, setProductForUpdate }) {
                                 {/* בשביל שתי הכפתורים הבאים. ביני role-הוספתי בדיקה על ה   */}
                                  {role=='MANAGER' && <Button
                                         variant="contained"
-                                        sx={{ backgroundColor: "#D9B1A3", color: "#590202", fontSize: "0.85rem" }}
+                                        sx={{ backgroundColor: "#D9B1A3", color: "#590202", fontSize: "0.25rem" }}
                                         startIcon={<EditIcon />}
                                         onClick={() => { setViewUpdateForm(true); setProductForUpdate(product); }}
                                     >
-                                        ערוך
+                                        
                                     </Button>}
                                     {role=='MANAGER' && <Button
                                         variant="contained"
-                                        sx={{ backgroundColor: "#BF7069", color: "white", fontSize: "0.85rem" }}
+                                        sx={{ backgroundColor: "#BF7069", color: "white", fontSize: "0.25rem" }}
                                         startIcon={<DeleteIcon />}
                                         onClick={handleOpen} // כאן נפתח את הדיאלוג
                                     >
-                                        מחק
+                                        
                                     </Button>}
                                 </>
                         </Box>

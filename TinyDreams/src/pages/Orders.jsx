@@ -87,7 +87,7 @@ const Orders = () => {
 
     return (
         <div className="bg-[#F8F9FA] min-h-screen py-10 px-5 flex flex-col items-center">
-            <Typography variant="h3" sx={{ color: "#590202", fontWeight: "bold", marginBottom: "24px" }}>
+            <Typography variant="h3" sx={{marginRight:"auto", marginLeft:"auto", width:"20%", color: "#590202", fontWeight: "bold", marginBottom: "24px" }}>
                 רשימת הזמנות
             </Typography>
 
@@ -97,7 +97,7 @@ const Orders = () => {
                     <Typography>{error.message}</Typography>
                 </Alert>
             ) : (
-                <TableContainer component={Paper} sx={{ maxWidth: "90%", boxShadow: 3, borderRadius: "12px" }}>
+                <TableContainer component={Paper} sx={{marginRight:"auto", marginLeft:"auto", width:"100%", maxWidth: "90%", boxShadow: 3, borderRadius: "12px" }}>
                     <Table>
                         <TableHead>
                             <TableRow sx={{ backgroundColor: "#D9B1A3" }}>

@@ -54,7 +54,7 @@
 import { useEffect, useState } from "react";
 import { getAllUsers } from "../api/userService";
 import OneUser from "../components/OneUser";
-import { Typography, Alert, Table, TableContainer, TableHead, TableRow, TableCell, TableBody, Paper } from "@mui/material";
+import { Typography, Alert, Table, TableContainer, TableHead, TableRow, TableCell, TableBody, Paper, Box } from "@mui/material";
 
 const Users = () => {
     const [users, setUsers] = useState([]);
@@ -81,8 +81,8 @@ const Users = () => {
     }, []);
 
     return (
-        <div className="bg-[#F8F9FA] min-h-screen py-10 px-5 flex flex-col items-center">
-            <Typography variant="h3" sx={{ color: "#590202", fontWeight: "bold", marginBottom: "24px" }}>
+        <Box sx={{marginRight:"auto", marginLeft:"auto", width:"100%", alignItems: "center"}}>
+            <Typography variant="h3" sx={{marginRight:"auto", marginLeft:"auto", width:"30%", color: "#590202", fontWeight: "bold", marginBottom: "24px" }}>
                 רשימת משתמשים
             </Typography>
 
@@ -92,7 +92,7 @@ const Users = () => {
                     <Typography>{error.message}</Typography>
                 </Alert>
             ) : (
-                <TableContainer component={Paper} sx={{ maxWidth: "90%", boxShadow: 3, borderRadius: "12px" }}>
+                <TableContainer component={Paper} sx={{ marginRight:"auto", marginLeft:"auto", width:"100%",maxWidth: "90%", boxShadow: 3, borderRadius: "12px" }}>
                     <Table>
                         <TableHead>
                             <TableRow sx={{ backgroundColor: "#D9B1A3" }}>
@@ -111,7 +111,8 @@ const Users = () => {
                     </Table>
                 </TableContainer>
             )}
-        </div>
+        </Box>
+            
     );
 };
 

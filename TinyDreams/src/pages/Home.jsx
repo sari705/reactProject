@@ -163,6 +163,7 @@ export default function Home() {
           background: `linear-gradient(135deg, #FFD3C2, #FFC4B3)`,
           color: "#fff",
           borderRadius: "0 0 50px 50px",
+          
         }}
       >
         <motion.div

@@ -1,27 +1,21 @@
+import { TableRow, TableCell } from "@mui/material";
 
-function OneOrderForUser({order}) {
-
-    const isBeforeToday = order.deadLine < new Date();
-
-    return (<div>
-
-        <h2></h2>
-        {order.isSetOff && <h3>order is on way!</h3>}
-
-        {order.deadLine && isBeforeToday && (<h3>order will arrive until: {order.deadLine.toString()}</h3>)}
-        <h2>toAdress: {order.adress}</h2>
-        <h2> num products: {order.minimalProduct.length}</h2>
-        <h3>final price: {order.finalPrice}</h3>
-
-    </div>);
+function OneOrderForUser({ order }) {
+    const isBeforeToday = new Date(order.deadline) < new Date();
+    
+    return (
+        <TableRow>
+            <TableCell align="right">{order.address}</TableCell>
+            <TableCell align="right">{order.minimalProduct.length}</TableCell>
+            <TableCell align="right">{order.finalPrice.toFixed(2)}</TableCell>
+            <TableCell align="right">
+                {/* {order.deadline && isBeforeToday
+                    ? `עד ${new Date(order.deadline).toLocaleDateString()}`
+                    : "בדרך"} */}
+                    {new Date(order.deadline).toLocaleDateString()}
+            </TableCell>
+        </TableRow>
+    );
 }
 
 export default OneOrderForUser;
-// date:Date,
-// deadline: Date,
-// address: String,
-// userId: {type: ObjectId, ref: "user"},
-// minimalProduct:[{productName:String, amount:Number}],
-// isSetOff:Boolean,
-// shippingPrice:Number,
-// finalPrice:Number, 

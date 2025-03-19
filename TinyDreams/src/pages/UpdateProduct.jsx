@@ -97,11 +97,29 @@ function UpdateProduct({ product, setViewUpdateForm }) {
                     <TextField fullWidth label="תמונות (מופרדות בפסיקים)" variant="outlined" {...register("images", { required: "חובה להוסיף לפחות תמונה אחת" })} error={!!errors.images} helperText={errors.images?.message} style={styles.input} />
                     <TextField fullWidth label="מלאי" type="number" variant="outlined" {...register("stock", { required: "חובה להזין מלאי", min: 1 })} error={!!errors.stock} helperText={errors.stock?.message} style={styles.input} />
                     <TextField fullWidth label="מחיר" type="number" variant="outlined" {...register("price", { required: "חובה להזין מחיר", min: 1 })} error={!!errors.price} helperText={errors.price?.message} style={styles.input} />
+                    <Controller
+                        name="sizes"
+                        control={control}
+                        defaultValue={[]}
+                        render={({ field }) => (
+                            <TextField
+                                fullWidth
+                                label="גדלים (מופרדים בפסיקים)"
+                                variant="outlined"
+                                value={field.value.join(", ")} // מציג כטקסט מופרד בפסיקים
+                                onChange={(e) => field.onChange(e.target.value.split(",").map(size => size.trim()))}
+                                error={!!errors.sizes}
+                                helperText={errors.sizes?.message}
+                                style={styles.input}
+                            />
+                        )}
+                    />
                     <Controller name="categories" control={control} defaultValue="" render={({ field }) => (
                         <Select fullWidth {...field} style={styles.input}>
                             {categories.map(category => <MenuItem key={category} value={category}>{category}</MenuItem>)}
                         </Select>
                     )} />
+
                     <Controller name="colors" control={control} defaultValue={[]} render={({ field }) => (
                         <Select fullWidth multiple {...field} style={styles.input}>
                             {colors.map(color => <MenuItem key={color} value={color}>{color}</MenuItem>)}

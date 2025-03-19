@@ -37,7 +37,7 @@ function ResponsiveAppBar() {
         { name: 'סל הקניות', path: '/cart' },
         { name: 'התחבר', path: '/login' },
         ...(!role ? [
-        { name: 'הרשם', path: '/signup' }] : [{ name: 'כל ההזמנות שלי', path: '/userorders' }]),
+            { name: 'הרשם', path: '/signup' }] : [{ name: 'כל ההזמנות שלי', path: '/userorders' }]),
         ...(isManager ? [
             { name: 'הוסף מוצר', path: '/add-product' },
             { name: 'הזמנות', path: '/orders' },
@@ -49,14 +49,14 @@ function ResponsiveAppBar() {
         <>
             <AppBar
                 position="fixed"
-                className="navBar" 
+                className="navBar"
                 sx={{
                     backgroundColor: "#BF7069",
                     transition: "background-color 0.3s ease-in-out",
-               }}
+                }}
             >
                 <Container maxWidth="xl">
-                    <Toolbar disableGutters>
+                    <Toolbar disableGutters sx={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
                         <Typography
                             variant="h6"
                             noWrap
@@ -88,7 +88,7 @@ function ResponsiveAppBar() {
                                 ))}
                             </Menu>
 
-                            <IconButton component={Link} to="/cart">
+                            <IconButton component={Link} to="/cart" sx={{ ml: 2 }}>
                                 <CartBadge badgeContent={amountInCart} color="primary" overlap="circular">
                                     <ShoppingCartIcon fontSize="small" />
                                 </CartBadge>
@@ -105,26 +105,27 @@ function ResponsiveAppBar() {
 
                         <Box className="userMenu">
                             <Tooltip title="Open settings">
-                                <IconButton onClick={(e) => setAnchorElUser(e.currentTarget)} className="avatarButton">
+                                <IconButton onClick={(e) => setAnchorElUser(e.currentTarget)} className="avatarButton" sx={{ ml: 2 }}>
                                     <Avatar alt={userName} src="/static/images/avatar/2.jpg" />
                                 </IconButton>
                             </Tooltip>
-                            
-                        <Menu
-                            anchorEl={anchorElUser}
-                            open={Boolean(anchorElUser)}
-                            onClose={() => setAnchorElUser(null)}
-                        >
-                            <MenuItem key="Profile" onClick={() => { navigate("/profile"); setAnchorElUser(null); }}>
-                                <Typography className="menuItem">Profile</Typography>
-                            </MenuItem>
-                            <LogOut/>
-                        </Menu>
 
-                    </Box>
-                </Toolbar>
-            </Container>
-        </AppBar >
+                            <Menu
+                                anchorEl={anchorElUser}
+                                open={Boolean(anchorElUser)}
+                                onClose={() => setAnchorElUser(null)}
+                                sx={{ maxHeight: "80vh", overflowY: "auto" }}
+                            >
+                                <MenuItem key="Profile" onClick={() => { navigate("/profile"); setAnchorElUser(null); }}>
+                                    <Typography className="menuItem">Profile</Typography>
+                                </MenuItem>
+                                <LogOut />
+                            </Menu>
+
+                        </Box>
+                    </Toolbar>
+                </Container>
+            </AppBar >
 
             <div className="bodyContent">
                 {/* התוכן של הדף יבוא כאן */}

@@ -70,3 +70,7 @@ button.next-button:hover {
 .css-16sn0xl-MuiGrid-root{
     box-shadow: none !important;
 }
+
+css-6qhrtj-MuiContainer-root {
+    padding-top: 0;
+}

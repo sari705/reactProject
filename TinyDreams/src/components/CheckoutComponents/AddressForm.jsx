@@ -91,7 +91,7 @@ export default function AddressForm({ defaultValues, onSubmit }) {
 
   return (
     <form onSubmit={handleSubmit(submitHandler)}>
-      <Typography variant="h6" gutterBottom>
+      <Typography variant="h6" gutterBottom sx={{color:"#590202"}}>
         כתובת משלוח
       </Typography>
 
@@ -100,7 +100,7 @@ export default function AddressForm({ defaultValues, onSubmit }) {
           <TextField
             fullWidth
             label="שם פרטי"
-            {...register("firstName", { required: "שדה חובה" })}
+            {...register("firstName")}
             error={!!errors.firstName}
             helperText={errors.firstName?.message}
           />
@@ -110,7 +110,7 @@ export default function AddressForm({ defaultValues, onSubmit }) {
           <TextField
             fullWidth
             label="שם משפחה"
-            {...register("lastName", { required: "שדה חובה" })}
+            {...register("lastName")}
             error={!!errors.lastName}
             helperText={errors.lastName?.message}
           />
@@ -120,7 +120,7 @@ export default function AddressForm({ defaultValues, onSubmit }) {
           <TextField
             fullWidth
             label="טלפון"
-            {...register("phone", { required: "שדה חובה" })}
+            {...register("phone")}
             error={!!errors.phone}
             helperText={errors.phone?.message}
           />
@@ -130,7 +130,7 @@ export default function AddressForm({ defaultValues, onSubmit }) {
           <TextField
             fullWidth
             label="עיר"
-            {...register("city", { required: "שדה חובה" })}
+            {...register("city")}
             error={!!errors.city}
             helperText={errors.city?.message}
           />
@@ -140,7 +140,7 @@ export default function AddressForm({ defaultValues, onSubmit }) {
           <TextField
             fullWidth
             label="מיקוד"
-            {...register("zip", { required: "שדה חובה" })}
+            {...register("zip")}
             error={!!errors.zip}
             helperText={errors.zip?.message}
           />

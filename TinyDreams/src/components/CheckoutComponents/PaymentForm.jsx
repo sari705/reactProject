@@ -20,7 +20,7 @@
   
 //   return (
 //     <form onSubmit={handleSubmit(onSubmit)}>
-      
+
 //       <Typography variant="h6">פרטי תשלום</Typography>
 //       <Grid container spacing={2}>
 //         <Grid item xs={12}>
@@ -68,7 +68,7 @@ export default function PaymentForm({ defaultValues, onSubmit, onBack }) {
 
   return (
     <form onSubmit={handleSubmit(submitHandler)}>
-      <Typography variant="h6" gutterBottom>
+      <Typography variant="h6" gutterBottom sx={{color:"#590202"}}>
         פרטי תשלום
       </Typography>
       <Grid container spacing={2}>
@@ -77,7 +77,6 @@ export default function PaymentForm({ defaultValues, onSubmit, onBack }) {
             fullWidth
             label="מספר כרטיס אשראי"
             {...register("cardNumber", {
-              required: "שדה חובה",
               pattern: {
                 value: /^[0-9]{16}$/,
                 message: "מספר כרטיס לא תקין (16 ספרות)",
@@ -93,7 +92,6 @@ export default function PaymentForm({ defaultValues, onSubmit, onBack }) {
             fullWidth
             label="תוקף (MM/YY)"
             {...register("expiry", {
-              required: "שדה חובה",
               pattern: {
                 value: /^(0[1-9]|1[0-2])\/\d{2}$/,
                 message: "תוקף חייב להיות בפורמט MM/YY",
@@ -109,7 +107,6 @@ export default function PaymentForm({ defaultValues, onSubmit, onBack }) {
             fullWidth
             label="CVV"
             {...register("cvv", {
-              required: "שדה חובה",
               pattern: {
                 value: /^[0-9]{3,4}$/,
                 message: "CVV לא תקין (3 או 4 ספרות)",

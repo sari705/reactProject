@@ -80,7 +80,6 @@
 //             setIsSubmitting(false);
 //         }
 //     };
-
 //     return (
 //         <Container component="main" maxWidth="lg" sx={{ height: "76vh", paddingLeft: "0", paddingTop: "47px" }}>
 //             <Grid container spacing={0}>
@@ -137,16 +136,17 @@
 //         </Container>
 //     );
 // }
-// //לנסות לראות ב גיפי טי את הקקוד האחרון פלוס כפתור הX והצבעים האחרים כדאי לעשות קלון ולבדוק איזה פרוייקט טוב יותר.
+// // //לנסות לראות ב גיפי טי את הקקוד האחרון פלוס כפתור הX והצבעים האחרים כדאי לעשות קלון ולבדוק איזה פרוייקט טוב יותר.
+////////////////////////////////////////////////////////////////////////////////////////
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { Container, Stepper, Step, StepLabel, Typography } from "@mui/material";
+import { Container, Paper, Stepper, Step, StepLabel, Typography, Grid, Drawer, Box,Button, CircularProgress, IconButton, useMediaQuery } from "@mui/material";
 
-
+import CloseIcon from "@mui/icons-material/Close";
 import AddressForm from "../components/CheckoutComponents/AddressForm";
 import PaymentForm from "../components/CheckoutComponents/PaymentForm";
 import ReviewOrder from "../components/CheckoutComponents/ReviewOrder";
-
+import OrderSummary from "../components/CheckoutComponents/OrderSummary";
 import { addOrder } from "../api/orderService";
 import { emptyingCart } from "../features/cartSlice";
 import Swal from "sweetalert2";
@@ -154,41 +154,34 @@ import { useNavigate } from "react-router-dom";
 
 export default function Checkout() {
   const [activeStep, setActiveStep] = useState(0);
-
-  // כאן נשמור את הנתונים מכל שלב
   const [addressData, setAddressData] = useState({});
   const [paymentData, setPaymentData] = useState({});
+  const [openSummary, setOpenSummary] = useState(false);
 
   const user = useSelector((state) => state.user.currentUser);
   const products = useSelector((state) => state.cart.products);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  // "שלבים" להצגה ב-Stepper (אפשר בעברית)
   const steps = ["כתובת למשלוח", "פרטי תשלום", "סקור את ההזמנה"];
+  const isSmallScreen = useMediaQuery((theme) => theme.breakpoints.down("md"));
 
-  // פונקציה למעבר שלב קדימה
+
   const handleNext = () => setActiveStep((prev) => prev + 1);
-  // פונקציה למעבר שלב אחורה
   const handleBack = () => setActiveStep((prev) => prev - 1);
 
-  // 1. אחרי מילוי כתובת בהצלחה
   const handleAddressSubmit = (data) => {
     setAddressData(data);
     handleNext();
   };
 
-  // 2. אחרי מילוי תשלום בהצלחה
   const handlePaymentSubmit = (data) => {
     setPaymentData(data);
     handleNext();
   };
 
-  // 3. בשלב ReviewOrder – ביצוע ההזמנה בפועל
   const handleFinalSubmit = async () => {
-    // אפשר פה לעשות ולידציה נוספת, או פשוט לשלוח
     try {
-      // מסדרים אוסף מוצרים מינימלי
       const minimalProduct = products.map((prod) => ({
         _id: prod._id,
         productName: prod.name,
@@ -196,7 +189,6 @@ export default function Checkout() {
         amount: prod.amount ?? 1,
       }));
 
-      // מכינים את אובייקט ההזמנה הסופי
       const order = {
         ...addressData,
         ...paymentData,
@@ -230,44 +222,54 @@ export default function Checkout() {
 
   return (
     <Container maxWidth="md" sx={{ my: 5 }}>
-      <Typography variant="h5" sx={{ mb: 2, textAlign: "center" }}>
-        תהליך Checkout – גישת טופס בכל שלב
-      </Typography>
-
-      {/* Stepper ויזואלי עבור השלבים */}
-      <Stepper activeStep={activeStep} sx={{ mb: 4 }}>
-        {steps.map((label, idx) => (
-          <Step key={idx}>
-            <StepLabel>{label}</StepLabel>
-          </Step>
-        ))}
-      </Stepper>
-
-      {/* נרנדר את הטופס המתאים בהתאם ל-activeStep */}
-      {activeStep === 0 && (
-        <AddressForm
-          defaultValues={addressData}
-          onSubmit={handleAddressSubmit}
-          // בשלב הראשון אין צורך ב"כפתור אחורה", אבל אפשר להעביר אם רוצים
-        />
-      )}
-
-      {activeStep === 1 && (
-        <PaymentForm
-          defaultValues={paymentData}
-          onSubmit={handlePaymentSubmit}
-          onBack={handleBack}
-        />
-      )}
-
-      {activeStep === 2 && (
-        <ReviewOrder
-          addressData={addressData}
-          paymentData={paymentData}
-          onBack={handleBack}
-          onConfirm={handleFinalSubmit}
-        />
-      )}
+  <Grid container spacing={3} sx={{ display: "flex", justifyContent: "space-between" }}>
+        {/* החלק של תהליך ה-Checkout + טפסים - צד שמאל */}
+        <Grid item xs={12} md={7}>
+          {/* <Typography variant="h5" sx={{ mb: 2, textAlign: "center", color: "#590202",fontWeight:"bold" }}>
+           תהליך התשלום
+          </Typography> */}
+          {isSmallScreen && (
+                            <Button variant="contained" onClick={() => setOpenSummary(true)} sx={{ width: "100%", mb: 2 }}>
+                                הצג תקציר הזמנה
+                            </Button>
+                        )}
+          <Stepper activeStep={activeStep} sx={{ mb: 4 }}>
+            {steps.map((label, idx) => (
+              <Step key={idx}>
+                <StepLabel>{label}</StepLabel>
+              </Step>
+            ))}
+          </Stepper>
+          {activeStep === 0 && <AddressForm defaultValues={addressData} onSubmit={handleAddressSubmit} />}
+          {activeStep === 1 && <PaymentForm defaultValues={paymentData} onSubmit={handlePaymentSubmit} onBack={handleBack} />}
+          {activeStep === 2 && <ReviewOrder addressData={addressData} paymentData={paymentData} onBack={handleBack} onConfirm={handleFinalSubmit} />}
+        </Grid>
+          {/* קומפוננטת תקציר הזמנה - צד ימין */}
+          <Grid item xs={12} md={5} sx={{ position: "sticky",maxHeight:"95vh", top: 0, padding: "0px", display: { xs: "none", md: "block" } }}>
+          <OrderSummary products={products.map((prod) => ({ _id: prod._id, productName: prod.name, price: prod.price, amount: prod.amount ?? 1 }))} />
+        </Grid>
+      </Grid>
+      <Drawer anchor="top" open={openSummary} onClose={() => setOpenSummary(false)}>
+        <Box sx={{ p: "2", width: "100%", alignItems: "center" }}>
+          <IconButton onClick={() => setOpenSummary(false)} sx={{ position: "absolute", right: 10, top: 10 }}>
+            <CloseIcon />
+          </IconButton>
+          <OrderSummary products={products.map((prod) => ({ _id: prod._id, productName: prod.name, price: prod.price, amount: prod.amount ?? 1 }))} />
+        </Box>
+      </Drawer>
     </Container>
   );
 }
+
+// {/* <Grid item xs={12} md={5} sx={{ position: "sticky", padding: "47px", display: { xs: "none", md: "block" } }}>
+// // //                     <OrderSummary products={minimalProduct} />
+// // //                 </Grid> */}
+// // //             </Grid>
+// // //             <Drawer anchor="top" open={openSummary} onClose={() => setOpenSummary(false)}>
+// // //                 <Box sx={{ p: "2", width: "100%", alignItems:"center" }}>
+// // //                     <IconButton onClick={() => setOpenSummary(false)} sx={{ position: "absolute", right: 10, top: 10 }}>
+// // //                         <CloseIcon />
+// // //                     </IconButton>
+// // //                     <OrderSummary products={minimalProduct} />
+// // //                 </Box>
+// // //             </Drawer>

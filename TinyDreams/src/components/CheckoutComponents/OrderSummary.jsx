@@ -64,7 +64,7 @@ const OrderSummary = ({ products }) => {
   const totalPrice = total + shippingPrice;
 
   return (
-    <Paper sx={{ width: "100%", height: "100%", p: 4, bgcolor: "#FCE8E6" }}>
+    <Paper sx={{ width: "92.5%", height: "100%", p: 4, bgcolor: "#FCE8E6" }}>
       <Typography variant="h5" gutterBottom sx={{fontWeight: "bold", textAlign: "center", width: "100%", padding:"3px", marginBottom:"35px" }}>
        תקציר הזמנה
       </Typography>

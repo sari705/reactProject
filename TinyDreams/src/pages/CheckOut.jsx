@@ -145,11 +145,12 @@ import { emptyingCart } from "../features/cartSlice.js";
 import OrderSummary from "../components/CheckoutComponents/OrderSummary.jsx";
 import './css/Checkout.css'
 import CloseIcon from '@mui/icons-material/Close';
+import Swal from "sweetalert2";
 
 const steps = ["כתובת למשלוח", "פרטי תשלום", "סקור את ההזמנה שלך"];
 
 export default function Checkout() {
-    
+
     const [activeStep, setActiveStep] = useState(0);
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [openSummary, setOpenSummary] = useState(false);
@@ -159,7 +160,7 @@ export default function Checkout() {
     const navigate = useNavigate();
     const [formData, setFormData] = useState({});
     const [paymentForm, setPaymentForm] = useState({});
-    
+
     const isSmallScreen = useMediaQuery((theme) => theme.breakpoints.down("md"));
 
     const handleNext = () => setActiveStep((prevStep) => prevStep + 1);
@@ -179,46 +180,61 @@ export default function Checkout() {
         if (isSubmitting) return;
         setIsSubmitting(true);
         console.log("formData: ", formData);
-        
+
         const order = { ...formData, minimalProduct, userId: user._id };
         console.log("order: ", order);
-        
+
         try {
             const response = await addOrder(order);
             if (response) {
-                toast.success("Order submitted successfully!", { position: "top-center", autoClose: 3000,
-                    style: {
-                        backgroundColor: "#E9ECF2",  
-                        color: "#590202 ",            // צבע טקסט לבן
-                        borderRadius: "8px",         // פינות מעוגלות
-                        padding: "10px 20px",        // ריפוד פנימי להודעה
-                        fontSize: "16px",   // גודל גופן
-                        border:"#590202 2px solid"       
-                      }
-                 });
+                // toast.success("Order submitted successfully!", { position: "top-center", autoClose: 3000,
+                //     style: {
+                //         backgroundColor: "#E9ECF2",  
+                //         color: "#590202 ",            // צבע טקסט לבן
+                //         borderRadius: "8px",         // פינות מעוגלות
+                //         padding: "10px 20px",        // ריפוד פנימי להודעה
+                //         fontSize: "16px",   // גודל גופן
+                //         border:"#590202 2px solid"       
+                //       }
+                //  });
+                Swal.fire({
+                    title: "הושלם",
+                    text: "ההזמנה בדרך אליך...",
+                    imageUrl: "/logo/logo2.png",
+                    imageWidth: 300,
+                    imageHeight: 250,
+                    imageAlt: "Tiny Dreams",
+                    timer: "3000",
+                    allowOutsideClick: true,
+                });
                 localStorage.removeItem("cart");
                 dispatch(emptyingCart());
                 setTimeout(() => navigate("/Home"), 3000);
             }
         } catch (err) {
-            toast.error("Error submitting order. Please try again!", { position: "top-center", autoClose: 3000 });
+            // toast.error("Error submitting order. Please try again!", { position: "top-center", autoClose: 3000 });
             console.log(err);
+            Swal.fire({
+                icon: "error",
+                title: err.message||"address is required",
+                text: "Please try again",
+            });
         } finally {
             setIsSubmitting(false);
         }
     };
 
     return (
-        <Container component="main" maxWidth="lg"sx={{height: "76vh", paddingLeft: "0", paddingTop:"47px" }}>
+        <Container component="main" maxWidth="lg" sx={{ height: "76vh", paddingLeft: "0", paddingTop: "47px" }}>
             <Grid container spacing={0}>
                 <Grid item xs={12} md={7} sx={{ width: "100%" }}>
-                    <Paper sx={{ p: 4 }}>
-                        <Typography variant="h5" gutterBottom sx={{fontWeight: "bold",textAlign: "center", padding:"3px", marginBottom:"35px"}}>
-                           תהליך התשלום
+                    <Paper sx={{ p: 4, backgroundColor:"#f0eded", border:"0", boxShadow:"0" }}>
+                        <Typography variant="h5" gutterBottom sx={{ fontWeight: "bold", textAlign: "center", padding: "3px", marginBottom: "35px" }}>
+                            תהליך התשלום
                         </Typography>
                         {isSmallScreen && (
                             <Button variant="contained" onClick={() => setOpenSummary(true)} sx={{ width: "100%", mb: 2 }}>
-                                הצג תקציר הזמנה 
+                                הצג תקציר הזמנה
                             </Button>
                         )}
                         <Stepper activeStep={activeStep} sx={{ mb: 3 }}>
@@ -249,12 +265,12 @@ export default function Checkout() {
                         </Box>
                     </Paper>
                 </Grid>
-                <Grid item xs={12} md={5} sx={{ position: "sticky", padding:"47px", display: { xs: "none", md: "block" } }}>
+                <Grid item xs={12} md={5} sx={{ position: "sticky", padding: "47px", display: { xs: "none", md: "block" } }}>
                     <OrderSummary products={minimalProduct} />
                 </Grid>
             </Grid>
             <Drawer anchor="top" open={openSummary} onClose={() => setOpenSummary(false)}>
-                <Box sx={{ p: 2,width:410 }}>
+                <Box sx={{ p: "2", width: "100%", alignItems:"center" }}>
                     <IconButton onClick={() => setOpenSummary(false)} sx={{ position: "absolute", right: 10, top: 10 }}>
                         <CloseIcon />
                     </IconButton>

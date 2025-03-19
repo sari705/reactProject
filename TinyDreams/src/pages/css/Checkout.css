@@ -66,3 +66,7 @@ button.next-button:hover {
 .css-82y680-MuiGrid-root {
     height: 400px;
 }
+
+.css-16sn0xl-MuiGrid-root{
+    box-shadow: none !important;
+}

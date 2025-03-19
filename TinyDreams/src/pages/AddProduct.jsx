@@ -329,6 +329,30 @@ function AddProduct() {
                     </Select>
                 </Box>
                 <Box>
+                    <label style={styles.label}>גדלים (מופרדים בפסיקים):</label>
+                    <Controller
+                        name="sizes"
+                        control={control}
+                        defaultValue={[]}
+                        render={({ field }) => (
+                            <TextField
+                                fullWidth
+                                variant="outlined"
+                                placeholder="S, M, L"
+                                {...field}
+                                onChange={(e) => {
+                                    const sizesArray = e.target.value.split(",").map(size => size.trim());
+                                    field.onChange(sizesArray);
+                                }}
+                                error={!!errors.sizes}
+                                helperText={errors.sizes ? "חובה להזין לפחות גודל אחד" : ""}
+                                style={styles.input}
+                            />
+                        )}
+                    />
+                </Box>
+
+                <Box>
                     <label style={styles.label}>צבעים:</label>
                     <Controller
                         name="colors"

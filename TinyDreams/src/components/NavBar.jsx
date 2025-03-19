@@ -56,7 +56,6 @@ function ResponsiveAppBar() {
             >
                 <Container maxWidth="xl">
                     <Toolbar disableGutters>
-                        <AdbIcon className="logoIcon" />
                         <Typography
                             variant="h6"
                             noWrap

@@ -6,7 +6,6 @@ function ReviewOrder({ formData, onBack }) {
     return (
         <Paper sx={{ p: 4 }}>
             <Typography variant="h6">פרטי הזמנה</Typography>
-            {/* <Typography>שם: {formData.firstName} {formData.lastName}</Typography> */}
             <Typography>רחוב: {formData.address}, {formData.city}, {formData.zip}</Typography>
             <Typography>מספר כרטיס : {formData.cardNumber}</Typography>
             <Typography>תוקף: {formData.expiry}</Typography>

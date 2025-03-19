@@ -1,4 +1,3 @@
-// src/components/SitemarkIcon.jsx
 import * as React from 'react';
 import { SvgIcon } from '@mui/material';
 

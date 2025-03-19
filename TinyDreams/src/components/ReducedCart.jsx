@@ -1,27 +1,3 @@
-// import ProductInReducedCart from "./ProductInReducedCart";
-// import { useSelector } from "react-redux";
-
-// function ReducedCart() {
-//     const reduxProducts = useSelector((state) => state.cart.products);
-//     const reduxAmount = useSelector((state) => state.cart.amountInCart);
-//     const reduxSum = useSelector((state) => state.cart.sum.toFixed(2));
-
-//     return (<>
-//         <ul>
-//             {reduxProducts.map((product) => (<li key={product._id}>
-//                 <ProductInReducedCart product={product} />
-//             </li>
-//             ))}
-//         </ul>
-
-//         <h2>num products in cart: {reduxAmount}</h2>
-//         <h2>sum: {reduxSum > 0 ? reduxSum : 0}</h2>
-
-//     </>);//כאן אמור להיות כפתור "המשך בקניה" / "לתשלום
-// }
-
-// export default ReducedCart;
-
 import { useSelector } from "react-redux";
 import { Card, CardContent, Typography, Button, Divider, List, ListItem, Box } from "@mui/material";
 
@@ -35,7 +11,7 @@ function ReducedCart({ setViewReducedCart }) {
 
     return (
         <Card sx={{
-            width: 320, // קצת יותר רחב לעיצוב נוח
+            width: 320, 
             position: "fixed",
             bottom: 20,
             right: 20,
@@ -50,11 +26,10 @@ function ReducedCart({ setViewReducedCart }) {
                 </Typography>
                 <Divider sx={{ mb: 2 }} />
 
-                {/* 🔹 עוטף את רשימת המוצרים עם גלילה */}
                 <Box sx={{
-                    maxHeight: 250,  // גובה מקסימלי
-                    overflowY: "auto", // הפעלת גלילה אם יש הרבה מוצרים
-                    pr: 1  // קצת ריווח מימין שלא יחתוך את ה-Scrollbar
+                    maxHeight: 250,  
+                    overflowY: "auto", 
+                    pr: 1  
                 }}>
                     <List>
                         {reduxProducts.length === 0 ? (

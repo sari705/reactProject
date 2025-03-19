@@ -12,9 +12,7 @@ const ProtectRoute = ({children, role}) => {
     else if (user?.role == "MANAGER") {                
         return children;
     }
-    return <Navigate to="/login"/>;
-    console.log("not ok");
-    
+    return <Navigate to="/login"/>;    
 }
  
 export default ProtectRoute;

@@ -6,7 +6,7 @@ const PaymentForm = ({ onNext, onChange, formData, setFormData }) => {
   const { register, handleSubmit, formState: { errors } } = useForm();
 
   const onSubmit = (data) => {
-    console.log("Form Data Before Sending:", data); // ✅ בדיקה אם הנתונים מגיעים
+    console.log("Form Data Before Sending:", data);
     onNext(data);
   };
 
@@ -14,7 +14,7 @@ const PaymentForm = ({ onNext, onChange, formData, setFormData }) => {
     const { name, value } = e.target;
     console.log(`📝 Updating ${name}:`, value);
     if (onChange) {
-      onChange(name, value); // מעדכן את הנתונים בזמן אמת
+      onChange(name, value);
     }
   };
   
@@ -27,20 +27,20 @@ const PaymentForm = ({ onNext, onChange, formData, setFormData }) => {
           <TextField fullWidth label="מספר כרטיס אשראי" {...register("cardNumber"
           , { required: "שדה חובה", pattern: { value: /^[0-9]{16}$/, message: "מספר כרטיס לא תקין" } }
         )}
-            error={!!errors.cardNumber} helperText={errors.cardNumber?.message} onChange={handleChange} // עדכון בזמן אמת
+            error={!!errors.cardNumber} helperText={errors.cardNumber?.message} onChange={handleChange}
           />
         </Grid>
         <Grid item xs={6}>
           <TextField fullWidth label="תוקף (MM/YY)" {...register("expiry"
           ,{ required: "שדה חובה" }
-        )} error={!!errors.expiry} helperText={errors.expiry?.message} onChange={handleChange} // עדכון בזמן אמת
+        )} error={!!errors.expiry} helperText={errors.expiry?.message} onChange={handleChange}
           />
         </Grid>
         <Grid item xs={6}>
           <TextField fullWidth label="CVV" {...register("cvv"
           , { required: "שדה חובה", pattern: { value: /^[0-9]{3,4}$/, message: "CVV לא תקין" } }
         )}
-            error={!!errors.cvv} helperText={errors.cvv?.message} onChange={handleChange} // עדכון בזמן אמת
+            error={!!errors.cvv} helperText={errors.cvv?.message} onChange={handleChange}
           />
         </Grid>
       </Grid>

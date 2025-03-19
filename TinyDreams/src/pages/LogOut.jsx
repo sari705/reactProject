@@ -6,43 +6,39 @@ import MenuItem from '@mui/material/MenuItem';
 import Typography from '@mui/material/Typography';
 
 import { userOut } from "../features/userSlice.js";
+import Swal from "sweetalert2";
 
 
 function LogOut() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
-    function handleLogOut(){
+    function handleLogOut() {
         try {
 
-            localStorage.removeItem("currentUser"); // מחיקת המשתמש מה-LocalStorage
-            localStorage.removeItem("cart"); // מחיקת סל הקניות מה-LocalStorage
+            localStorage.removeItem("currentUser");
+            localStorage.removeItem("cart");
             localStorage.removeItem("token");
 
-            dispatch(userOut()); // עדכון Redux
-            // alert("LogOut!////////////////////");
-            toast.success("logout succesfully!", {
-                position: "top-center", autoClose: 3000,
-                style: {
-                    backgroundColor: "#E9ECF2",
-                    color: "#590202 ",            // צבע טקסט לבן
-                    borderRadius: "8px",         // פינות מעוגלות
-                    padding: "10px 20px",        // ריפוד פנימי להודעה
-                    fontSize: "16px",   // גודל גופן
-                    border: "#590202 2px solid"
-                }
+            dispatch(userOut());
+            Swal.fire({
+                title: "הושלם",
+                icon: "success",
+                text: "התנתקת בהצלחה",             
+                timer: "3000",
+                allowOutsideClick: true,
             });
-            navigate("/login"); // ניווט לדף ההתחברות
+            navigate("/login");
         } catch (err) {
             console.log(err);
             alert(err.message);
         }
     }
     useEffect(() => {
-       
+
     }, [dispatch, navigate]);
     return (<>
-        <MenuItem key="Logout ↪️" onClick={() => { handleLogOut();  }}>
+        <MenuItem key="Logout ↪️" onClick={() => { handleLogOut(); }}>
             <Typography className="menuItem">Logout ↪</Typography>
         </MenuItem>
     </>);

@@ -1,15 +1,3 @@
-// const OneUser = ({ user }) => {
-//     return (
-//         <div>
-//             <h2>{user.username}</h2>
-//             <h2>{user.email}</h2>
-//             <h2>{user.date}</h2>
-//             <h2>{user._id}</h2>
-//         </div>
-//     );
-// }
-
-// export default OneUser;
 import { TableRow, TableCell, Button } from "@mui/material";
 
 const OneUser = ({ user }) => {

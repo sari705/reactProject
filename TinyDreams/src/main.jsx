@@ -11,17 +11,17 @@ const theme = createTheme({
   
   palette: {
     primary: {
-      main: '#84B1D9', // צבע תכלת רך
+      main: '#84B1D9',
     },
     secondary: {
-      main: '#BF7069', //ורוד בערך כמו הנאבבאר
+      main: '#BF7069',
     },
     background: {
-      default: '#f5f5f5', // צבע רקע בהיר
+      default: '#f5f5f5',
     },
     text: {
-      primary: '#590202', //בורדו צבע טקסט כהה
-      secondary: '#555555', // צבע טקסט בינוני
+      primary: '#590202',
+      secondary: '#555555',
     },
   },
   typography: {

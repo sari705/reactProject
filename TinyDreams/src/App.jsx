@@ -134,7 +134,7 @@ function App() {
       sx={{
         display: 'flex',
         flexDirection: 'column',
-        minHeight: '100vh' // מבטיח שהתוכן יתפוס לפחות את כל גובה הדף
+        minHeight: '100vh'
       }}
     >
       <NavBar />

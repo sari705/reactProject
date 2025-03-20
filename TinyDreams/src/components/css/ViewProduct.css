@@ -38,11 +38,14 @@
 }
 
 .close-button {
-    background: black;
+    background:#84B1D9 ;
     color: white;
     padding: 10px 15px;
     border: none;
     border-radius: 5px;
     cursor: pointer;
     margin-top: 10px;
+}
+.modal-overlay{
+    color: #590202;
 }

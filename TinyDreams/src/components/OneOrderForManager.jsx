@@ -14,11 +14,11 @@ const OneOrderForManager = ({ order }) => {
                 {order.date ? new Date(order.date).toLocaleString("he-IL") : "תאריך לא זמין"}
             </TableCell>
             <TableCell align="center">
-                <Chip 
-                    label={order.isSetOff ? "שולם" : "לא שולם"} 
-                    sx={{ 
-                        backgroundColor: order.isSetOff ? "#84B1D9" : "#D32F2F", 
-                        color: "white", 
+                <Chip
+                    label={order.isSetOff ? "שולם" : "לא שולם"}
+                    sx={{
+                        backgroundColor: order.isSetOff ? "#84B1D9" : "#D32F2F",
+                        color: "white",
                         fontWeight: "bold"
                     }}
                 />

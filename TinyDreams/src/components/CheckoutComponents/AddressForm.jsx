@@ -86,12 +86,12 @@ export default function AddressForm({ defaultValues, onSubmit }) {
 
   // קריאה ל־onSubmit שנשלחה מהורה רק אם הטופס תקין
   const submitHandler = (data) => {
-    onSubmit(data); 
+    onSubmit(data);
   };
 
   return (
     <form onSubmit={handleSubmit(submitHandler)}>
-      <Typography variant="h6" gutterBottom sx={{color:"#590202"}}>
+      <Typography variant="h6" gutterBottom sx={{ color: "#590202" }}>
         כתובת משלוח
       </Typography>
 
@@ -130,7 +130,7 @@ export default function AddressForm({ defaultValues, onSubmit }) {
           <TextField
             fullWidth
             label="עיר"
-            {...register("city")}
+            {...register("city", { required: "שדה חובה" })}
             error={!!errors.city}
             helperText={errors.city?.message}
           />
@@ -140,7 +140,7 @@ export default function AddressForm({ defaultValues, onSubmit }) {
           <TextField
             fullWidth
             label="מיקוד"
-            {...register("zip")}
+            {...register("zip", { required: "שדה חובה" })}
             error={!!errors.zip}
             helperText={errors.zip?.message}
           />

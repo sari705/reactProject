@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import SwingingImage from "../components/SwingingImage";
 import { useDispatch } from "react-redux";
+import { useEffect } from "react";
 
 const themeColors = {
   background: "#FCE8E6",

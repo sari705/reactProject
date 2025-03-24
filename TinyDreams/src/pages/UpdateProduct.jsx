@@ -1,7 +1,7 @@
 import { updateProduct } from "../api/productService";
 import { useState, useEffect } from "react";
 import { Controller, useForm } from "react-hook-form";
-import { MenuItem, Select, TextField, Button, Typography, Container, Dialog, DialogTitle, DialogContent, DialogActions } from "@mui/material";
+import { MenuItem, Select, TextField, Button, Typography, Container, Dialog, DialogTitle, DialogContent, DialogActions, CircularProgress } from "@mui/material";
 import { useSelector } from "react-redux";
 import Swal from "sweetalert2";
 import { getCategories, getTags, getColors } from "../api/enumService";
@@ -41,22 +41,27 @@ const styles = {
 };
 
 function UpdateProduct({ product, setViewUpdateForm }) {
+
     const { register, handleSubmit, control, reset, formState: { errors } } = useForm();
     const [categories, setCategories] = useState([]);
     const [tags, setTags] = useState([]);
     const [colors, setColors] = useState([]);
+    const [isSubmitting, setIsSubmitting] = useState(false);
+
     const token = useSelector((state) => state.user?.currentUser?.token);
 
     async function onSubmit(data) {
-        console.log("Data received from form: ", data);
+        setIsSubmitting(true);
         console.log("in submit update");
 
         if (!product || !product._id) {
             alert("מזהה המוצר חסר! לא ניתן לעדכן.");
             return;
         }
-        const productToUpdate = { ...data, _id: product._id };
         try {
+
+            const productToUpdate = { ...data, _id: product._id };
+
             await updateProduct(productToUpdate, token);
             alert("המוצר עודכן בהצלחה!");
             setViewUpdateForm(false);
@@ -77,6 +82,10 @@ function UpdateProduct({ product, setViewUpdateForm }) {
                 });
             }
             console.error(error);
+        }
+        finally {
+            setIsSubmitting(false);
+            reset();
         }
     }
 
@@ -157,7 +166,10 @@ function UpdateProduct({ product, setViewUpdateForm }) {
                             marginTop: "15px",
                             marginLeft: "10px",
                         }} color="secondary">ביטול</Button>
-                        <Button type="submit" fullWidth variant="contained" style={styles.button}>עדכן מוצר</Button>
+
+                        <Button type="submit" fullWidth variant="contained" style={styles.button}>
+                              {isSubmitting ? <CircularProgress size={24} color="inherit" /> : "עדכן מוצר"}
+                              </Button> 
                     </DialogActions>
                 </form>
             </DialogContent>

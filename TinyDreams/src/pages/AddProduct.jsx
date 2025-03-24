@@ -1,5 +1,5 @@
 import { Controller, useForm } from "react-hook-form";
-import { MenuItem, Select, TextField, Button, Typography, Container, Box } from "@mui/material";
+import { MenuItem, Select, TextField, Button, Typography, Container, Box, CircularProgress } from "@mui/material";
 import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { getCategories, getTags, getColors } from "../api/enumService";
@@ -7,7 +7,7 @@ import { addProduct } from "../api/productService";
 
 const styles = {
     container: {
-        backgroundColor: "#E9ECF2", 
+        backgroundColor: "#E9ECF2",
         padding: "2rem",
         borderRadius: "8px",
         boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.1)",
@@ -31,20 +31,28 @@ const styles = {
 };
 
 function AddProduct() {
-    const { register, handleSubmit, control, formState: { errors } } = useForm();
+    const { register, handleSubmit, control, formState: { errors }, reset } = useForm();
     const [categories, setCategories] = useState([]);
     const [tags, setTags] = useState([]);
     const [colors, setColors] = useState([]);
+    const [isSubmitting, setIsSubmitting] = useState(false);
     const token = useSelector(state => state.user.currentUser.token);
 
     async function onSubmit(data) {
         data.images = data.images.split(",").map(img => img.trim());
         try {
+            setIsSubmitting(true);
+
             await addProduct(data, token);
             alert("המוצר נוסף בהצלחה!");
+
         } catch (error) {
             alert("שגיאה בהוספת המוצר");
             console.error(error);
+        }
+        finally {
+            setIsSubmitting(false);
+            reset();
         }
     }
 
@@ -119,7 +127,7 @@ function AddProduct() {
                                 multiple
                                 fullWidth
                                 {...field}
-                                value={field.value ?? []} 
+                                value={field.value ?? []}
                                 onChange={(e) => field.onChange(e.target.value)}
                                 style={styles.input}
                             >
@@ -157,7 +165,9 @@ function AddProduct() {
                         )}
                     />
                 </Box>
-                <Button type="submit" fullWidth variant="contained" style={styles.button}>הוסף מוצר</Button>
+                <Button type="submit" fullWidth variant="contained" style={styles.button} disabled={isSubmitting} >
+                    {isSubmitting ? <CircularProgress size={24} color="inherit" /> : "הוסף מוצר"}
+                </Button>
             </form>
         </Container>
     );

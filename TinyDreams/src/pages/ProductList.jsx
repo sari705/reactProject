@@ -135,14 +135,14 @@ export default function ProductList() {
         getProductsCategory(choiseCategory)
     }, [choiseCategory])
 
-    useEffect(() => {
-        const params = new URLSearchParams(location.search);
-        const tokenFromUrl = params.get("token");
+    // useEffect(() => {
+    //     const params = new URLSearchParams(location.search);
+    //     const tokenFromUrl = params.get("token");
 
-        if (tokenFromUrl) {
-            fetchGoogleUser(dispatch, navigate, tokenFromUrl);
-        }
-    }, [dispatch, navigate, location.search]);
+    //     if (tokenFromUrl) {
+    //         fetchGoogleUser(dispatch, navigate, tokenFromUrl);
+    //     }
+    // }, [dispatch, navigate, location.search]);
 
 
     return (<>

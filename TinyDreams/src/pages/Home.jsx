@@ -4,6 +4,7 @@ import { styled } from "@mui/material/styles";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import SwingingImage from "../components/SwingingImage";
+import { useDispatch } from "react-redux";
 
 const themeColors = {
   background: "#FCE8E6",
@@ -33,10 +34,20 @@ const categories = [
 
 export default function Home() {
   const navigate = useNavigate();
+  const dispatch  = useDispatch();
+
+  useEffect(() => {
+    const params = new URLSearchParams(location.search);
+    const tokenFromUrl = params.get("token");
+
+    if (tokenFromUrl) {
+      fetchGoogleUser(dispatch, navigate, tokenFromUrl);
+    }
+  }, [dispatch, navigate, location.search]);
 
   return (
     <Box sx={{ backgroundColor: themeColors.background, minHeight: "100vh", paddingBottom: "5rem" }}>
-      
+
       {/* Hero Section עם אנימציות */}
       <Box
         component={motion.div}
@@ -49,7 +60,7 @@ export default function Home() {
           background: `linear-gradient(135deg, #FFD3C2, #FFC4B3)`,
           color: "#fff",
           borderRadius: "0 0 50px 50px",
-          
+
         }}
       >
         <motion.div
@@ -85,11 +96,11 @@ export default function Home() {
 
       {/* קטגוריות מוצרים עם אפקט הופעה */}
       <Container sx={{ mt: 5 }}>
-        <Typography 
-          variant="h4" 
-          textAlign="center" 
-          fontWeight="bold" 
-          color={themeColors.textPrimary} 
+        <Typography
+          variant="h4"
+          textAlign="center"
+          fontWeight="bold"
+          color={themeColors.textPrimary}
           mb={3}
           component={motion.div}
           initial={{ opacity: 0, y: 30 }}

@@ -60,6 +60,9 @@ function ReducedCart({ setViewReducedCart }) {
                     <Button variant="contained" fullWidth color="success" sx={{backgroundColor:"#59020210", color:"#590202"}} onClick={() => navigate("/cart")}>
                         לסל הקניות
                     </Button>
+                    <Button variant="contained" fullWidth color="success" sx={{backgroundColor:"#59020210", color:"#590202"}} onClick={() => navigate("/checkout")}>
+                        לתשלום
+                    </Button>
                     <Button variant="contained" fullWidth sx={{backgroundColor:"#59020210", color:"#590202"}} onClick={() => (setViewReducedCart(false))}>
                         סגור
                     </Button>

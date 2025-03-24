@@ -19,7 +19,7 @@ const OrderSummary = ({ products }) => {
 
   return (
     <Paper sx={{ width: "92.5%", height: "100%", p: 4, bgcolor: "#FCE8E6", }}>
-      <Typography variant="h5" gutterBottom sx={{fontWeight: "bold", textAlign: "center", width: "100%", padding:"3px", marginBottom:"35px" ,paddingTop:"200px"}}>
+      <Typography variant="h5" gutterBottom sx={{fontWeight: "bold", textAlign: "center", width: "100%", padding:"3px", marginBottom:"35px" ,paddingTop:"20px"}}>
        תקציר הזמנה
       </Typography>
       <Typography variant="body2" sx={{ mb: 2 }}>

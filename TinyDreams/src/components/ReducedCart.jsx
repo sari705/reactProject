@@ -2,11 +2,13 @@ import { useSelector } from "react-redux";
 import { Card, CardContent, Typography, Button, Divider, List, ListItem, Box } from "@mui/material";
 
 import ProductInReducedCart from "./ProductInReducedCart";
+import { useNavigate } from "react-router-dom";
 
 function ReducedCart({ setViewReducedCart }) {
     const reduxProducts = useSelector((state) => state.cart.products);
     const reduxAmount = useSelector((state) => state.cart.amountInCart);
     const reduxSum = useSelector((state) => state.cart.sum.toFixed(2));
+    const navigate = useNavigate();
     console.log("מוצרים בעגלה:", reduxProducts);
 
     return (
@@ -55,7 +57,7 @@ function ReducedCart({ setViewReducedCart }) {
                 </Typography>
 
                 <Box sx={{ display: "flex", justifyContent: "space-between", mt: 2 }}>
-                    <Button variant="contained" fullWidth color="success" sx={{backgroundColor:"#59020210", color:"#590202"}} onClick={() => window.location.href = "/cart"}>
+                    <Button variant="contained" fullWidth color="success" sx={{backgroundColor:"#59020210", color:"#590202"}} onClick={() => navigate("/cart")}>
                         לסל הקניות
                     </Button>
                     <Button variant="contained" fullWidth sx={{backgroundColor:"#59020210", color:"#590202"}} onClick={() => (setViewReducedCart(false))}>

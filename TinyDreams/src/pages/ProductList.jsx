@@ -190,7 +190,7 @@ export default function ProductList() {
 
             ) : (
                 <div className="product-list-div">
-                    {products.length > 0 ? <ul className="product-list-container">
+                    {products?.length > 0 ? <ul className="product-list-container">
                         {products.map((product) => (
                             <li key={product._id} >
                                 <OneProduct setProductForUpdate={setProductForUpdate} setViewUpdateForm={setViewUpdateForm} product={product} onClick={() => setChoiseProduct(product)} />

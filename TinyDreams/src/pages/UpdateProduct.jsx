@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { MenuItem, Select, TextField, Button, Typography, Container, Dialog, DialogTitle, DialogContent, DialogActions } from "@mui/material";
 import { useSelector } from "react-redux";
-
+import Swal from "sweetalert2";
 import { getCategories, getTags, getColors } from "../api/enumService";
 import "./css/UpdateProduct.css";
 
@@ -48,6 +48,7 @@ function UpdateProduct({ product, setViewUpdateForm }) {
     const token = useSelector((state) => state.user?.currentUser?.token);
 
     async function onSubmit(data) {
+        console.log("Data received from form: ", data);
         console.log("in submit update");
 
         if (!product || !product._id) {
@@ -60,7 +61,21 @@ function UpdateProduct({ product, setViewUpdateForm }) {
             alert("המוצר עודכן בהצלחה!");
             setViewUpdateForm(false);
         } catch (error) {
-            alert(error.response.data.message);
+            if (error.message && error.message === "Network Error") {
+                Swal.fire({
+                    title: "The Internet?",
+                    text: error.message,
+                    icon: "question"
+                });
+            }
+            // alert(error.response?.data?.message || error.message);
+            else {
+                Swal.fire({
+                    icon: "error",
+                    title: "Oops...",
+                    text: error.response?.data?.message || error.message,
+                });
+            }
             console.error(error);
         }
     }

@@ -36,7 +36,7 @@ export function deleteProduct(productId, token) {
 export function updateProduct(product, token) {
     return axios.put(`${baseUrl}/${product._id}`, product, {
         headers: {
-            'authorization':
+            'Authorization':
                 `Bearer ${token}`
         }
     });

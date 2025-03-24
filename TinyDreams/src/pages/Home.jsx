@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import SwingingImage from "../components/SwingingImage";
 import { useDispatch } from "react-redux";
 import { useEffect } from "react";
+import { fetchGoogleUser } from "../utils/fetchData";
 
 const themeColors = {
   background: "#FCE8E6",

@@ -28,7 +28,7 @@ const theme = createTheme({
     fontFamily: '"Fredoka", "Arial", sans-serif',
   },
 });
-
+// #c5807a
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <ThemeProvider theme={theme}>

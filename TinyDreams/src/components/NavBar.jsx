@@ -51,7 +51,8 @@ function ResponsiveAppBar() {
                 position="fixed"
                 className="navBar"
                 sx={{
-                    backgroundColor: "#BF7069",
+                    // backgroundColor: "#BF7069",
+                    backgroundColor:"#c5807a",
                     transition: "background-color 0.3s ease-in-out",
                 }}
             >

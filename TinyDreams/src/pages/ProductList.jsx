@@ -55,6 +55,7 @@ export default function ProductList() {
         else {
             setSearchValue("")
             try {
+              
                 setLoading(true);
                 console.log("fetching products...");
                 let response = await getProductsByCategory(category);
@@ -129,7 +130,7 @@ export default function ProductList() {
 
     useEffect(() => {
         getProducts(page)
-        window.scrollTo({ top: 20, behavior: "smooth" });
+        window.scrollTo({ top: 20, behavior: "auto" });
     }, [page, viewUpdateForm])
 
     useEffect(() => {

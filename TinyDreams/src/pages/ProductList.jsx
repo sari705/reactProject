@@ -129,6 +129,7 @@ export default function ProductList() {
 
     useEffect(() => {
         getProducts(page)
+        window.scrollTo({ top: 20, behavior: "smooth" });
     }, [page, viewUpdateForm])
 
     useEffect(() => {

@@ -63,7 +63,12 @@ function UpdateProduct({ product, setViewUpdateForm }) {
             const productToUpdate = { ...data, _id: product._id };
 
             await updateProduct(productToUpdate, token);
-            alert("המוצר עודכן בהצלחה!");
+                       Swal.fire({
+                           title: " המוצר עודכן בהצלחה",
+                           icon: "success",
+                           timer: "3000",
+                           allowOutsideClick: true
+                       });
             setViewUpdateForm(false);
         } catch (error) {
             if (error.message && error.message === "Network Error") {

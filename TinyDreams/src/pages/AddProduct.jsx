@@ -2,6 +2,7 @@ import { Controller, useForm } from "react-hook-form";
 import { MenuItem, Select, TextField, Button, Typography, Container, Box, CircularProgress } from "@mui/material";
 import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
+import Swal from "sweetalert2";
 import { getCategories, getTags, getColors } from "../api/enumService";
 import { addProduct } from "../api/productService";
 
@@ -44,10 +45,19 @@ function AddProduct() {
             setIsSubmitting(true);
 
             await addProduct(data, token);
-            alert("המוצר נוסף בהצלחה!");
+            Swal.fire({
+                title: "המוצר נוסף בהצלחה",
+                icon: "success",
+                timer: "3000",
+                allowOutsideClick: true,
+            });
 
         } catch (error) {
-            alert("שגיאה בהוספת המוצר");
+            Swal.fire({
+                title: "שגיאה בעדכון",
+                text: error.message,
+                icon: "error"
+            });
             console.error(error);
         }
         finally {

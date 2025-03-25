@@ -57,7 +57,7 @@ export default function ProductList() {
         else {
             setSearchValue("")
             try {
-                
+
                 setLoading(true);
                 console.log("fetching products...");
                 let response = await getProductsByCategory(category);
@@ -132,7 +132,7 @@ export default function ProductList() {
 
     useEffect(() => {
         getProducts(page)
-        window.scrollTo({ top: 20, behavior: "smooth" });
+        window.scrollTo({ top: 20, behavior: "auto" });
     }, [page, viewUpdateForm])
 
     useEffect(() => {
@@ -150,7 +150,7 @@ export default function ProductList() {
 
 
     return (<>
-        <Box sx={{ display: "flex", gap: 2, justifyContent: "center", alignItems: "center", marginBottom: 5, marginTop:"80px" }}>            {/* בחירת קטגוריה */}
+        <Box sx={{ display: "flex", gap: 2, justifyContent: "center", alignItems: "center", marginBottom: 5, marginTop: "80px" }}>            {/* בחירת קטגוריה */}
             <FormControl variant="outlined" sx={{ minWidth: 300 }}>
                 <InputLabel>בחר קטגוריה</InputLabel>
                 <Select

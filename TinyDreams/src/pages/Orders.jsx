@@ -38,7 +38,7 @@ const Orders = () => {
     }, []);
 
     return (
-        <Box sx={{ marginRight: "auto", marginLeft: "auto", direction: "rtl", width: "100%" }}>
+        <Box sx={{ marginRight: "auto", marginLeft: "auto", direction: "rtl", width: "65%" }}>
             <Typography variant="h3" sx={{ marginRight: "auto", marginLeft: "auto", width: "20%", color: "#590202", fontWeight: "bold", marginBottom: "24px" }}>
                 רשימת הזמנות
             </Typography>

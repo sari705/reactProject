@@ -93,7 +93,9 @@ export default function Login() {
             Swal.fire({
                 title: "ברוכים הבאים",
                 text: "התחברת בהצלחה, גלישה מהנה",
-                icon: "success"
+                icon: "success",
+                timer: "3000",
+                allowOutsideClick:true
             });
             dispatch(userIn({ ...response.data.data, token: response.data.token }));
             navigate("/products");

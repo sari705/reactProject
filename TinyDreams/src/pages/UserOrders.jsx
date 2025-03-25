@@ -33,13 +33,13 @@ function UserOrders() {
     }, []);
 
     return (
-        <Box sx={{marginRight: "auto", marginLeft: "auto", direction: "rtl", width: "100%"}}>
-            <Typography variant="h3" sx={{ color: "#590202", fontWeight: "bold", marginBottom: "24px",marginRight: "auto", marginLeft: "auto", width:"20%"  }}>
+        <Box sx={{ marginRight: "auto", marginLeft: "auto", direction: "rtl", width: "70%" }}>
+            <Typography variant="h3" sx={{ color: "#590202", fontWeight: "bold", marginBottom: "24px", marginRight: "auto", marginLeft: "auto", width: "20%" }}>
                 ההזמנות שלי
             </Typography>
             {status === "pending" ? (
-                <Box sx={{marginRight: "auto", marginLeft: "auto", width: "25%"}}><SwingingImage /></Box>
-                
+                <Box sx={{ marginRight: "auto", marginLeft: "auto", width: "25%" }}><SwingingImage /></Box>
+
             ) : error ? (
                 <Alert severity="error" sx={{ backgroundColor: "#590202", color: "white", padding: "16px", borderRadius: "8px" }}>
                     <Typography variant="h6">{error.title}</Typography>

@@ -66,12 +66,12 @@ function UpdateProduct({ product, setViewUpdateForm }) {
             const productToUpdate = { ...data, _id: product._id };
 
             await updateProduct(productToUpdate, token);
-                       Swal.fire({
-                           title: " המוצר עודכן בהצלחה",
-                           icon: "success",
-                           timer: "3000",
-                           allowOutsideClick: true
-                       });
+            Swal.fire({
+                title: " המוצר עודכן בהצלחה",
+                icon: "success",
+                timer: "3000",
+                allowOutsideClick: true
+            });
             setViewUpdateForm(false);
         } catch (error) {
             if (error.message && error.message === "Network Error") {
@@ -176,8 +176,8 @@ function UpdateProduct({ product, setViewUpdateForm }) {
                         }} color="secondary">ביטול</Button>
 
                         <Button type="submit" fullWidth variant="contained" style={styles.button}>
-                              {isSubmitting ? <CircularProgress size={24} color="inherit" /> : "עדכן מוצר"}
-                              </Button> 
+                            {isSubmitting ? <CircularProgress size={24} color="inherit" /> : "עדכן מוצר"}
+                        </Button>
                     </DialogActions>
                 </form>
             </DialogContent>

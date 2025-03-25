@@ -27,15 +27,15 @@ import { userIn } from "../features/userSlice";
 import useScrollToTop from "../hooks/useScrollToTop";
 
 const themeColors = {
-    background: "#E9ECF2",
-    cardBg: "#FFFFFF",
-    inputBg: "#F7F7F7",
-    inputText: "#333333",
-    textPrimary: "#590202",
-    buttonBg: "#BF7069",
-    buttonHover: "#D9B1A3",
-    linkColor: "#84B1D9",
-    border: "#D9B1A3",
+  background: "#E9ECF2",
+  cardBg: "#FFFFFF",
+  inputBg: "#F7F7F7",
+  inputText: "#333333",
+  textPrimary: "#590202",
+  buttonBg: "#BF7069",
+  buttonHover: "#D9B1A3",
+  linkColor: "#84B1D9",
+  border: "#D9B1A3",
 };
 
 const Card = styled(MuiCard)(({ theme }) => ({
@@ -81,18 +81,20 @@ export default function SignUp() {
       Swal.fire({
         title: "ברוכים הבאים",
         text: "נרשמת בהצלחה, גלישה מהנה",
-        icon: "success"
+        icon: "success",
+        timer: "3000",
+        allowOutsideClick: true
       });
       navigate("/products");
     } catch (e) {
-        Swal.fire({
-            icon: "error",
-            title: "Oops...",
-            text: e.response.data.message,
-            footer: '<a href="#">Why do I have this issue?</a>'
-          });
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: e.response.data.message,
+        footer: '<a href="#">Why do I have this issue?</a>'
+      });
       setServerError(e.message);
-      console.log(e);      
+      console.log(e);
     }
   }
 
@@ -192,7 +194,7 @@ export default function SignUp() {
             variant="contained"
             sx={{
               bgcolor: themeColors.buttonBg,
-              color:"white",
+              color: "white",
               py: 1.5,
               fontSize: "1.1rem",
               fontWeight: "bold",
@@ -215,7 +217,7 @@ export default function SignUp() {
           <Button
             fullWidth
             variant="outlined"
-            startIcon={<GoogleIcon sx={{ fontSize: 24, marginLeft: "8px" }}/>}
+            startIcon={<GoogleIcon sx={{ fontSize: 24, marginLeft: "8px" }} />}
             sx={{
               color: themeColors.linkColor,
               borderColor: themeColors.border,

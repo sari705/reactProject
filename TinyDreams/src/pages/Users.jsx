@@ -36,7 +36,7 @@ const Users = () => {
     }, []);
 
     return (
-        <Box sx={{ marginRight: "auto", marginLeft: "auto", width: "100%", alignItems: "center" }}>
+        <Box sx={{ marginRight: "auto", marginLeft: "auto", width: "65%", alignItems: "center" }}>
             <Typography variant="h3" sx={{ marginRight: "auto", marginLeft: "auto", width: "30%", color: "#590202", fontWeight: "bold", marginBottom: "24px" }}>
                 רשימת משתמשים
             </Typography>

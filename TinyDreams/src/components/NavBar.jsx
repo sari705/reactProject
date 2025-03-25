@@ -19,6 +19,7 @@ import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 
 import "./css/navBar.css";
 import LogOut from '../pages/LogOut';
+import { color } from 'framer-motion';
 
 function ResponsiveAppBar() {
     const role = useSelector(state => state.user.currentUser?.role);
@@ -26,7 +27,7 @@ function ResponsiveAppBar() {
     const isUser = role === "USER";
     const [anchorElNav, setAnchorElNav] = React.useState(null);
     const [anchorElUser, setAnchorElUser] = React.useState(null);
-    const userName = useSelector(state => state.user.currentUser?.name);
+    const userName = useSelector(state => state.user.currentUser?.username);
     const disp = useDispatch();
     const navigate = useNavigate();
     const amountInCart = useSelector((state) => state.cart.amountInCart);
@@ -52,7 +53,7 @@ function ResponsiveAppBar() {
                 className="navBar"
                 sx={{
                     // backgroundColor: "#BF7069",
-                    backgroundColor:"#c5807a",
+                    backgroundColor: "#c5807a",
                     transition: "background-color 0.3s ease-in-out",
                 }}
             >
@@ -104,13 +105,15 @@ function ResponsiveAppBar() {
                             ))}
                         </Box>
 
-                        <Box className="userMenu">
+                        <Box className="userMenu" sx={{ display: "flex", alignItems: "center", gap: 1, flexDirection: "row-reverse" }}>
                             <Tooltip title="Open settings">
                                 <IconButton onClick={(e) => setAnchorElUser(e.currentTarget)} className="avatarButton" sx={{ ml: 2 }}>
                                     <Avatar alt={userName} src="/static/images/avatar/2.jpg" />
                                 </IconButton>
                             </Tooltip>
-
+                            <Typography sx={{ color: "#590202" }}>
+                                שלום, {userName || "אורח"}
+                            </Typography>
                             <Menu
                                 anchorEl={anchorElUser}
                                 open={Boolean(anchorElUser)}
@@ -122,6 +125,7 @@ function ResponsiveAppBar() {
                                 </MenuItem>
                                 <LogOut />
                             </Menu>
+
 
                         </Box>
                     </Toolbar>

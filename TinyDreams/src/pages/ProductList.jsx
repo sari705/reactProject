@@ -102,7 +102,7 @@ export default function ProductList() {
     async function getCategoriesEnum() {
         try {
             let response = await getCategories();
-            setCategories([" ", ...response.data.Categories]);
+            setCategories(["הצג הכל ", ...response.data.Categories]);
         }
         catch (e) {
             console.log(e);

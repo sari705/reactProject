@@ -21,8 +21,10 @@ import { useForm } from "react-hook-form";
 import { useDispatch } from 'react-redux';
 import { useNavigate } from "react-router-dom";
 import Swal from 'sweetalert2'
+
 import { signUp } from '../api/userService.js';
 import { userIn } from "../features/userSlice";
+import useScrollToTop from "../hooks/useScrollToTop";
 
 const themeColors = {
     background: "#E9ECF2",
@@ -62,6 +64,7 @@ const SignUpContainer = styled(Stack)(() => ({
 }));
 
 export default function SignUp() {
+  useScrollToTop();
   const { register, handleSubmit, formState: { errors } } = useForm();
   const dispatch = useDispatch();
   const navigate = useNavigate();

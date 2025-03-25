@@ -23,10 +23,12 @@ import { useNavigate } from "react-router-dom";
 import Swal from 'sweetalert2'
 import { useState, useEffect } from "react";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
+
 import { logIn } from "../api/userService";
 import { userIn } from "../features/userSlice";
-import "./css/Login.css";
 import { fetchGoogleUser } from '../utils/fetchData';
+import useScrollToTop from "../hooks/useScrollToTop";
+import "./css/Login.css";
 
 const themeColors = {
     background: "#E9ECF2",
@@ -66,6 +68,9 @@ const LoginContainer = styled(Stack)(() => ({
 }));
 
 export default function Login() {
+
+    useScrollToTop();
+
     const { register, formState: { errors }, handleSubmit } = useForm();
     const dispatch = useDispatch();
     const navigate = useNavigate();

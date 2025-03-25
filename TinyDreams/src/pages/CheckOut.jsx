@@ -141,18 +141,21 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Container, Paper, Stepper, Step, StepLabel, Typography, Grid, Drawer, Box,Button, CircularProgress, IconButton, useMediaQuery } from "@mui/material";
-
 import CloseIcon from "@mui/icons-material/Close";
+import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
+
 import AddressForm from "../components/CheckoutComponents/AddressForm";
 import PaymentForm from "../components/CheckoutComponents/PaymentForm";
 import ReviewOrder from "../components/CheckoutComponents/ReviewOrder";
 import OrderSummary from "../components/CheckoutComponents/OrderSummary";
 import { addOrder } from "../api/orderService";
 import { emptyingCart } from "../features/cartSlice";
-import Swal from "sweetalert2";
-import { useNavigate } from "react-router-dom";
+import useScrollToTop from "../hooks/useScrollToTop";
 
 export default function Checkout() {
+
+  useScrollToTop();
   const [activeStep, setActiveStep] = useState(0);
   const [addressData, setAddressData] = useState({});
   const [paymentData, setPaymentData] = useState({});

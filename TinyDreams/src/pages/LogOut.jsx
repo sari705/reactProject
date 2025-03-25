@@ -1,15 +1,17 @@
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
-import { toast } from "react-toastify";
 import MenuItem from '@mui/material/MenuItem';
 import Typography from '@mui/material/Typography';
+import Swal from "sweetalert2";
 
 import { userOut } from "../features/userSlice.js";
-import Swal from "sweetalert2";
+import useScrollToTop from "../hooks/useScrollToTop";
 
 
 function LogOut() {
+
+    useScrollToTop();
     const dispatch = useDispatch();
     const navigate = useNavigate();
 

@@ -5,8 +5,11 @@ import { Typography, Alert, Table, TableContainer, TableHead, TableRow, TableCel
 import { getOrderByUser } from "../api/orderService.js";
 import OneOrderForUser from "../components/OneOrderForUser.jsx";
 import SwingingImage from "../components/SwingingImage.jsx";
+import useScrollToTop from "../hooks/useScrollToTop";
+
 
 function UserOrders() {
+    useScrollToTop();
     const _id = useSelector((state) => state.user.currentUser._id);
     const token = localStorage.getItem("token");
     const [orders, setOrders] = useState([]);

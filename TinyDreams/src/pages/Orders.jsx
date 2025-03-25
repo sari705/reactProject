@@ -1,11 +1,15 @@
 import { useEffect, useState } from "react";
 import { Typography, Alert, Table, TableContainer, TableHead, TableRow, TableCell, TableBody, Paper, Box } from "@mui/material";
-import { getAllOrders } from "../api/orderService";
 
 import OneOrderForManager from "../components/OneOrderForManager";
 import SwingingImage from "../components/SwingingImage";
+import { getAllOrders } from "../api/orderService";
+import useScrollToTop from "../hooks/useScrollToTop";
+
 
 const Orders = () => {
+
+    useScrollToTop();
     const [orders, setOrders] = useState([]);
     const [error, setError] = useState(null);
     const token = localStorage.getItem("token");

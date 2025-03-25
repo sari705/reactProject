@@ -3,10 +3,12 @@ import { Box, Button, Container, Grid, Typography, Card, CardContent, CardMedia 
 import { styled } from "@mui/material/styles";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
-import SwingingImage from "../components/SwingingImage";
 import { useDispatch } from "react-redux";
 import { useEffect } from "react";
+
+import SwingingImage from "../components/SwingingImage";
 import { fetchGoogleUser } from "../utils/fetchData";
+import useScrollToTop from "../hooks/useScrollToTop";
 
 const themeColors = {
   background: "#FCE8E6",
@@ -35,6 +37,9 @@ const categories = [
 ];
 
 export default function Home() {
+
+  useScrollToTop();
+
   const navigate = useNavigate();
   const dispatch  = useDispatch();
 

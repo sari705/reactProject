@@ -1,10 +1,12 @@
-import { updateProduct } from "../api/productService";
 import { useState, useEffect } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { MenuItem, Select, TextField, Button, Typography, Container, Dialog, DialogTitle, DialogContent, DialogActions, CircularProgress } from "@mui/material";
 import { useSelector } from "react-redux";
 import Swal from "sweetalert2";
+
+import { updateProduct } from "../api/productService";
 import { getCategories, getTags, getColors } from "../api/enumService";
+import useScrollToTop from "../hooks/useScrollToTop";
 import "./css/UpdateProduct.css";
 
 const styles = {
@@ -42,6 +44,7 @@ const styles = {
 
 function UpdateProduct({ product, setViewUpdateForm }) {
 
+    useScrollToTop();
     const { register, handleSubmit, control, reset, formState: { errors } } = useForm();
     const [categories, setCategories] = useState([]);
     const [tags, setTags] = useState([]);

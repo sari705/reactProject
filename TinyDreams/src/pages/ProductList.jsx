@@ -1,21 +1,23 @@
-import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { Outlet, useLocation, useNavigate } from "react-router-dom";
 import { Button, Pagination, Stack, Typography } from "@mui/material";
 import { MenuItem, Select, TextField, FormControl, InputLabel } from "@mui/material";
 import Box from "@mui/material/Box";
-import { getAllProducts, getTotalPages, getProductsByCategory, searchProducts } from "../api/productService";
+
 import OneProduct from "../components/OneProduct";
-import { getCategories } from "../api/enumService";
-import ReducedCart from "../components/ReducedCart";
-import UpdateProduct from "./UpdateProduct";
-import "./css/ProductList.css"
 import SwingingImage from "../components/SwingingImage";
-import { fetchGoogleUser } from "../utils/fetchData";
-import { useDispatch } from "react-redux";
+import ReducedCart from "../components/ReducedCart";
+import { getCategories } from "../api/enumService";
+import { getAllProducts, getTotalPages, getProductsByCategory, searchProducts } from "../api/productService";
+import UpdateProduct from "./UpdateProduct";
+import useScrollToTop from "../hooks/useScrollToTop";
+import "./css/ProductList.css"
 
 
 export default function ProductList() {
+    useScrollToTop();
     const [products, setProducts] = useState([])
     const [choiseProduct, setChoiseProduct] = useState(null);
     const [totalPages, setTotalPages] = useState(0)
@@ -55,7 +57,7 @@ export default function ProductList() {
         else {
             setSearchValue("")
             try {
-              
+                
                 setLoading(true);
                 console.log("fetching products...");
                 let response = await getProductsByCategory(category);
@@ -130,7 +132,7 @@ export default function ProductList() {
 
     useEffect(() => {
         getProducts(page)
-        window.scrollTo({ top: 20, behavior: "auto" });
+        window.scrollTo({ top: 20, behavior: "smooth" });
     }, [page, viewUpdateForm])
 
     useEffect(() => {

@@ -3,8 +3,11 @@ import { getAllUsers } from "../api/userService";
 import OneUser from "../components/OneUser";
 import { Typography, Alert, Table, TableContainer, TableHead, TableRow, TableCell, TableBody, Paper, Box } from "@mui/material";
 import SwingingImage from "../components/SwingingImage";
+import useScrollToTop from "../hooks/useScrollToTop";
+
 
 const Users = () => {
+    useScrollToTop();
     const [users, setUsers] = useState([]);
     const [error, setError] = useState(null);
     const token = localStorage.getItem("token");

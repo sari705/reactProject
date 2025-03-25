@@ -3,8 +3,10 @@ import { MenuItem, Select, TextField, Button, Typography, Container, Box, Circul
 import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import Swal from "sweetalert2";
+
 import { getCategories, getTags, getColors } from "../api/enumService";
 import { addProduct } from "../api/productService";
+import useScrollToTop from "../hooks/useScrollToTop";
 
 const styles = {
     container: {
@@ -32,6 +34,8 @@ const styles = {
 };
 
 function AddProduct() {
+
+    useScrollToTop();
     const { register, handleSubmit, control, formState: { errors }, reset } = useForm();
     const [categories, setCategories] = useState([]);
     const [tags, setTags] = useState([]);

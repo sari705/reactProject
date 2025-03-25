@@ -5,8 +5,12 @@ import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import PaymentIcon from "@mui/icons-material/Payment";
 
 import ProductInCart from "../components/ProductInCart";
+import useScrollToTop from "../hooks/useScrollToTop";
 
 function Cart() {
+
+    useScrollToTop();
+
     const reduxProducts = useSelector((state) => state.cart.products);
     const reduxAmount = useSelector((state) => state.cart.amountInCart);
     const reduxSum = useSelector((state) => state.cart.sum.toFixed(2));

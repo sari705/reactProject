@@ -39,29 +39,13 @@ git clone https://github.com/your-username/tinydreams.git
 cd tinydreams
 ```
 
-### 2. התקנת צד לקוח
+### 2. התקנה
 ```bash
 cd TinyDreams
 npm install
 npm start
 ```
 
-### 3. התקנת צד שרת
-```bash
-cd server
-npm install
-npm run dev
-```
-
----
-
-## 🌐 משתני סביבה
-
-יצרי קובץ `.env` בתיקיית `TinyDreams`:
-
-```env
-REACT_APP_API_URL=https://nodeproject-gd82.onrender.com/api
-```
 
 ---
 

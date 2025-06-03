@@ -7,7 +7,7 @@ TinyDreams הוא אתר מודרני לחנות מוצרים לתינוקות, 
 
 ## 🚀 קישורים לפרויקט
 
-- **אתר חי (Netlify):** https://tinydreams-byta.netlify.app  
+- **אתר חי (Netlify):** https://tinydreamsbyta.netlify.app  
 - **שרת API (Render):** https://nodeproject-gd82.onrender.com  
 - **קוד מקור (GitHub):** [קישור ל-Repo שלך]
 

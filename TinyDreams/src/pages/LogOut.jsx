@@ -32,7 +32,6 @@ function LogOut() {
             });
             navigate("/login");
         } catch (err) {
-            console.log(err);
             alert(err.message);
         }
     }

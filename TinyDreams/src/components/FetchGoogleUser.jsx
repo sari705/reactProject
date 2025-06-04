@@ -26,7 +26,6 @@ function FetchGoogleUser() {
       async function fetchUserData() {
         try {
           let response = await getUserByToken(token);
-          console.log("response", response.data);          
 
           if (!response) {
             throw new Error("Failed to fetch user data");
@@ -41,7 +40,6 @@ function FetchGoogleUser() {
           navigate("/products");
         } 
         catch (error) {
-          console.log("Error fetching Google user data:", error);
           Swal.fire({
             icon: "error",
             title: "Oops...",

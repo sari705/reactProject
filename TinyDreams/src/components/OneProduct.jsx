@@ -28,7 +28,6 @@ function OneProduct({ product, setViewUpdateForm, setProductForUpdate }) {
         try {
             const response = await deleteProduct(id, token);
             if (response) {
-                console.log("מוצר נמחק:", response);
                 Swal.fire({
                     title: "המוצר נמחק",
                     text: response.data.name,
@@ -36,7 +35,6 @@ function OneProduct({ product, setViewUpdateForm, setProductForUpdate }) {
                 });
             }
         } catch (error) {
-            console.log("שגיאה במחיקה:", error);
             alert(error.response?.data?.message || "שגיאה במחיקת המוצר");
         }
     };

@@ -12,12 +12,9 @@ function ViewProduct() {
     const fetchProduct = async () => {
         try {
             const response = await getProduct(id)
-            console.log("response", response)
             setProduct(response.data.data)
-            console.log("product: ", product)
         }
         catch (e) {
-            console.log("error fetching product: " + e)
         }
     }
 

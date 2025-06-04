@@ -9,7 +9,6 @@ function ReducedCart({ setViewReducedCart }) {
     const reduxAmount = useSelector((state) => state.cart.amountInCart);
     const reduxSum = useSelector((state) => state.cart.sum.toFixed(2));
     const navigate = useNavigate();
-    console.log("מוצרים בעגלה:", reduxProducts);
 
     return (
         <Card sx={{

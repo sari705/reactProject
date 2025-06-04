@@ -46,10 +46,8 @@
 //     const onSubmit = async () => {
 //         if (isSubmitting) return;
 //         setIsSubmitting(true);
-//         console.log("formData: ", formData);
 
 //         const order = { ...formData, minimalProduct, userId: user._id };
-//         console.log("order: ", order);
 
 //         try {
 //             const response = await addOrder(order);
@@ -70,7 +68,6 @@
 //             }
 //         } catch (err) {
 //             // toast.error("Error submitting order. Please try again!", { position: "top-center", autoClose: 3000 });
-//             console.log(err);
 //             Swal.fire({
 //                 icon: "error",
 //                 title: err.message||"address is required",

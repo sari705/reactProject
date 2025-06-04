@@ -18,14 +18,12 @@
 //       });
 //       return;
 //     }
-//     console.log("🚀 Form Data Before Sending: ", data);
 //     setFormData(prev => ({ ...prev, ...data }));
 //     onNext(data);
 //   };
 
 //   const handleChange = (e) => {
 //     const { name, value } = e.target;
-//     console.log(`📝 Updating ${name}:`, value);
 //     if (onChange) {
 //       onChange(name, value); // עדכון בזמן אמת
 //     }

@@ -78,13 +78,10 @@ export default function Login() {
     const [showPassword, setShowPassword] = useState(false);
     const [FetchGoogleUser, setFetchGoogleUser] = useState(false)
 
-    console.log("user in redux: ", useSelector((state) => state.user.currentUser));
 
     async function submit(user) {
-        console.log("in submit");
         try {
             let response = await logIn(user);
-            console.log("res in login: ", response);
 
             localStorage.setItem("currentUser", JSON.stringify({
                 ...response.data.data,
@@ -100,7 +97,6 @@ export default function Login() {
             dispatch(userIn({ ...response.data.data, token: response.data.token }));
             navigate("/products");
         } catch (error) {
-            console.log(error);
             Swal.fire({
                 icon: "error",
                 title: error.response.data.title,

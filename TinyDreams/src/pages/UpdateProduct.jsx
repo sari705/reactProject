@@ -55,7 +55,6 @@ function UpdateProduct({ product, setViewUpdateForm }) {
 
     async function onSubmit(data) {
         setIsSubmitting(true);
-        console.log("in submit update");
 
         if (!product || !product._id) {
             alert("מזהה המוצר חסר! לא ניתן לעדכן.");
@@ -89,7 +88,7 @@ function UpdateProduct({ product, setViewUpdateForm }) {
                     text: error.response?.data?.message || error.message,
                 });
             }
-            console.error(error);
+            
         }
         finally {
             setIsSubmitting(false);
@@ -98,9 +97,9 @@ function UpdateProduct({ product, setViewUpdateForm }) {
     }
 
     useEffect(() => {
-        getCategories().then(res => setCategories(res.data.Categories)).catch(console.error);
-        getTags().then(res => setTags(res.data.TagsEnum)).catch(console.error);
-        getColors().then(res => setColors(res.data.Colors)).catch(console.error);
+        getCategories().then(res => setCategories(res.data.Categories));
+        getTags().then(res => setTags(res.data.TagsEnum));
+        getColors().then(res => setColors(res.data.Colors));
     }, []);
 
     useEffect(() => {

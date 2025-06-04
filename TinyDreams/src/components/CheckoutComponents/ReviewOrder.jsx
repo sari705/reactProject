@@ -75,7 +75,6 @@ export default function ReviewOrder({ addressData, paymentData, onBack, onConfir
     try {
       await onConfirm(); // מחכים לפעולה שתסתיים
     } catch (error) {
-      console.error("Error submitting order:", error);
     } finally {
       setIsSubmitting(false); // ביטול מצב טעינה אחרי שהפעולה מסתיימת
     }

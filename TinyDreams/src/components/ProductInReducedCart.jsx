@@ -7,7 +7,6 @@ import { removeProduct } from "../features/cartSlice";
 
 function ProductInReducedCart({ product }) {
   const dispatch = useDispatch();
-  console.log("product in reduced cart", product);
 
   return (
     <Card sx={{

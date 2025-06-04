@@ -6,13 +6,11 @@
 //   const { register, handleSubmit, formState: { errors } } = useForm();
 
 //   const onSubmit = (data) => {
-//     console.log("Form Data Before Sending:", data);
 //     onNext(data);
 //   };
 
 //   const handleChange = (e) => {
 //     const { name, value } = e.target;
-//     console.log(`📝 Updating ${name}:`, value);
 //     if (onChange) {
 //       onChange(name, value);
 //     }

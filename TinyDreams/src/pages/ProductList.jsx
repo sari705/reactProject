@@ -42,7 +42,6 @@ export default function ProductList() {
             setChoiseProduct(null)
         }
         catch (e) {
-            console.log(e);
         }
         finally {
             setLoading(false); // ✅ ביטול טעינה לאחר השלמת הבקשה
@@ -59,13 +58,11 @@ export default function ProductList() {
             try {
 
                 setLoading(true);
-                console.log("fetching products...");
                 let response = await getProductsByCategory(category);
                 setProducts(response.data.products);
                 setChoiseProduct(null)
             }
             catch (e) {
-                console.log(e);
             }
             finally {
                 setLoading(false); // ✅ ביטול טעינה לאחר השלמת הבקשה
@@ -91,7 +88,6 @@ export default function ProductList() {
                 setProducts(response.data.products);
             }
             catch (e) {
-                console.log(e);
             }
             finally {
                 setLoading(false); // ✅ ביטול טעינה לאחר השלמת הבקשה
@@ -105,7 +101,6 @@ export default function ProductList() {
             setCategories(["הצג הכל ", ...response.data.Categories]);
         }
         catch (e) {
-            console.log(e);
         }
     }
 
@@ -116,7 +111,6 @@ export default function ProductList() {
             setTotalPages(totalPages.data.totalPages);
         }
         catch (e) {
-            console.log(e)
         }
     }
 

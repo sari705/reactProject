@@ -62,7 +62,6 @@ function AddProduct() {
                 text: error.message,
                 icon: "error"
             });
-            console.error(error);
         }
         finally {
             setIsSubmitting(false);
@@ -71,9 +70,9 @@ function AddProduct() {
     }
 
     useEffect(() => {
-        getCategories().then(res => setCategories(res.data.Categories)).catch(console.error);
-        getTags().then(res => setTags(res.data.TagsEnum)).catch(console.error);
-        getColors().then(res => setColors(res.data.Colors)).catch(console.error);
+        getCategories().then(res => setCategories(res.data.Categories));
+        getTags().then(res => setTags(res.data.TagsEnum));
+        getColors().then(res => setColors(res.data.Colors));
     }, []);
 
     return (

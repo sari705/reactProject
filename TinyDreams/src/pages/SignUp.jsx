@@ -73,9 +73,7 @@ export default function SignUp() {
   async function save(data) {
     setServerError(null)
     try {
-      console.log("data: ", data);
       const user = await signUp(data);
-      console.log("user after sign up: ", user);
       localStorage.setItem("currentUser", JSON.stringify(user));
       dispatch(userIn({ username: user.username, email: user.email }));
       Swal.fire({
@@ -94,7 +92,6 @@ export default function SignUp() {
         footer: '<a href="#">Why do I have this issue?</a>'
       });
       setServerError(e.message);
-      console.log(e);
     }
   }
 
